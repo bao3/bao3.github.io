@@ -3,16 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: 活着真好
 subtitle:
-description:
-author: John Doe
+description: 享受生命之美好，感叹山峦之壮美；以我点滴之热忱，温暖淡漠之炎凉。
+author: Tyrael
 language:
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://blog.bao3.org
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -44,7 +44,7 @@ highlight:
   tab_replace:
 
 # Category & Tag
-default_category: uncategorized
+default_category: Geek
 category_map:
 tag_map:
 
