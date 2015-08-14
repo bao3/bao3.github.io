@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[活着真好]]></title>
+  <subtitle><![CDATA[Geek  凤凰男]]></subtitle>
+  <link href="/atom.xml" rel="self"/>
+  <link href="http://blog.bao3.org/"/>
+  <updated>2015-08-14T18:35:12.000Z</updated>
+  <id>http://blog.bao3.org/</id>
+  
+  <author>
+    <name><![CDATA[Tyrael]]></name>
+    <email><![CDATA[modbus@icloud.com]]></email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[这一次不带tags]]></title>
+    <link href="http://blog.bao3.org/2015/08/15/%E8%BF%99%E4%B8%80%E6%AC%A1%E4%B8%8D%E5%B8%A6tags/"/>
+    <id>http://blog.bao3.org/2015/08/15/这一次不带tags/</id>
+    <published>2015-08-14T18:35:12.000Z</published>
+    <updated>2015-08-14T18:35:12.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+  </entry>
+  
+</feed>
