@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Geek  凤凰男]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.bao3.org/"/>
-  <updated>2015-08-14T20:04:13.000Z</updated>
+  <updated>2015-08-14T20:07:33.000Z</updated>
   <id>http://blog.bao3.org/</id>
   
   <author>
@@ -13,6 +13,21 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[测试我的自动打开成功不]]></title>
+    <link href="http://blog.bao3.org/2015/08/15/%E6%B5%8B%E8%AF%95%E6%88%91%E7%9A%84%E8%87%AA%E5%8A%A8%E6%89%93%E5%BC%80%E6%88%90%E5%8A%9F%E4%B8%8D/"/>
+    <id>http://blog.bao3.org/2015/08/15/测试我的自动打开成功不/</id>
+    <published>2015-08-14T20:07:13.000Z</published>
+    <updated>2015-08-14T20:07:33.000Z</updated>
+    <content type="html"><![CDATA[<p>内空就是空的，哈哈，纯测试</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>内空就是空的，哈哈，纯测试</p>
+]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[testa]]></title>
