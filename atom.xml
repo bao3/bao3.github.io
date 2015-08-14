@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Geek  凤凰男]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.bao3.org/"/>
-  <updated>2015-08-14T18:35:12.000Z</updated>
+  <updated>2015-08-14T20:04:13.000Z</updated>
   <id>http://blog.bao3.org/</id>
   
   <author>
@@ -13,6 +13,90 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[testa]]></title>
+    <link href="http://blog.bao3.org/2015/08/15/testa/"/>
+    <id>http://blog.bao3.org/2015/08/15/testa/</id>
+    <published>2015-08-14T20:03:26.000Z</published>
+    <updated>2015-08-14T20:04:13.000Z</updated>
+    <content type="html"><![CDATA[<p><strong> just a test </strong></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><strong> just a test </strong></p>
+]]>
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[just test]]></title>
+    <link href="http://blog.bao3.org/2015/08/15/just-test-2/"/>
+    <id>http://blog.bao3.org/2015/08/15/just-test-2/</id>
+    <published>2015-08-14T19:24:03.000Z</published>
+    <updated>2015-08-14T19:24:49.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="这是第一个">这是第一个</h1><p>##再来测试一个#</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="这是第一个">这是第一个</h1><p>##再来测试一个#</p>
+]]>
+    </summary>
+    
+      <category term="vim" scheme="http://blog.bao3.org/tags/vim/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[just test]]></title>
+    <link href="http://blog.bao3.org/2015/08/15/just-test-1/"/>
+    <id>http://blog.bao3.org/2015/08/15/just-test-1/</id>
+    <published>2015-08-14T19:23:39.000Z</published>
+    <updated>2015-08-14T19:23:39.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[just test]]></title>
+    <link href="http://blog.bao3.org/2015/08/15/just-test/"/>
+    <id>http://blog.bao3.org/2015/08/15/just-test/</id>
+    <published>2015-08-14T19:22:41.000Z</published>
+    <updated>2015-08-14T19:22:41.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[测试new 后自动打开vim]]></title>
+    <link href="http://blog.bao3.org/2015/08/15/%E6%B5%8B%E8%AF%95new-%E5%90%8E%E8%87%AA%E5%8A%A8%E6%89%93%E5%BC%80vim-1/"/>
+    <id>http://blog.bao3.org/2015/08/15/测试new-后自动打开vim-1/</id>
+    <published>2015-08-14T19:20:48.000Z</published>
+    <updated>2015-08-14T19:20:48.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[测试new 后自动打开vim]]></title>
+    <link href="http://blog.bao3.org/2015/08/15/%E6%B5%8B%E8%AF%95new-%E5%90%8E%E8%87%AA%E5%8A%A8%E6%89%93%E5%BC%80vim/"/>
+    <id>http://blog.bao3.org/2015/08/15/测试new-后自动打开vim/</id>
+    <published>2015-08-14T19:16:31.000Z</published>
+    <updated>2015-08-14T19:16:31.000Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[这一次不带tags]]></title>
