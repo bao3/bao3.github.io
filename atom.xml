@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Geek  凤凰男]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.bao3.org/"/>
-  <updated>2015-08-15T05:51:45.000Z</updated>
+  <updated>2015-08-15T07:05:29.000Z</updated>
   <id>http://blog.bao3.org/</id>
   
   <author>
@@ -19,12 +19,13 @@
     <link href="http://blog.bao3.org/2015/08/15/%E9%82%A3%E4%B8%AA%E5%B9%B4%E4%BB%A3/"/>
     <id>http://blog.bao3.org/2015/08/15/那个年代/</id>
     <published>2015-08-15T05:03:21.000Z</published>
-    <updated>2015-08-15T05:51:45.000Z</updated>
+    <updated>2015-08-15T07:05:29.000Z</updated>
     <content type="html"><![CDATA[<h1 id="风暴降生">风暴降生</h1><p>《<em>权利的游戏</em>》中有一个女王, <strong> 丹妮丝・坦格利安</strong>，自称“风暴降生” ，还蛮喜欢她这套的,这是图片 <img src="/blog/Daenery.jpg" alt="丹妮丝・坦格利安">  </p>
 <p>A First Level Header   ====================<br>A Second Level Header   ———————</p>
 <blockquote>
 <p>blockquote some thing</p>
-<h3 id="Header_3">Header 3</h3><h2 id="header_2">header 2</h2><h1 id="header_1">header 1</h1></blockquote>
+<h3 id="Header_3">Header 3</h3><h2 id="header_2">header 2</h2><h1 id="header_1">header 1</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">有时候我就是想静静</span><br></pre></td></tr></table></figure>
+</blockquote>
 ]]></content>
     <summary type="html">
     <![CDATA[<h1 id="风暴降生">风暴降生</h1><p>《<em>权利的游戏</em>》中有一个女王, <strong> 丹妮丝・坦格利安</strong>，自称“风暴降生” ，还蛮喜欢她这套的,这是图片 <img src="/blog/Daenery.jpg" alt="丹妮丝・坦]]>
