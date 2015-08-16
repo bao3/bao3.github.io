@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Geek  凤凰男]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://blog.bao3.org/"/>
-  <updated>2015-08-16T11:53:10.000Z</updated>
+  <updated>2015-08-16T11:55:24.000Z</updated>
   <id>http://blog.bao3.org/</id>
   
   <author>
@@ -19,12 +19,12 @@
     <link href="http://blog.bao3.org/2015/08/16/test/"/>
     <id>http://blog.bao3.org/2015/08/16/test/</id>
     <published>2015-08-16T10:58:57.000Z</published>
-    <updated>2015-08-16T11:53:10.000Z</updated>
+    <updated>2015-08-16T11:55:24.000Z</updated>
     <content type="html"><![CDATA[<h1 id="缘起">缘起</h1><p>这些年的发展，家乡也开始发生很大变化，在外工作的十多年使我觉得有必要把家乡的东西保存下来，于是便想到写小说。  将几个友人的成长编成小说，虽然在这微博横行，微信乱入的年代里，写这么长的文字似乎心力不足。但还是尽量吧。</p>
 <h2 id="书写环境">书写环境</h2><ul>
 <li>电脑一台，<strong>2015 Rmbp 13”</strong> 原本是给老婆的礼物，不过她就是用来无广告看爱奇艺，太浪费了，于是被我霸占。</li>
 <li>使用了 <em>Markdown</em> 语言 ，尝试用这种新的语言尝试写作。</li>
-<li>使用 Macdown.app 作为写作前端，虽然自己依然是一个 VIM党人，不过不得不说在我没有适应 Markdown 这语言前还是要靠裡显示的。</li>
+<li>使用 Macdown.app 作为写作前端，虽然自己依然是一个 VIM党人，不过不得不说在我没有适应 Markdown 这语言前还是要靠它来实时显示的。</li>
 <li>托管在 github 上</li>
 <li>使用 hexo 生成博客文章</li>
 <li>使用 syncthing 备份 hexo 到 VPS上，为的是防止意外</li>
