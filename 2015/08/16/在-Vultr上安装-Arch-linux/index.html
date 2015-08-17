@@ -39,29 +39,35 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.1" />
 
 
-<meta name="description" content="下载 iso安装盘Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去ISOs 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:
+<meta name="description" content="[TOC]
+下载 iso安装盘Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去ISOs 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:
 http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso  
 
-创建系统这个应该都会了吧， Dep">
+#创建系统
+这个应该都">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在 Vultr上安装 Arch linux">
 <meta property="og:url" content="http://bao3.org/2015/08/16/在-Vultr上安装-Arch-linux/index.html">
 <meta property="og:site_name" content="活着真好">
-<meta property="og:description" content="下载 iso安装盘Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去ISOs 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:
+<meta property="og:description" content="[TOC]
+下载 iso安装盘Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去ISOs 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:
 http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso  
 
-创建系统这个应该都会了吧， Dep">
+#创建系统
+这个应该都">
 <meta property="og:image" content="http://bao3.org/blog/downloadISO.png">
 <meta property="og:image" content="http://bao3.org/blog/vultrdeply.png">
 <meta property="og:image" content="http://bao3.org/blog/VultrEF02.png">
 <meta property="og:image" content="http://bao3.org/blog/VultrSSD.png">
-<meta property="og:updated_time" content="2015-08-17T09:04:43.000Z">
+<meta property="og:updated_time" content="2015-08-17T09:10:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在 Vultr上安装 Arch linux">
-<meta name="twitter:description" content="下载 iso安装盘Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去ISOs 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:
+<meta name="twitter:description" content="[TOC]
+下载 iso安装盘Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去ISOs 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:
 http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso  
 
-创建系统这个应该都会了吧， Dep">
+#创建系统
+这个应该都">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -252,10 +258,12 @@ http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-d
       
 
       
-        <span itemprop="articleBody"><h1 id="下载_iso安装盘">下载 iso安装盘</h1><p>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
+        <span itemprop="articleBody"><p>[TOC]</p>
+<h1 id="下载_iso安装盘">下载 iso安装盘</h1><p>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
 <p><code>http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso</code>  </p>
 <p><img src="/blog/downloadISO.png" alt=""></p>
-<h1 id="创建系统">创建系统</h1><p>这个应该都会了吧， Deploy 一个新的，注意先择系统时，使用你刚才下载的 iso ，不过在创建好之后系统根本不会自动安装好 Arch Linux，只不过是用光盘启动了而已。    </p>
+<p>#创建系统</p>
+<p>这个应该都会了吧， Deploy 一个新的，注意先择系统时，使用你刚才下载的 iso ，不过在创建好之后系统根本不会自动安装好 Arch Linux，只不过是用光盘启动了而已。    </p>
 <p><img src="/blog/vultrdeply.png" alt=""></p>
 <blockquote>
 <p>注意一点，如果你创建的时候很不幸选了SATA （更多存储空间）那就郁闷了，因为有可能会莫名各种小毛病，影响后面的安装。<br>我经历过，所以只建议你使用 SSD套餐<br>并且 SATA套餐不能制作  Snapshot而 SSD可以，基于此，相当于多了一个免费的备份镜像，数据是数据是无价的。  </p>
@@ -421,7 +429,7 @@ http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-d
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载_iso安装盘"><span class="nav-number">1.</span> <span class="nav-text">下载 iso安装盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建系统"><span class="nav-number">2.</span> <span class="nav-text">创建系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装"><span class="nav-number">2.1.</span> <span class="nav-text">开始安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬盘分区"><span class="nav-number">2.2.</span> <span class="nav-text">硬盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装-1"><span class="nav-number">2.3.</span> <span class="nav-text">开始安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装_yaourt"><span class="nav-number">2.4.</span> <span class="nav-text">安装 yaourt</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载_iso安装盘"><span class="nav-number">1.</span> <span class="nav-text">下载 iso安装盘</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装"><span class="nav-number">1.1.</span> <span class="nav-text">开始安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬盘分区"><span class="nav-number">1.2.</span> <span class="nav-text">硬盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装-1"><span class="nav-number">1.3.</span> <span class="nav-text">开始安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装_yaourt"><span class="nav-number">1.4.</span> <span class="nav-text">安装 yaourt</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
