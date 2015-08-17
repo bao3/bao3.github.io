@@ -55,7 +55,7 @@ http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-d
 <meta property="og:image" content="http://bao3.org/blog/vultrdeply.png">
 <meta property="og:image" content="http://bao3.org/blog/VultrEF02.png">
 <meta property="og:image" content="http://bao3.org/blog/VultrSSD.png">
-<meta property="og:updated_time" content="2015-08-17T08:26:49.000Z">
+<meta property="og:updated_time" content="2015-08-17T08:46:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在 Vultr上安装 Arch linux">
 <meta name="twitter:description" content="下载 iso安装盘Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去ISOs 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:
@@ -272,6 +272,15 @@ http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-d
 <p> 截图如下：<br> <img src="/blog/VultrEF02.png" alt="">  </p>
 <p> 剩下的空间就是你自己自由支配，我的就仅供参考（与平时的分区没有区别），注意看图片中一定会有一个 ==BIOS== 分区，这是成功的关键:</p>
 <p> <img src="/blog/VultrSSD.png" alt="">  </p>
+<p>==当然最后还要写盘，这个我就不说按哪个键了。== </p>
+<h2 id="开始安装-1">开始安装</h2><p> 分区已经分好了，并且已经使用 ISO光盘启动了，接下来就是分区了，Arch Linux也有类似于 FreeBSD的交互式安装过程，不过在这里还是要用手动的过程，毕竟我也是第一次安装 Arch Linux 。 Vultr因为可以使用镜像来克隆，所以一次安装，永远安逸。</p>
+<p> 不过你需要注意的是，如果你的分区跟我不太一样，那接下来的步骤你需要有些调整，通常的调整就是 <code>/dev/vda1</code> <code>/dev/vda2``/dev/vda3</code>这些编号有所不同。我只会依照我的来写。</p>
+ <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">mkswap <span class="regexp">/dev/</span>vda2 -L SWAP</span><br><span class="line">swapon <span class="regexp">/dev/</span>vda2</span><br><span class="line">mkfs.ext4 <span class="regexp">/dev/</span>vda3 -L ArchOS</span><br><span class="line">mount <span class="regexp">/dev/</span>vda3 <span class="regexp">/mnt</span></span><br></pre></td></tr></table></figure>
+<p> 好了，至此所有准备工作都已经完成了，我们开始安装系统核心了。<br> <figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="label">pacstrap</span> /mnt <span class="keyword">base </span><span class="keyword">base-level </span>net-tools</span><br></pre></td></tr></table></figure></p>
+<p> 这是要安装基本系统以及一些必要的套件，其中 <code>net-tools</code>是我额外加上的，因为这样可以在安装完使用诸如 <code>ifconfig``nslookup</code>等等的小工具。经过等待（<em>通常为==2分钟==</em>左右），系统就已经完全OK了。</p>
+<p> 不过此时的系统还没有引导器 <em>bootloader</em> ,因此我们需要为系统安装一下：<br> <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">arch-chroot /mnt</span><br><span class="line">pacman -Sy grub</span><br><span class="line">mkinitcpio -p linux</span><br><span class="line">grub-install <span class="regexp">/dev/</span>vda</span><br><span class="line">grub-mkconfig -o <span class="regexp">/boot/</span>grub/grub.cfg</span><br></pre></td></tr></table></figure></p>
+<p> OK,启动你的机器试一下吧！</p>
+<p> <em>*安装后有还有些额外调整，但不是必需的例如 hostname, locale, timezone，你完全可以不设置重启后再慢慢调整</em></p>
 </span>
       
     </div>
@@ -408,7 +417,7 @@ http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-d
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载_iso安装盘"><span class="nav-number">1.</span> <span class="nav-text">下载 iso安装盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建系统"><span class="nav-number">2.</span> <span class="nav-text">创建系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装"><span class="nav-number">2.1.</span> <span class="nav-text">开始安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬盘分区"><span class="nav-number">2.2.</span> <span class="nav-text">硬盘分区</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载_iso安装盘"><span class="nav-number">1.</span> <span class="nav-text">下载 iso安装盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建系统"><span class="nav-number">2.</span> <span class="nav-text">创建系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装"><span class="nav-number">2.1.</span> <span class="nav-text">开始安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬盘分区"><span class="nav-number">2.2.</span> <span class="nav-text">硬盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装-1"><span class="nav-number">2.3.</span> <span class="nav-text">开始安装</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
