@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Geek  凤凰男]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://bao3.org/"/>
-  <updated>2015-08-17T07:50:21.000Z</updated>
+  <updated>2015-08-17T07:55:46.000Z</updated>
   <id>http://bao3.org/</id>
   
   <author>
@@ -19,10 +19,11 @@
     <link href="http://bao3.org/2015/08/16/%E5%9C%A8-Vultr%E4%B8%8A%E5%AE%89%E8%A3%85-Arch-linux/"/>
     <id>http://bao3.org/2015/08/16/在-Vultr上安装-Arch-linux/</id>
     <published>2015-08-16T12:17:56.000Z</published>
-    <updated>2015-08-17T07:50:21.000Z</updated>
-    <content type="html"><![CDATA[<h1 id="下载_iso安装盘">下载 iso安装盘</h1><p>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>customIOS</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
-<p><code>http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso</code></p>
-<h1 id="创建系统">创建系统</h1><p>这个应该都会了吧， Deploy 一个新的，注意先择系统时，使用你刚才下载的 iso ，不过在创建好之后系统根本不会自动安装好 Arch Linux，只不过是用光盘启动了而已。  </p>
+    <updated>2015-08-17T07:55:46.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="下载_iso安装盘">下载 iso安装盘</h1><p>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
+<p><code>http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso</code>  </p>
+<p><img src="/blog/downloadISO.png" alt="下载光盘的菜单截图"></p>
+<h1 id="创建系统">创建系统</h1><p>这个应该都会了吧， Deploy 一个新的，注意先择系统时，使用你刚才下载的 iso ，不过在创建好之后系统根本不会自动安装好 Arch Linux，只不过是用光盘启动了而已。    </p>
 <blockquote>
 <p>注意一点，如果你创建的时候很不幸选了SATA （更多存储空间）那就郁闷了，因为有可能会莫名各种小毛病，影响后面的安装。<br>我经历过，所以只建议你使用 SSD套餐<br>并且 SATA套餐不能制作  Snapshot而 SSD可以，基于此，相当于多了一个免费的备份镜像，数据是数据是无价的。  </p>
 </blockquote>
@@ -36,7 +37,8 @@
 </ol>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h1 id="下载_iso安装盘">下载 iso安装盘</h1><p>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>customIOS</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>]]>
+    <![CDATA[<h1 id="下载_iso安装盘">下载 iso安装盘</h1><p>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
+<p><]]>
     </summary>
     
       <category term="geek" scheme="http://bao3.org/tags/geek/"/>
