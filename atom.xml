@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Geek  凤凰男]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://bao3.org/"/>
-  <updated>2015-08-17T09:17:24.000Z</updated>
+  <updated>2015-08-17T09:18:24.000Z</updated>
   <id>http://bao3.org/</id>
   
   <author>
@@ -19,9 +19,8 @@
     <link href="http://bao3.org/2015/08/16/%E5%9C%A8-Vultr%E4%B8%8A%E5%AE%89%E8%A3%85-Arch-linux/"/>
     <id>http://bao3.org/2015/08/16/在-Vultr上安装-Arch-linux/</id>
     <published>2015-08-16T12:17:56.000Z</published>
-    <updated>2015-08-17T09:17:24.000Z</updated>
-    <content type="html"><![CDATA[<p> [TOC]</p>
-<p>#下载 iso安装盘<br>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
+    <updated>2015-08-17T09:18:24.000Z</updated>
+    <content type="html"><![CDATA[<p>#下载 iso安装盘<br>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
 <p><code>http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso</code>  </p>
 <p><img src="/blog/downloadISO.png" alt=""></p>
 <p>#创建系统</p>
@@ -61,9 +60,8 @@ Server   = http://repo.archlinuxcn.org/<span class="variable">$arch</span>
 <p><strong><em>完结</em></strong></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p> [TOC]</p>
-<p>#下载 iso安装盘<br>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
-<p><code>]]>
+    <![CDATA[<p>#下载 iso安装盘<br>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
+<p><code>http://ftp.jai]]>
     </summary>
     
       <category term="geek" scheme="http://bao3.org/tags/geek/"/>
