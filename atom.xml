@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Geek  凤凰男]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://bao3.org/"/>
-  <updated>2015-08-17T09:10:17.000Z</updated>
+  <updated>2015-08-17T09:15:07.000Z</updated>
   <id>http://bao3.org/</id>
   
   <author>
@@ -19,9 +19,9 @@
     <link href="http://bao3.org/2015/08/16/%E5%9C%A8-Vultr%E4%B8%8A%E5%AE%89%E8%A3%85-Arch-linux/"/>
     <id>http://bao3.org/2015/08/16/在-Vultr上安装-Arch-linux/</id>
     <published>2015-08-16T12:17:56.000Z</published>
-    <updated>2015-08-17T09:10:17.000Z</updated>
-    <content type="html"><![CDATA[<p>[TOC]</p>
-<h1 id="下载_iso安装盘">下载 iso安装盘</h1><p>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
+    <updated>2015-08-17T09:15:07.000Z</updated>
+    <content type="html"><![CDATA[<p> [TOC]</p>
+<p>#下载 iso安装盘<br>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
 <p><code>http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso</code>  </p>
 <p><img src="/blog/downloadISO.png" alt=""></p>
 <p>#创建系统</p>
@@ -54,11 +54,12 @@
 <h2 id="安装_yaourt">安装 yaourt</h2><p> 这部分是额外的设定，Arch 使用 <strong><em>pacman</em></strong>来管理包，但是有时候这些包更新慢，我们可以使用<strong><em>yaourt</em></strong> 来代替，可称为神器。我们需要修改 <code>/etc/pacman.conf</code>，加入以下代码：<br><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="title">[archlinuxcn]</span></span><br><span class="line"><span class="comment">#The Chinese Arch Linux communities packages.</span></span><br><span class="line"><span class="setting">SigLevel = <span class="value">Optional TrustedOnly</span></span></span><br><span class="line"><span class="setting">Server   = <span class="value">http://repo.archlinuxcn.org/<span class="variable">$arch</span></span></span></span><br></pre></td></tr></table></figure></p>
 <p>然后使用 <code>pacman -Syu yaourt</code> 安装。此后，你就可以使用 <code>yaourt -Sy  软件包名称</code>来自动使用其他用户分享的包， Enjoy~ it !</p>
 <p>*Arch 上安装 ocserv的时候，请在安装时选择手动编辑，然后去掉 autogen ，因为这货有引起编译错误导致失败。</p>
-<p> <strong><em>完结</em></strong></p>
+<p><strong><em>完结</em></strong></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>[TOC]</p>
-<h1 id="下载_iso安装盘">下载 iso安装盘</h1><p>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本]]>
+    <![CDATA[<p> [TOC]</p>
+<p>#下载 iso安装盘<br>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
+<p><code>]]>
     </summary>
     
       <category term="geek" scheme="http://bao3.org/tags/geek/"/>
