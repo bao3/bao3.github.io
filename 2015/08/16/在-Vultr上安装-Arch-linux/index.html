@@ -55,7 +55,7 @@ http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-d
 <meta property="og:image" content="http://bao3.org/blog/vultrdeply.png">
 <meta property="og:image" content="http://bao3.org/blog/VultrEF02.png">
 <meta property="og:image" content="http://bao3.org/blog/VultrSSD.png">
-<meta property="og:updated_time" content="2015-08-17T08:46:00.000Z">
+<meta property="og:updated_time" content="2015-08-17T08:52:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在 Vultr上安装 Arch linux">
 <meta name="twitter:description" content="下载 iso安装盘Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去ISOs 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:
@@ -281,6 +281,10 @@ http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-d
 <p> 不过此时的系统还没有引导器 <em>bootloader</em> ,因此我们需要为系统安装一下：<br> <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">arch-chroot /mnt</span><br><span class="line">pacman -Sy grub</span><br><span class="line">mkinitcpio -p linux</span><br><span class="line">grub-install <span class="regexp">/dev/</span>vda</span><br><span class="line">grub-mkconfig -o <span class="regexp">/boot/</span>grub/grub.cfg</span><br></pre></td></tr></table></figure></p>
 <p> OK,启动你的机器试一下吧！</p>
 <p> <em>*安装后有还有些额外调整，但不是必需的例如 hostname, locale, timezone，你完全可以不设置重启后再慢慢调整</em></p>
+<h2 id="安装_yaourt">安装 yaourt</h2><p> 这部分是额外的设定，Arch 使用 <strong><em>pacman</em></strong>来管理包，但是有时候这些包更新慢，我们可以使用<strong><em>yaourt</em></strong> 来代替，可称为神器。我们需要修改 <code>/etc/pacman.conf</code>，加入以下代码：<br><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="title">[archlinuxcn]</span></span><br><span class="line"><span class="comment">#The Chinese Arch Linux communities packages.</span></span><br><span class="line"><span class="setting">SigLevel = <span class="value">Optional TrustedOnly</span></span></span><br><span class="line"><span class="setting">Server   = <span class="value">http://repo.archlinuxcn.org/<span class="variable">$arch</span></span></span></span><br></pre></td></tr></table></figure></p>
+<p>然后使用 <code>pacman -Syu yaourt</code> 安装。此后，你就可以使用 <code>yaourt -Sy  软件包名称</code>来自动使用其他用户分享的包， Enjoy~ it !</p>
+<p>*Arch 上安装 ocserv的时候，请在安装时选择手动编辑，然后去掉 autogen ，因为这货有引起编译错误导致失败。</p>
+<p><strong>==完结==</strong></p>
 </span>
       
     </div>
@@ -417,7 +421,7 @@ http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-d
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载_iso安装盘"><span class="nav-number">1.</span> <span class="nav-text">下载 iso安装盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建系统"><span class="nav-number">2.</span> <span class="nav-text">创建系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装"><span class="nav-number">2.1.</span> <span class="nav-text">开始安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬盘分区"><span class="nav-number">2.2.</span> <span class="nav-text">硬盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装-1"><span class="nav-number">2.3.</span> <span class="nav-text">开始安装</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载_iso安装盘"><span class="nav-number">1.</span> <span class="nav-text">下载 iso安装盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建系统"><span class="nav-number">2.</span> <span class="nav-text">创建系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装"><span class="nav-number">2.1.</span> <span class="nav-text">开始安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#硬盘分区"><span class="nav-number">2.2.</span> <span class="nav-text">硬盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装-1"><span class="nav-number">2.3.</span> <span class="nav-text">开始安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装_yaourt"><span class="nav-number">2.4.</span> <span class="nav-text">安装 yaourt</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
