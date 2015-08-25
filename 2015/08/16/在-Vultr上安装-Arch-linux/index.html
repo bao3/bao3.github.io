@@ -1,0 +1,251 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在 Vultr上安装 Arch linux | 活着真好</title>
+  <meta name="author" content="Tyrael">
+  
+  <meta name="description" content="享受生命之美好，感叹风光之秀美；以我点滴之热忱，温暖冷漠之炎凉。">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="在 Vultr上安装 Arch linux"/>
+  <meta property="og:site_name" content="活着真好"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  
+  
+    <link href="/favicon.png" rel="icon">
+  
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/font-awesome.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/highlight.css" media="screen" type="text/css">
+  <link rel="stylesheet" href="/css/google-fonts.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+  <script src="/js/jquery-2.0.3.min.js"></script>
+
+  <!-- analytics -->
+  
+
+
+
+</head>
+
+ <body>  
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <button type="button" class="navbar-header navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+		<span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+	  <a class="navbar-brand" href="/">活着真好</a>
+      <div class="collapse navbar-collapse nav-menu">
+		<ul class="nav navbar-nav">
+		  
+		  <li>
+			<a href="/archives" title="All the articles.">
+			  <i class="fa fa-archive"></i>Archives
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/categories" title="All the categories.">
+			  <i class="fa fa-folder"></i>Categories
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/tags" title="All the tags.">
+			  <i class="fa fa-tags"></i>Tags
+			</a>
+		  </li>
+		  
+		  <li>
+			<a href="/about" title="About me.">
+			  <i class="fa fa-user"></i>About
+			</a>
+		  </li>
+		  
+		</ul>
+      </div>
+    </div> <!-- container -->
+</nav>
+<div class="clearfix"></div>
+
+  <div class="container">
+  	<div class="content">
+    	 
+
+
+	
+		<div class="page-header">		
+			<h1> 在 Vultr上安装 Arch linux</h1>
+		</div>		
+	
+
+
+
+<div class="row post">
+	<!-- cols -->
+	
+	<div class="col-md-9">
+	
+
+			
+
+	<!-- content -->
+	<div class="mypage">		
+	    <h1 id="下载_iso安装盘">下载 iso安装盘</h1><p>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
+<p><code>http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso</code>  </p>
+<p><img src="/blog/downloadISO.png" alt=""></p>
+<h1 id="创建系统">创建系统</h1><p>这个应该都会了吧， Deploy 一个新的，注意先择系统时，使用你刚才下载的 iso ，不过在创建好之后系统根本不会自动安装好 Arch Linux，只不过是用光盘启动了而已。    </p>
+<p><img src="/blog/vultrdeply.png" alt=""></p>
+<blockquote>
+<p>注意一点，如果你创建的时候很不幸选了SATA （更多存储空间）那就郁闷了，因为有可能会莫名各种小毛病，影响后面的安装。<br>我经历过，所以只建议你使用 SSD套餐<br>并且 SATA套餐不能制作  Snapshot而 SSD可以，基于此，相当于多了一个免费的备份镜像，数据是数据是无价的。  </p>
+</blockquote>
+<h1 id="开始安装">开始安装</h1><p> 我相信你应该是一个具有动手能力的人，因为接下来的安装需要使用很多命令行指令。请在 Web上选使用 VNC Console的方式来使用新创建的 VPS。  </p>
+<h2 id="硬盘分区">硬盘分区</h2><p> 整个安装过程中最核心的地方就是硬盘分区。原因在于 Vultr是基于 KVM的虚拟机，而我们又是用的 SSD ，所以是基于 BIOS + GPT的系统。而在默认情况下咱们的引动器 Grub只能支持 BIOS+ MBR 或者 EFI + GPT 的方式。Vultr 恰是个混合模式，会导致 Grub不引导的。  </p>
+<ol>
+<li>首先我们必须分出一个 bios安装分区，用于存放存放标准的 Grub 的引导文件。  </li>
+<li>如果你要承载 Web类服务，例如<strong>网站</strong>或者<strong>私有云</strong> ( <strong><em>owncloud</em></strong>)，那么我们最好单独分一个 Swap 。  </li>
+<li><p>默认情况下我们直接使用剩余的 <strong>SSD</strong> 作为整个系统磁盘，不单独分区了。<br>正面就开始咯：</p>
+<p><figure class="highlight"><table><tr><td class="code"><pre><span class="line">gdisk /dev/vda&#10;n&#10;+2M&#10;&#22238;&#36710;&#10;EF02 &#65288;&#31867;&#22411;&#20195;&#30721;&#40664;&#35748;&#20026; 8300&#65292;&#35201;&#25163;&#21160;&#25913;&#65289;</span><br></pre></td></tr></table></figure>
+</p>
+</li>
+</ol>
+<p> 截图如下：<br> <img src="/blog/VultrEF02.png" alt="">  </p>
+<p> 剩下的空间就是你自己自由支配，我的就仅供参考（与平时的分区没有区别），注意看图片中一定会有一个 ==BIOS== 分区，这是成功的关键:</p>
+<p> <img src="/blog/VultrSSD.png" alt="">  </p>
+<p>==当然最后还要写盘，这个我就不说按哪个键了。== </p>
+<h2 id="开始安装-1">开始安装</h2><p> 分区已经分好了，并且已经使用 ISO光盘启动了，接下来就是分区了，Arch Linux也有类似于 FreeBSD的交互式安装过程，不过在这里还是要用手动的过程，毕竟我也是第一次安装 Arch Linux 。 Vultr因为可以使用镜像来克隆，所以一次安装，永远安逸。</p>
+<p> 不过你需要注意的是，如果你的分区跟我不太一样，那接下来的步骤你需要有些调整，通常的调整就是 <code>/dev/vda1</code> <code>/dev/vda2``/dev/vda3</code>这些编号有所不同。我只会依照我的来写。</p>
+<p> <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">mkswap <span class="regexp">/dev/</span>vda2 -L SWAP</span><br><span class="line">swapon <span class="regexp">/dev/</span>vda2</span><br><span class="line">mkfs.ext4 <span class="regexp">/dev/</span>vda3 -L ArchOS</span><br><span class="line">mount <span class="regexp">/dev/</span>vda3 <span class="regexp">/mnt</span></span><br></pre></td></tr></table></figure>
+</p>
+<p> 好了，至此所有准备工作都已经完成了，我们开始安装系统核心了。<br> <figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="label">pacstrap</span> /mnt <span class="keyword">base </span><span class="keyword">base-level </span>net-tools</span><br></pre></td></tr></table></figure></p>
+<p> 这是要安装基本系统以及一些必要的套件，其中 <code>net-tools</code>是我额外加上的，因为这样可以在安装完使用诸如 <code>ifconfig</code> <code>nslookup</code>等等的小工具。经过等待（<em>通常为==2分钟==</em>左右），系统就已经完全OK了。</p>
+<p> 不过此时的系统还没有引导器 <em>bootloader</em> ,因此我们需要为系统安装一下：<br> <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">arch-chroot /mnt</span><br><span class="line">pacman -Sy grub</span><br><span class="line">mkinitcpio -p linux</span><br><span class="line">grub-install <span class="regexp">/dev/</span>vda</span><br><span class="line">grub-mkconfig -o <span class="regexp">/boot/</span>grub/grub.cfg</span><br></pre></td></tr></table></figure></p>
+<p> OK,启动你的机器试一下吧！</p>
+<p> <em>*安装后有还有些额外调整，但不是必需的例如 hostname, locale, timezone，你完全可以不设置重启后再慢慢调整</em></p>
+<h2 id="安装_yaourt">安装 yaourt</h2><p> 这部分是额外的设定，Arch 使用 <strong><em>pacman</em></strong>来管理包，但是有时候这些包更新慢，我们可以使用<strong><em>yaourt</em></strong> 来代替，可称为神器。我们需要修改 <code>/etc/pacman.conf</code>，加入以下代码：  </p>
+<pre><code>
+[archlinuxcn]  
+SigLevel = Optional TrustedOnly
+Server   = http://repo.archlinuxcn.org/<span class="variable">$arch</span>
+</code></pre><p>然后使用 <code>pacman -Syu yaourt</code> 安装。此后，你就可以使用 <code>yaourt -Sy  软件包名称</code>来自动使用其他用户分享的包， Enjoy~ it !</p>
+<p>*Arch 上安装 ocserv的时候，请在安装时选择手动编辑，然后去掉 autogen ，因为这货有引起编译错误导致失败。</p>
+<p><strong><em>完结</em></strong></p>
+	  
+	</div>
+
+	<div>
+  	<center>
+	<div class="pagination">
+<ul class="pagination">
+	 
+				
+    	<li class="prev"><a href="/2015/08/25/testcategories/" class="alignleft prev"><i class="fa fa-arrow-circle-o-left"></i>上一頁</a></li>
+  		
+
+        <li><a href="/archives"><i class="fa fa-archive"></i>Archive</a></li>
+
+		
+		   <li class="next"><a href="/2015/08/16/开篇/" class="alignright next">下一頁<i class="fa fa-arrow-circle-o-right"></i></a></li>         
+        
+	
+</ul>
+</div>
+
+    </center>
+	</div>
+	
+	<!-- comment -->
+	
+<section id="comment">
+  <h2 class="title">留言</h2>
+
+  
+</section>
+
+	
+	</div> <!-- col-md-9/col-md-12 -->
+	
+	
+		<div class="col-md-3"> 
+
+	<!-- date -->
+	
+	<div class="meta-widget">
+	<i class="fa fa-clock-o"></i>
+	2015-08-16 
+	</div>
+	
+
+	<!-- categories -->
+    
+
+	<!-- tags -->
+	
+	<div class="meta-widget">
+	<a data-toggle="collapse" data-target="#tags"><i class="fa fa-tags"></i></a>		  
+    <ul id="tags" class="tag_box list-unstyled collapse in">	  
+	    
+  <li><a href="/tags/geek/">geek<span>1</span></a></li>
+    </ul>
+	</div>
+		
+
+	<!-- toc -->
+	<div class="meta-widget">
+	
+	</div>
+	
+    <hr>
+	
+</div><!-- col-md-3 -->
+
+	
+
+</div><!-- row -->
+
+	</div>
+  </div>
+  <div class="container-narrow">
+  <footer> <p>
+  &copy; 2015 Tyrael
+  
+      with help from <a href="http://hexo.io/" target="_blank">Hexo</a> and <a href="http://getbootstrap.com/" target="_blank">Twitter Bootstrap</a>. Theme by <a href="http://github.com/wzpan/hexo-theme-freemind/">Freemind</a>.    
+</p> </footer>
+</div> <!-- container-narrow -->
+  
+<a id="gotop" href="#">   
+  <span>▲</span> 
+</a>
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+
+</body>
+   </html>
