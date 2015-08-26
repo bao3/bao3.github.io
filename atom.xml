@@ -37,19 +37,16 @@
     <link href="http://bao3.org/2015/08/26/test/"/>
     <id>http://bao3.org/2015/08/26/test/</id>
     <published>2015-08-25T18:08:55.000Z</published>
-    <updated>2015-08-26T03:14:36.000Z</updated>
-    <content type="html"><![CDATA[<p>#这是大标题</p>
-<p>##这是二标题<br>开始写东西，<em>斜体</em> 这是我们要注意的 (哈哈中)<br><em>这是什么情况</em> 来一个</p>
+    <updated>2015-08-26T03:16:18.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="这是大标题">这是大标题</h1><h2 id="这是二标题">这是二标题</h2><p>开始写东西，<em>斜体</em> 这是我们要注意的 (哈哈中)<br><em>这是什么情况</em> 来一个</p>
 <p>听说可以这样 <strong>这是什么鬼</strong> </p>
 <p>还有 ==这个==</p>
 <p>===这是个什么===</p>
 <hr>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>#这是大标题</p>
-<p>##这是二标题<br>开始写东西，<em>斜体</em> 这是我们要注意的 (哈哈中)<br><em>这是什么情况</em> 来一个</p>
-<p>听说可以这样 <strong>这是什么鬼</strong> </p>
-<p>还有 ==这个==</]]>
+    <![CDATA[<h1 id="这是大标题">这是大标题</h1><h2 id="这是二标题">这是二标题</h2><p>开始写东西，<em>斜体</em> 这是我们要注意的 (哈哈中)<br><em>这是什么情况</em> 来一个</p>
+<p>听说可以这样 <strong>这是什么鬼</st]]>
     </summary>
     
   </entry>
