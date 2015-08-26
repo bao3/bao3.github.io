@@ -37,7 +37,7 @@
     <link href="http://bao3.org/2015/08/26/test/"/>
     <id>http://bao3.org/2015/08/26/test/</id>
     <published>2015-08-25T18:08:55.000Z</published>
-    <updated>2015-08-26T03:16:18.000Z</updated>
+    <updated>2015-08-26T06:02:25.000Z</updated>
     <content type="html"><![CDATA[<h1 id="这是大标题">这是大标题</h1><h2 id="这是二标题">这是二标题</h2><p>开始写东西，<em>斜体</em> 这是我们要注意的 (哈哈中)<br><em>这是什么情况</em> 来一个</p>
 <p>听说可以这样 <strong>这是什么鬼</strong> </p>
 <p>还有 ==这个==</p>
@@ -48,6 +48,10 @@
     <![CDATA[<h1 id="这是大标题">这是大标题</h1><h2 id="这是二标题">这是二标题</h2><p>开始写东西，<em>斜体</em> 这是我们要注意的 (哈哈中)<br><em>这是什么情况</em> 来一个</p>
 <p>听说可以这样 <strong>这是什么鬼</st]]>
     </summary>
+    
+      <category term="测试标签" scheme="http://bao3.org/tags/%E6%B5%8B%E8%AF%95%E6%A0%87%E7%AD%BE/"/>
+    
+      <category term="测试" scheme="http://bao3.org/categories/%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
