@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Geek]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://bao3.org/"/>
-  <updated>2015-08-26T15:02:41.000Z</updated>
+  <updated>2015-08-26T16:39:23.000Z</updated>
   <id>http://bao3.org/</id>
   
   <author>
@@ -16,40 +16,49 @@
   
   <entry>
     <title><![CDATA[关于 iPhone 的安全防范]]></title>
-    <link href="http://bao3.org/2015/08/26/%E5%85%B3%E4%BA%8E-iPhone-%E7%9A%84%E5%AE%89%E5%85%A8%E9%98%B2%E8%8C%83-2/"/>
-    <id>http://bao3.org/2015/08/26/关于-iPhone-的安全防范-2/</id>
-    <published>2015-08-26T15:02:41.000Z</published>
-    <updated>2015-08-26T15:02:41.000Z</updated>
-    <content type="html"></content>
-    <summary type="html">
-    
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[关于 iPhone 的安全防范]]></title>
-    <link href="http://bao3.org/2015/08/26/%E5%85%B3%E4%BA%8E-iPhone-%E7%9A%84%E5%AE%89%E5%85%A8%E9%98%B2%E8%8C%83-1/"/>
-    <id>http://bao3.org/2015/08/26/关于-iPhone-的安全防范-1/</id>
-    <published>2015-08-26T15:02:04.000Z</published>
-    <updated>2015-08-26T15:02:04.000Z</updated>
-    <content type="html"></content>
-    <summary type="html">
-    
-    </summary>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[关于 iPhone 的安全防范]]></title>
     <link href="http://bao3.org/2015/08/26/%E5%85%B3%E4%BA%8E-iPhone-%E7%9A%84%E5%AE%89%E5%85%A8%E9%98%B2%E8%8C%83/"/>
     <id>http://bao3.org/2015/08/26/关于-iPhone-的安全防范/</id>
     <published>2015-08-26T15:00:18.000Z</published>
-    <updated>2015-08-26T15:00:18.000Z</updated>
-    <content type="html"></content>
+    <updated>2015-08-26T16:39:23.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="iPhone手机的安全">iPhone手机的安全</h1><p>最近曝出了<strong>抢红包插件</strong>在 iOS8 上作恶，窃取了 22万苹果手机用户的密码，所以我觉得我应该分享一下我的 iOS安全心得。</p>
+<h1 id="手机目前状态">手机目前状态</h1><ul>
+<li>iOS 8.4 越狱</li>
+<li>SIM 卡 中国联不通</li>
+<li>Apple ID 使用 iCloud </li>
+<li>所有网络账号绑定在这张 SIM 上</li>
+<li></li>
+</ul>
+<h1 id="我所涉及的安全危险">我所涉及的安全危险</h1><ol>
+<li>手机遗失被他们拾获，设定为飞行模式或者关机，从而躲避苹果官方的网络锁，使我们的<em>“丢失模式”</em>失效</li>
+<li>如果手机被窃，极有可能在不解锁的情况下用其他设备接收短信验证码，被用来重置网络账号密码，造成损失</li>
+<li>锁屏密码过于简单，被有很大机率被猜解，进而整个手机系统被攻入。</li>
+<li>手机上的账号陷入完全暴露</li>
+</ol>
+<h1 id="我要解决这些问题">我要解决这些问题</h1><ol>
+<li>手机设置了飞行模式或者关机</li>
+</ol>
+<p>似乎我们并没有很好的解决办法，不过如果你越狱了，就可以很好的解决这个问题。比如：</p>
+<ul>
+<li>Bioprotect 指纹保护插件，要想关机，必须校对指纹，否则无法关机，同时由于 iPhone手机无法更换电池，因此当被人拿到后的一段时间里只能被不断重启或者重启进入 DFU来躲避，但这通常还是比较有难度的。因为一般都是长按关机，然后划一下关机条，然后放口袋藏，很少有人会看到在这之后的那个暗色的 Bioprotect 校验框，非常容易被忽略。至于那些偷了手机又能冷静掌控时间进入 DFU的人，我们只能认命了。</li>
+<li>各种控制中心插件，可以很好的屏蔽飞行模式在锁屏时显示，防止断网断 GPS。</li>
+</ul>
+<ol>
+<li>遗失后被用来重置密码</li>
+</ol>
+<p>无论有没有上一步的保护，有心要窃取私人信息的人都会发生这一步的事情，那就是利用手机号来重置不同的网络账号。我倒并不担心网银被重置，反而更害怕支付宝/淘宝、京东、苏宁等这类有现实地址的网站，也包括中国联通的客户管理页面。我们杜绝这类事情发生，就必须要防止他人利用我们的 SIM卡。我的解决方法就是：</p>
+<ul>
+<li>SIM PIN</li>
+</ul>
+<p>每张 SIM卡都带有一个 PIN，默认是 <code>1234</code>，当我们在 iOS里打开这个PIN （<em>请记得改掉默认 PIN</em>)，重启手机时一定要输入 SIM卡的 PIN才可以使用 SIM的相关功能，也就是说无论对方换什么手机也都没用了。你可能会问，如果我的手机丢了，人家拿到一直不重启怎么办？</p>
+]]></content>
     <summary type="html">
-    
+    <![CDATA[<h1 id="iPhone手机的安全">iPhone手机的安全</h1><p>最近曝出了<strong>抢红包插件</strong>在 iOS8 上作恶，窃取了 22万苹果手机用户的密码，所以我觉得我应该分享一下我的 iOS安全心得。</p>
+<h1 id="手机目前状态">手]]>
     </summary>
+    
+      <category term="ios" scheme="http://bao3.org/tags/ios/"/>
+    
+      <category term="Geek" scheme="http://bao3.org/categories/Geek/"/>
     
   </entry>
   
@@ -58,8 +67,8 @@
     <link href="http://bao3.org/2015/08/26/%E5%85%B3%E4%BA%8E-hexo-%E7%94%9F%E6%88%90-tags%E9%A1%B5%E7%A9%BA%E7%99%BD/"/>
     <id>http://bao3.org/2015/08/26/关于-hexo-生成-tags页空白/</id>
     <published>2015-08-25T18:17:25.000Z</published>
-    <updated>2015-08-25T18:25:48.000Z</updated>
-    <content type="html"><![CDATA[<p>有一个问题困扰了我很久，那就是 <strong>hexo</strong> 生成的 <strong>tags</strong> 页是空白的，我使用的是标准的 <code>hexo new page tags</code> ,也亲眼看到 <code>source/tags/index.md</code>正常生成，可是就是显示为空白。google 了很久也没找到，然后我打开 <strong>分类</strong> 的 md 发现，两个 md 文件的区别在于， <strong>tags</strong>中的丢失了 <code>type: “tags”</code>。</p>
+    <updated>2015-08-26T16:39:00.000Z</updated>
+    <content type="html"><![CDATA[<p>有一个问题困扰了我很久，那就是 <strong>hexo</strong> 生成的 <strong>tags</strong> 页是空白的，我使用的是标准的 <code>hexo new page tags</code> ,也亲眼看到 <code>source/tags/index.md</code>正常生成，可是就是显示为空白。google 了很久也没找到，然后我打开 <strong>分类</strong> 的 md 发现，两个 md 文件的区别在于， <strong>tags</strong> 中的丢失了 <code>type: “tags”</code>。</p>
 ]]></content>
     <summary type="html">
     <![CDATA[<p>有一个问题困扰了我很久，那就是 <strong>hexo</strong> 生成的 <strong>tags</strong> 页是空白的，我使用的是标准的 <code>hexo new page tags</code> ,也亲眼看到 <code>source/tags/i]]>
