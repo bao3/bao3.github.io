@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Geek]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://bao3.org/"/>
-  <updated>2015-08-27T15:36:51.000Z</updated>
+  <updated>2015-08-28T10:33:24.000Z</updated>
   <id>http://bao3.org/</id>
   
   <author>
@@ -19,14 +19,14 @@
     <link href="http://bao3.org/2015/08/26/%E5%85%B3%E4%BA%8E-iPhone-%E7%9A%84%E5%AE%89%E5%85%A8%E9%98%B2%E8%8C%83/"/>
     <id>http://bao3.org/2015/08/26/关于-iPhone-的安全防范/</id>
     <published>2015-08-26T15:00:18.000Z</published>
-    <updated>2015-08-27T15:36:51.000Z</updated>
+    <updated>2015-08-28T10:33:24.000Z</updated>
     <content type="html"><![CDATA[<h1 id="iPhone手机的安全">iPhone手机的安全</h1><p>最近曝出了<strong>抢红包插件</strong>在 iOS8 上作恶，窃取了 22万苹果手机用户的密码，所以我觉得我应该分享一下我的 iPhone iOS 8.4 的安全设置心得。</p>
 <h1 id="手机目前状态">手机目前状态</h1><ul>
 <li>iOS 8.4 越狱</li>
 <li>SIM 卡 中国联不通</li>
 <li>Apple ID 使用 iCloud </li>
 <li>所有网络账号绑定在这张 SIM 上</li>
-<li></li>
+<li>经常连接公共 WiFi</li>
 </ul>
 <h1 id="我所涉及的安全危险">我所涉及的安全危险</h1><ol>
 <li>手机遗失被他们拾获，设定为飞行模式或者关机，从而躲避苹果官方的网络锁，使我们的<em>“丢失模式”</em>失效</li>
@@ -73,6 +73,7 @@
 <p>我对所有的 2-step 认证网站恢复密钥的保存都是另存为PDF，然后将 PDF放入到使用 Veracrypt 加密过的虚拟磁盘（格式为 FAT, 100MB），而后将此磁盘放入到 Dropbox以及 Onedrive，并且使用 syncthing与 VPS同步。</p>
 <p>虚拟磁盘使用两把密钥来解，两把密钥分开来放在不同邮箱、网盘，由于都是分开的，也并不担心会被同时得到。</p>
 </blockquote>
+<h2 id="公共_WiFi的安全">公共 WiFi的安全</h2><p>这部分将在 08-28晚更新</p>
 <p>现在我们来总结一下针对我自己的 iPhone所以做的安全性改进：<br><figure class="highlight haml"><table><tr><td class="code"><pre><span class="line">-<span class="ruby"> 如果已经越狱，可为手机安装 <span class="constant">Bioprotect</span>以及各种控制中心插件，实现屏蔽在锁屏时的飞行模式、<span class="constant">GPS</span>、数据开关等功能。尽可能延长 iOS设备的在线时间，利于我们远程锁定</span><br><span class="line"></span>-<span class="ruby"> 我们修改了 <span class="constant">SIM</span> <span class="constant">PIN</span>，防止坏人得到短信验证码以及 <span class="constant">Apple</span> <span class="constant">ID</span> 两步法验证码</span><br><span class="line"></span>-<span class="ruby"> 我们将锁屏的密码位数做了修改，几乎无法破解</span><br><span class="line"></span>-<span class="ruby"> 打开了 <span class="constant">Apple</span> <span class="constant">ID</span> 的两步法验证，即便你被人钓鱼骗到了密码，也无法登录，加上<span class="constant">SIM</span> <span class="constant">PIN</span>的锁定，对方完全无法破解 <span class="constant">Apple</span> <span class="constant">ID</span> 锁。</span></span><br></pre></td></tr></table></figure></p>
 <p>这就是我自己现今在用的 iOS安全设置。可能当中有不对的部分，我想会随着时间积累，再来更新吧。</p>
 <p>作为自己 iPhone安全环节最后的一部分，应当会有很多人争议<em>越狱</em>的安全性。我不想去争论这件事情，但要嘱咐一下：</p>
