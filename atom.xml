@@ -95,7 +95,7 @@
     <link href="http://bao3.org/2015/08/26/%E5%85%B3%E4%BA%8E-iPhone-%E7%9A%84%E5%AE%89%E5%85%A8%E9%98%B2%E8%8C%83/"/>
     <id>http://bao3.org/2015/08/26/关于-iPhone-的安全防范/</id>
     <published>2015-08-26T15:00:18.000Z</published>
-    <updated>2015-09-17T17:40:29.000Z</updated>
+    <updated>2015-09-17T17:42:51.000Z</updated>
     <content type="html"><![CDATA[<h1 id="iPhone手机的安全">iPhone手机的安全</h1><p>最近曝出了<strong>抢红包插件</strong>在 iOS8 上作恶，窃取了 22万苹果手机用户的密码，所以我觉得我应该分享一下我的 iPhone iOS 8.4 的安全设置心得。</p>
 <h1 id="手机目前状态">手机目前状态</h1><ul>
 <li>iOS 8.4 越狱</li>
@@ -153,7 +153,7 @@
 <hr>
 <p>现在我们来总结一下针对我自己的 iPhone所以做的安全性改进：<br><figure class="highlight haml"><table><tr><td class="code"><pre><span class="line">-<span class="ruby"> 如果已经越狱，可为手机安装 <span class="constant">Bioprotect</span>以及各种控制中心插件，实现屏蔽在锁屏时的飞行模式、<span class="constant">GPS</span>、数据开关等功能。尽可能延长 iOS设备的在线时间，利于我们远程锁定</span><br><span class="line"></span>-<span class="ruby"> 我们修改了 <span class="constant">SIM</span> <span class="constant">PIN</span>，防止坏人得到短信验证码以及 <span class="constant">Apple</span> <span class="constant">ID</span> 两步法验证码</span><br><span class="line"></span>-<span class="ruby"> 我们将锁屏的密码位数做了修改，几乎无法破解</span><br><span class="line"></span>-<span class="ruby"> 打开了 <span class="constant">Apple</span> <span class="constant">ID</span> 的两步法验证，即便你被人钓鱼骗到了密码，也无法登录，加上<span class="constant">SIM</span> <span class="constant">PIN</span>的锁定，对方完全无法破解 <span class="constant">Apple</span> <span class="constant">ID</span> 锁。</span></span><br></pre></td></tr></table></figure></p>
 <p>这就是我自己现今在用的 iOS安全设置。可能当中有不对的部分，我想会随着时间积累，再来更新吧。</p>
-<h2 id="针对越狱系统">针对越狱系统</h2><p>作为自己 iPhone安全环节最后的一部分，应当会有很多人争议<em>越狱</em>的安全性。我不想去争论这件事情，但要嘱咐一下：</p>
+<h1 id="针对越狱系统">针对越狱系统</h1><p>作为自己 iPhone安全环节最后的一部分，应当会有很多人争议<em>越狱</em>的安全性。我不想去争论这件事情，但要嘱咐一下：</p>
 <ol>
 <li>越狱后，必须，务必，一定要修改 root密码，方法其实在 cydia的手机端的首页中下部就有写。就是装个 openssh 和 new term之类，登录，然后 su , 输入密码 alpine ，再使用 password 改密码，你可以不必记住这个密码。</li>
 <li>一定不要装 Apple File Cuit （?) 似乎是这个插件，也叫 AFC 2 插件。这个本来是为了方便访问手机所有的文件系统。恐怖之处就是在别人拿到你的手机后，极有可能也可以访问。反而如果不装这个，插到电脑上后看到跟未越狱手机是一样的文件系统。我没有验证安装了 AFC的 iOS新插入到一台 PC的情形，不过小心为妙,毕竟 iOS 那个是否信任此电脑的小框，不是每次都跳，也不是每次都起作用。(据说 iOS7和 iOS8.4的结构不太一样，这个没有验证)</li>
