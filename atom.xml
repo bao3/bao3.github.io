@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Geek]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://bao3.org/"/>
-  <updated>2015-10-03T11:17:47.000Z</updated>
+  <updated>2015-10-03T12:28:46.000Z</updated>
   <id>http://bao3.org/</id>
   
   <author>
@@ -15,15 +15,23 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[special_cydia_source]]></title>
+    <title><![CDATA[一些比较特别的 Cydia 源]]></title>
     <link href="http://bao3.org/2015/10/03/special-cydia-source/"/>
     <id>http://bao3.org/2015/10/03/special-cydia-source/</id>
-    <published>2015-10-03T11:17:47.000Z</published>
-    <updated>2015-10-03T11:17:47.000Z</updated>
-    <content type="html"></content>
+    <published>2015-10-03T11:26:21.000Z</published>
+    <updated>2015-10-03T12:28:46.000Z</updated>
+    <content type="html"><![CDATA[<p>这些源地址将使用手机浏览器直接点击添加</p>
+<p><a href="cydia://url/https://cydia.saurik.com/api/share#?source=http://cydia.xsellize.com" target="_blank" rel="external"># Xsellize 源</a></p>
+<p>我以前常用的源，有一些是破解收费 （请尽量保持试用心态）</p>
+<p><a href="cydia://url/https://cydia.saurik.com/api/share#?source=http://repo.xarold.com" target="_blank" rel="external"># Xarold 源</a></p>
+<p>目前在用的主力源，破解收费软件,在免费软件上大小与原文件一样，所以我一直这么用，我觉得应该算是比较安全的。</p>
+]]></content>
     <summary type="html">
-    
+    <![CDATA[<p>这些源地址将使用手机浏览器直接点击添加</p>
+<p><a href="cydia://url/https://cydia.saurik.com/api/share#?source=http://cydia.xsellize.com" target="_blank" rel]]>
     </summary>
+    
+      <category term="ios cydia" scheme="http://bao3.org/tags/ios-cydia/"/>
     
   </entry>
   
