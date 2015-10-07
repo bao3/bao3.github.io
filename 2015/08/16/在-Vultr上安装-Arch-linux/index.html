@@ -270,45 +270,59 @@
       
         <span itemprop="articleBody"><p>广告时间：在所有用过的 VPS服务商中，我一直依赖 Vultr，首先是日本线路质量比较可靠，其次价格平民，只要 5$/月（首次还送钱给你），最后就是最重要的，免费送你不限制的 Snapshot功能，让你克隆（备份）整机。所以不要由于，使用我的注册连接来注册试用（双方获利 $$ ）：<a href="www.vultr.com/?ref=6813064">bao3的 Vultr 邀请</a></p>
 <blockquote>
-<p>不过也要碰运气，在你 Deploy一台新的 VPS的时候要注意看分配给你的 IP地址，虽然同样是在日本，但是从中国过去的路由会有不同所以速度也一样会有差别，你可以不断地创建和删除 VPS，直到拿到对你来说比较不错的 IP地址。<br>记得哦，免费且不限制的 Snapshot 功能可以随时克隆（备份）你的 VPS，这样你可以随时重装、还原、创建新的 VPS</p>
+<p>不过也要碰运气，在你 Deploy一台新的 VPS的时候要注意看分配给你的 IP地址，虽然同样是在日本，但是从中国过去的路由会有不同所以速度也一样会有差别，你可以不断地创建和删除 VPS，直到拿到对你来说比较不错的 IP地址。
+记得哦，免费且不限制的 Snapshot 功能可以随时克隆（备份）你的 VPS，这样你可以随时重装、还原、创建新的 VPS</p>
 </blockquote>
-<h1 id="下载_iso安装盘">下载 iso安装盘</h1><p>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
-<p><code>http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso</code>  </p>
+<h1>下载 iso安装盘</h1>
+<p>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:</p>
+<p><code>http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso</code></p>
 <p><img src="/blog/downloadISO.png" alt=""></p>
-<h1 id="创建系统">创建系统</h1><p>这个应该都会了吧， Deploy 一个新的，注意先择系统时，使用你刚才下载的 iso ，不过在创建好之后系统根本不会自动安装好 Arch Linux，只不过是用光盘启动了而已。    </p>
+<h1>创建系统</h1>
+<p>这个应该都会了吧， Deploy 一个新的，注意先择系统时，使用你刚才下载的 iso ，不过在创建好之后系统根本不会自动安装好 Arch Linux，只不过是用光盘启动了而已。</p>
 <p><img src="/blog/vultrdeply.png" alt=""></p>
 <blockquote>
-<p>注意一点，如果你创建的时候很不幸选了SATA （更多存储空间）那就郁闷了，因为有可能会莫名各种小毛病，影响后面的安装。<br>我经历过，所以只建议你使用 SSD套餐<br>并且 SATA套餐不能制作  Snapshot而 SSD可以，基于此，相当于多了一个免费的备份镜像，数据是数据是无价的。  </p>
+<p>注意一点，如果你创建的时候很不幸选了SATA （更多存储空间）那就郁闷了，因为有可能会莫名各种小毛病，影响后面的安装。<br>
+我经历过，所以只建议你使用 SSD套餐<br>
+并且 SATA套餐不能制作  Snapshot而 SSD可以，基于此，相当于多了一个免费的备份镜像，数据是数据是无价的。</p>
 </blockquote>
-<h1 id="开始安装">开始安装</h1><p> 我相信你应该是一个具有动手能力的人，因为接下来的安装需要使用很多命令行指令。请在 Web上选使用 VNC Console的方式来使用新创建的 VPS。  </p>
-<h2 id="硬盘分区">硬盘分区</h2><p> 整个安装过程中最核心的地方就是硬盘分区。原因在于 Vultr是基于 KVM的虚拟机，而我们又是用的 SSD ，所以是基于 BIOS + GPT的系统。而在默认情况下咱们的引动器 Grub只能支持 BIOS+ MBR 或者 EFI + GPT 的方式。Vultr 恰是个混合模式，会导致 Grub不引导的。  </p>
+<h1>开始安装</h1>
+<p>我相信你应该是一个具有动手能力的人，因为接下来的安装需要使用很多命令行指令。请在 Web上选使用 VNC Console的方式来使用新创建的 VPS。</p>
+<h2>硬盘分区</h2>
+<p>整个安装过程中最核心的地方就是硬盘分区。原因在于 Vultr是基于 KVM的虚拟机，而我们又是用的 SSD ，所以是基于 BIOS + GPT的系统。而在默认情况下咱们的引动器 Grub只能支持 BIOS+ MBR 或者 EFI + GPT 的方式。Vultr 恰是个混合模式，会导致 Grub不引导的。</p>
 <ol>
-<li>首先我们必须分出一个 bios安装分区，用于存放存放标准的 Grub 的引导文件。  </li>
-<li>如果你要承载 Web类服务，例如<strong>网站</strong>或者<strong>私有云</strong> ( <strong><em>owncloud</em></strong>)，那么我们最好单独分一个 Swap 。  </li>
-<li><p>默认情况下我们直接使用剩余的 <strong>SSD</strong> 作为整个系统磁盘，不单独分区了。<br>正面就开始咯：</p>
-<p><figure class="highlight"><table><tr><td class="code"><pre><span class="line">gdisk /dev/vda&#10;n&#10;+2M&#10;&#22238;&#36710;&#10;EF02 &#65288;&#31867;&#22411;&#20195;&#30721;&#40664;&#35748;&#20026; 8300&#65292;&#35201;&#25163;&#21160;&#25913;&#65289;</span><br></pre></td></tr></table></figure>
-</p>
+<li>
+<pre><code>首先我们必须分出一个 bios安装分区，用于存放存放标准的 Grub 的引导文件。  
+</code></pre>
 </li>
+<li>如果你要承载 Web类服务，例如<strong>网站</strong>或者<strong>私有云</strong> ( <strong><em>owncloud</em></strong>)，那么我们最好单独分一个 Swap 。</li>
+<li>默认情况下我们直接使用剩余的 <strong>SSD</strong> 作为整个系统磁盘，不单独分区了。<br>
+正面就开始咯：</li>
 </ol>
-<p> 截图如下：<br> <img src="/blog/VultrEF02.png" alt="">  </p>
-<p> 剩下的空间就是你自己自由支配，我的就仅供参考（与平时的分区没有区别），注意看图片中一定会有一个 ==BIOS== 分区，这是成功的关键:</p>
-<p> <img src="/blog/VultrSSD.png" alt="">  </p>
-<p>==当然最后还要写盘，这个我就不说按哪个键了。== </p>
-<h2 id="开始安装-1">开始安装</h2><p> 分区已经分好了，并且已经使用 ISO光盘启动了，接下来就是分区了，Arch Linux也有类似于 FreeBSD的交互式安装过程，不过在这里还是要用手动的过程，毕竟我也是第一次安装 Arch Linux 。 Vultr因为可以使用镜像来克隆，所以一次安装，永远安逸。</p>
-<p> 不过你需要注意的是，如果你的分区跟我不太一样，那接下来的步骤你需要有些调整，通常的调整就是 <code>/dev/vda1</code> <code>/dev/vda2``/dev/vda3</code>这些编号有所不同。我只会依照我的来写。</p>
-<p> <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">mkswap <span class="regexp">/dev/</span>vda2 -L SWAP</span><br><span class="line">swapon <span class="regexp">/dev/</span>vda2</span><br><span class="line">mkfs.ext4 <span class="regexp">/dev/</span>vda3 -L ArchOS</span><br><span class="line">mount <span class="regexp">/dev/</span>vda3 <span class="regexp">/mnt</span></span><br></pre></td></tr></table></figure>
-</p>
-<p> 好了，至此所有准备工作都已经完成了，我们开始安装系统核心了。<br> <figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="label">pacstrap</span> /mnt <span class="keyword">base </span><span class="keyword">base-level </span>net-tools</span><br></pre></td></tr></table></figure></p>
-<p> 这是要安装基本系统以及一些必要的套件，其中 <code>net-tools</code>是我额外加上的，因为这样可以在安装完使用诸如 <code>ifconfig</code> <code>nslookup</code>等等的小工具。经过等待（<em>通常为==2分钟==</em>左右），系统就已经完全OK了。</p>
-<p> 不过此时的系统还没有引导器 <em>bootloader</em> ,因此我们需要为系统安装一下：<br> <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">arch-chroot /mnt</span><br><span class="line">pacman -Sy grub</span><br><span class="line">mkinitcpio -p linux</span><br><span class="line">grub-install <span class="regexp">/dev/</span>vda</span><br><span class="line">grub-mkconfig -o <span class="regexp">/boot/</span>grub/grub.cfg</span><br></pre></td></tr></table></figure></p>
-<p> OK,启动你的机器试一下吧！</p>
-<p> <em>*安装后有还有些额外调整，但不是必需的例如 hostname, locale, timezone，你完全可以不设置重启后再慢慢调整</em></p>
-<h2 id="安装_yaourt">安装 yaourt</h2><p> 这部分是额外的设定，Arch 使用 <strong><em>pacman</em></strong>来管理包，但是有时候这些包更新慢，我们可以使用<strong><em>yaourt</em></strong> 来代替，可称为神器。我们需要修改 <code>/etc/pacman.conf</code>，加入以下代码：  </p>
+<p><figure class="highlight"><table><tr><td class="code"><pre><span class="line">gdisk /dev/vda&#10;n&#10;+2M&#10;&#22238;&#36710;&#10;EF02 &#65288;&#31867;&#22411;&#20195;&#30721;&#40664;&#35748;&#20026; 8300&#65292;&#35201;&#25163;&#21160;&#25913;&#65289;</span><br></pre></td></tr></table></figure></p>
+<p>截图如下：<br>
+<img src="/blog/VultrEF02.png" alt=""></p>
+<p>剩下的空间就是你自己自由支配，我的就仅供参考（与平时的分区没有区别），注意看图片中一定会有一个 ==BIOS== 分区，这是成功的关键:</p>
+<p><img src="/blog/VultrSSD.png" alt=""></p>
+<p>==当然最后还要写盘，这个我就不说按哪个键了。==</p>
+<h2>开始安装</h2>
+<p>分区已经分好了，并且已经使用 ISO光盘启动了，接下来就是分区了，Arch Linux也有类似于 FreeBSD的交互式安装过程，不过在这里还是要用手动的过程，毕竟我也是第一次安装 Arch Linux 。 Vultr因为可以使用镜像来克隆，所以一次安装，永远安逸。</p>
+<p>不过你需要注意的是，如果你的分区跟我不太一样，那接下来的步骤你需要有些调整，通常的调整就是 <code>/dev/vda1</code> <code>/dev/vda2``/dev/vda3</code>这些编号有所不同。我只会依照我的来写。</p>
+<p><figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">mkswap <span class="regexp">/dev/</span>vda2 -L SWAP</span><br><span class="line">swapon <span class="regexp">/dev/</span>vda2</span><br><span class="line">mkfs.ext4 <span class="regexp">/dev/</span>vda3 -L ArchOS</span><br><span class="line">mount <span class="regexp">/dev/</span>vda3 <span class="regexp">/mnt</span></span><br></pre></td></tr></table></figure></p>
+<p>好了，至此所有准备工作都已经完成了，我们开始安装系统核心了。<br>
+<figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="label">pacstrap</span> /mnt <span class="keyword">base </span><span class="keyword">base-level </span>net-tools</span><br></pre></td></tr></table></figure></p>
+<p>这是要安装基本系统以及一些必要的套件，其中 <code>net-tools</code>是我额外加上的，因为这样可以在安装完使用诸如 <code>ifconfig</code> <code>nslookup</code>等等的小工具。经过等待（*通常为==2分钟==*左右），系统就已经完全OK了。</p>
+<p>不过此时的系统还没有引导器 <em>bootloader</em> ,因此我们需要为系统安装一下：<br>
+<figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">arch-chroot /mnt</span><br><span class="line">pacman -Sy grub</span><br><span class="line">mkinitcpio -p linux</span><br><span class="line">grub-install <span class="regexp">/dev/</span>vda</span><br><span class="line">grub-mkconfig -o <span class="regexp">/boot/</span>grub/grub.cfg</span><br></pre></td></tr></table></figure></p>
+<p>OK,启动你的机器试一下吧！</p>
+<p>*<em>安装后有还有些额外调整，但不是必需的例如 hostname, locale, timezone，你完全可以不设置重启后再慢慢调整</em></p>
+<h2>安装 yaourt</h2>
+<p>这部分是额外的设定，Arch 使用 <strong><em>pacman___来管理包，但是有时候这些包更新慢，我们可以使用___yaourt</em></strong> 来代替，可称为神器。我们需要修改 <code>/etc/pacman.conf</code>，加入以下代码：</p>
 <pre><code>
-[archlinuxcn]  
-SigLevel = Optional TrustedOnly
-Server   = http://repo.archlinuxcn.org/<span class="variable">$arch</span>
-</code></pre><p>然后使用 <code>pacman -Syu yaourt</code> 安装。此后，你就可以使用 <code>yaourt -Sy  软件包名称</code>来自动使用其他用户分享的包， Enjoy~ it !</p>
+    [archlinuxcn]  
+    SigLevel = Optional TrustedOnly
+    Server   = http://repo.archlinuxcn.org/$arch
+</code></pre>
+<p>然后使用 <code>pacman -Syu yaourt</code> 安装。此后，你就可以使用 <code>yaourt -Sy 软件包名称</code>来自动使用其他用户分享的包， Enjoy~ it !</p>
 <p>*Arch 上安装 ocserv的时候，请在安装时选择手动编辑，然后去掉 autogen ，因为这货有引起编译错误导致失败。</p>
 <p><strong><em>完结</em></strong></p>
 </span>
@@ -394,7 +408,7 @@ Server   = http://repo.archlinuxcn.org/<span class="variable">$arch</span>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -443,7 +457,7 @@ Server   = http://repo.archlinuxcn.org/<span class="variable">$arch</span>
           <div class="post-toc">
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#下载_iso安装盘"><span class="nav-number">1.</span> <span class="nav-text">下载 iso安装盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建系统"><span class="nav-number">2.</span> <span class="nav-text">创建系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开始安装"><span class="nav-number">3.</span> <span class="nav-text">开始安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#硬盘分区"><span class="nav-number">3.1.</span> <span class="nav-text">硬盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始安装-1"><span class="nav-number">3.2.</span> <span class="nav-text">开始安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装_yaourt"><span class="nav-number">3.3.</span> <span class="nav-text">安装 yaourt</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">1.</span> <span class="nav-text">下载 iso安装盘</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">2.</span> <span class="nav-text">创建系统</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#undefined"><span class="nav-number">3.</span> <span class="nav-text">开始安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.1.</span> <span class="nav-text">硬盘分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.2.</span> <span class="nav-text">开始安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#undefined"><span class="nav-number">3.3.</span> <span class="nav-text">安装 yaourt</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
