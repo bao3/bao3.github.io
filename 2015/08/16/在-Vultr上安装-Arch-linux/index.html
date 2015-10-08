@@ -57,7 +57,7 @@
 <meta property="og:image" content="http://bao3.org/blog/vultrdeply.png">
 <meta property="og:image" content="http://bao3.org/blog/VultrEF02.png">
 <meta property="og:image" content="http://bao3.org/blog/VultrSSD.png">
-<meta property="og:updated_time" content="2015-10-08T16:15:27.000Z">
+<meta property="og:updated_time" content="2015-10-08T16:16:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在 Vultr上安装 Arch linux">
 <meta name="twitter:description" content="广告时间：在所有用过的 VPS服务商中，我一直依赖 Vultr，首先是日本线路质量比较可靠，其次价格平民，只要 5$/月（首次还送钱给你），最后就是最重要的，免费送你不限制的 Snapshot功能，让你克隆（备份）整机。所以不要由于，使用我的注册连接来注册试用（双方获利 $$ ）：bao3的 Vultr 邀请
@@ -298,7 +298,7 @@
 <p> 不过你需要注意的是，如果你的分区跟我不太一样，那接下来的步骤你需要有些调整，通常的调整就是 <code>/dev/vda1</code> <code>/dev/vda2</code> <code>/dev/vda3</code>这些编号有所不同。我只会依照我的来写。</p>
 <p> <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">mkswap <span class="regexp">/dev/</span>vda2 -L SWAP</span><br><span class="line">swapon <span class="regexp">/dev/</span>vda2</span><br><span class="line">mkfs.ext4 <span class="regexp">/dev/</span>vda3 -L ArchOS</span><br><span class="line">mount <span class="regexp">/dev/</span>vda3 <span class="regexp">/mnt</span></span><br></pre></td></tr></table></figure>
 </p>
-<p> 好了，至此所有准备工作都已经完成了，我们开始安装系统核心了。<br> <figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="label">pacstrap</span> /mnt <span class="keyword">base </span><span class="keyword">base-level </span>net-tools</span><br></pre></td></tr></table></figure></p>
+<p> 好了，至此所有准备工作都已经完成了，我们开始安装系统核心了。<br> <figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="label">pacstrap</span> /mnt <span class="keyword">base </span><span class="keyword">base-devel </span>net-tools</span><br></pre></td></tr></table></figure></p>
 <p> 这是要安装基本系统以及一些必要的套件，其中 <code>net-tools</code>是我额外加上的，因为这样可以在安装完使用诸如 <code>ifconfig</code> <code>nslookup</code>等等的小工具。经过等待（<em>通常为 2分钟 </em>左右），系统就已经完全OK了。</p>
 <p> 不过此时的系统还没有引导器 <em>bootloader</em> ,因此我们需要为系统安装一下：<br> <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">arch-chroot /mnt</span><br><span class="line">pacman -Sy grub</span><br><span class="line">mkinitcpio -p linux</span><br><span class="line">grub-install <span class="regexp">/dev/</span>vda</span><br><span class="line">grub-mkconfig -o <span class="regexp">/boot/</span>grub/grub.cfg</span><br></pre></td></tr></table></figure></p>
 <p> OK,启动你的机器试一下吧！</p>
