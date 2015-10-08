@@ -274,7 +274,7 @@
     <link href="http://bao3.org/2015/08/16/%E5%9C%A8-Vultr%E4%B8%8A%E5%AE%89%E8%A3%85-Arch-linux/"/>
     <id>http://bao3.org/2015/08/16/在-Vultr上安装-Arch-linux/</id>
     <published>2015-08-16T12:17:56.000Z</published>
-    <updated>2015-10-08T16:12:07.000Z</updated>
+    <updated>2015-10-08T16:15:27.000Z</updated>
     <content type="html"><![CDATA[<p>广告时间：在所有用过的 VPS服务商中，我一直依赖 Vultr，首先是日本线路质量比较可靠，其次价格平民，只要 5$/月（首次还送钱给你），最后就是最重要的，免费送你不限制的 Snapshot功能，让你克隆（备份）整机。所以不要由于，使用我的注册连接来注册试用（双方获利 $$ ）：<a href="www.vultr.com/?ref=6813064">bao3的 Vultr 邀请</a></p>
 <blockquote>
 <p>不过也要碰运气，在你 Deploy一台新的 VPS的时候要注意看分配给你的 IP地址，虽然同样是在日本，但是从中国过去的路由会有不同所以速度也一样会有差别，你可以不断地创建和删除 VPS，直到拿到对你来说比较不错的 IP地址。<br>记得哦，免费且不限制的 Snapshot 功能可以随时克隆（备份）你的 VPS，这样你可以随时重装、还原、创建新的 VPS</p>
@@ -316,7 +316,7 @@
 [archlinuxcn]  
 SigLevel = Optional TrustedOnly
 Server   = http://repo.archlinuxcn.org/<span class="variable">$arch</span>
-</code></pre><p>保存并退出</p>
+</code></pre><p><code>Control + X</code> 保存( 选择 “yes “ ) ，并退出</p>
 <p>然后使用 <code>pacman -Syu yaourt</code> 安装。此后，你就可以使用 <code>yaourt -Sy  软件包名称</code>来自动使用其他用户分享的包， Enjoy~ it !</p>
 <p>*Arch 上安装 ocserv的时候，请在安装时选择手动编辑，然后去掉 autogen ，因为这货有引起编译错误导致失败。</p>
 <p><strong><em>完结</em></strong></p>
