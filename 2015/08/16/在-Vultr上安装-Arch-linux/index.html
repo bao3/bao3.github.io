@@ -57,7 +57,7 @@
 <meta property="og:image" content="http://bao3.org/blog/vultrdeply.png">
 <meta property="og:image" content="http://bao3.org/blog/VultrEF02.png">
 <meta property="og:image" content="http://bao3.org/blog/VultrSSD.png">
-<meta property="og:updated_time" content="2015-10-09T04:55:41.000Z">
+<meta property="og:updated_time" content="2015-10-09T05:11:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在 Vultr上安装 Arch linux">
 <meta name="twitter:description" content="广告时间：在所有用过的 VPS服务商中，我一直依赖 Vultr，首先是日本线路质量比较可靠，其次价格平民，只要 5$/月（首次还送钱给你），最后就是最重要的，免费送你不限制的 Snapshot功能，让你克隆（备份）整机。所以不要由于，使用我的注册连接来注册试用（双方获利 $$ ）：bao3的 Vultr 邀请
@@ -306,8 +306,8 @@
 <li>配置IP</li>
 </ol>
 <p>如果不配置，你重启后系统会无法联网，做完这一步，以后你重启系统，就可以使用你自己的PC 的 SSH 来远程连接了。</p>
-<p><code>配置DHCP</code>，这一步比较简单，在你的命令行下接着输入：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> dhcpcd</span><br></pre></td></tr></table></figure></p>
-<p>通常你会看到 ( Created symlink from /etc/systemd/system/multi-user.target.wants/dhcpcd.service to /usr/lib/systemd/system/dhcpcd.service.) </p>
+<p><code>配置DHCP</code>，这一步比较简单，在你的命令行下接着输入：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> dhcpcd</span><br><span class="line"></span><br><span class="line">或者是</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span>  dhcpcd@eth0</span><br></pre></td></tr></table></figure></p>
+<p>通常你会看到 ( Created symlink from /etc/systemd/system/multi-user.target.wants/dhcpcd.service to /usr/lib/systemd/system/dhcpcd （或者@eth0）.service.) </p>
 <ol>
 <li><p>重启前，记得使用 <code>passwd</code> 修改一下你的 root 密码，以利于下一步 ssh从你的 PC上登录，摆脱网页登录的烦恼</p>
 <p><figure class="highlight"><table><tr><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>

@@ -274,7 +274,7 @@
     <link href="http://bao3.org/2015/08/16/%E5%9C%A8-Vultr%E4%B8%8A%E5%AE%89%E8%A3%85-Arch-linux/"/>
     <id>http://bao3.org/2015/08/16/在-Vultr上安装-Arch-linux/</id>
     <published>2015-08-16T12:17:56.000Z</published>
-    <updated>2015-10-09T04:55:41.000Z</updated>
+    <updated>2015-10-09T05:11:09.000Z</updated>
     <content type="html"><![CDATA[<p>广告时间：在所有用过的 VPS服务商中，我一直依赖 Vultr，首先是日本线路质量比较可靠，其次价格平民，只要 5$/月（首次还送钱给你），最后就是最重要的，免费送你不限制的 Snapshot功能，让你克隆（备份）整机。所以不要由于，使用我的注册连接来注册试用（双方获利 $$ ）：<a href="www.vultr.com/?ref=6813064">bao3的 Vultr 邀请</a></p>
 <blockquote>
 <p>不过也要碰运气，在你 Deploy一台新的 VPS的时候要注意看分配给你的 IP地址，虽然同样是在日本，但是从中国过去的路由会有不同所以速度也一样会有差别，你可以不断地创建和删除 VPS，直到拿到对你来说比较不错的 IP地址。<br>记得哦，免费且不限制的 Snapshot 功能可以随时克隆（备份）你的 VPS，这样你可以随时重装、还原、创建新的 VPS</p>
@@ -313,8 +313,8 @@
 <li>配置IP</li>
 </ol>
 <p>如果不配置，你重启后系统会无法联网，做完这一步，以后你重启系统，就可以使用你自己的PC 的 SSH 来远程连接了。</p>
-<p><code>配置DHCP</code>，这一步比较简单，在你的命令行下接着输入：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> dhcpcd</span><br></pre></td></tr></table></figure></p>
-<p>通常你会看到 ( Created symlink from /etc/systemd/system/multi-user.target.wants/dhcpcd.service to /usr/lib/systemd/system/dhcpcd.service.) </p>
+<p><code>配置DHCP</code>，这一步比较简单，在你的命令行下接着输入：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> dhcpcd</span><br><span class="line"></span><br><span class="line">或者是</span><br><span class="line"></span><br><span class="line">systemctl <span class="built_in">enable</span>  dhcpcd@eth0</span><br></pre></td></tr></table></figure></p>
+<p>通常你会看到 ( Created symlink from /etc/systemd/system/multi-user.target.wants/dhcpcd.service to /usr/lib/systemd/system/dhcpcd （或者@eth0）.service.) </p>
 <ol>
 <li><p>重启前，记得使用 <code>passwd</code> 修改一下你的 root 密码，以利于下一步 ssh从你的 PC上登录，摆脱网页登录的烦恼</p>
 <p><figure class="highlight"><table><tr><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
