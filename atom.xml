@@ -274,7 +274,7 @@
     <link href="http://bao3.org/2015/08/16/%E5%9C%A8-Vultr%E4%B8%8A%E5%AE%89%E8%A3%85-Arch-linux/"/>
     <id>http://bao3.org/2015/08/16/在-Vultr上安装-Arch-linux/</id>
     <published>2015-08-16T12:17:56.000Z</published>
-    <updated>2015-10-08T16:16:44.000Z</updated>
+    <updated>2015-10-09T04:55:41.000Z</updated>
     <content type="html"><![CDATA[<p>广告时间：在所有用过的 VPS服务商中，我一直依赖 Vultr，首先是日本线路质量比较可靠，其次价格平民，只要 5$/月（首次还送钱给你），最后就是最重要的，免费送你不限制的 Snapshot功能，让你克隆（备份）整机。所以不要由于，使用我的注册连接来注册试用（双方获利 $$ ）：<a href="www.vultr.com/?ref=6813064">bao3的 Vultr 邀请</a></p>
 <blockquote>
 <p>不过也要碰运气，在你 Deploy一台新的 VPS的时候要注意看分配给你的 IP地址，虽然同样是在日本，但是从中国过去的路由会有不同所以速度也一样会有差别，你可以不断地创建和删除 VPS，直到拿到对你来说比较不错的 IP地址。<br>记得哦，免费且不限制的 Snapshot 功能可以随时克隆（备份）你的 VPS，这样你可以随时重装、还原、创建新的 VPS</p>
@@ -300,7 +300,7 @@
 <p> 截图如下：<br> <img src="/blog/VultrEF02.png" alt="">  </p>
 <p> 剩下的空间就是你自己自由支配，我的就仅供参考（与平时的分区没有区别），注意看图片中一定会有一个 ==BIOS== 分区，这是成功的关键:</p>
 <p> <img src="/blog/VultrSSD.png" alt="">  </p>
-<p>==当然最后还要写盘，这个我就不说按哪个键了。== </p>
+<p><strong>当然最后还要写盘</strong>，这个我就不说按哪个键了。  </p>
 <h2 id="开始安装-1">开始安装</h2><p> 分区已经分好了，并且已经使用 ISO光盘启动了，接下来就是分区了，Arch Linux也有类似于 FreeBSD的交互式安装过程，不过在这里还是要用手动的过程，毕竟我也是第一次安装 Arch Linux 。 Vultr因为可以使用镜像来克隆，所以一次安装，永远安逸。</p>
 <p> 不过你需要注意的是，如果你的分区跟我不太一样，那接下来的步骤你需要有些调整，通常的调整就是 <code>/dev/vda1</code> <code>/dev/vda2</code> <code>/dev/vda3</code>这些编号有所不同。我只会依照我的来写。</p>
 <p> <figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">mkswap <span class="regexp">/dev/</span>vda2 -L SWAP</span><br><span class="line">swapon <span class="regexp">/dev/</span>vda2</span><br><span class="line">mkfs.ext4 <span class="regexp">/dev/</span>vda3 -L ArchOS</span><br><span class="line">mount <span class="regexp">/dev/</span>vda3 <span class="regexp">/mnt</span></span><br></pre></td></tr></table></figure>
@@ -308,15 +308,39 @@
 <p> 好了，至此所有准备工作都已经完成了，我们开始安装系统核心了。<br> <figure class="highlight armasm"><table><tr><td class="code"><pre><span class="line"><span class="label">pacstrap</span> /mnt <span class="keyword">base </span><span class="keyword">base-devel </span>net-tools</span><br></pre></td></tr></table></figure></p>
 <p> 这是要安装基本系统以及一些必要的套件，其中 <code>net-tools</code>是我额外加上的，因为这样可以在安装完使用诸如 <code>ifconfig</code> <code>nslookup</code>等等的小工具。经过等待（<em>通常为 2分钟 </em>左右），系统就已经完全OK了。</p>
 <p> 不过此时的系统还没有引导器 <em>bootloader</em> ,因此我们需要为系统安装一下：<br> <figure class="highlight groovy"><table><tr><td class="code"><pre><span class="line">arch-chroot /mnt</span><br><span class="line">pacman -Sy grub</span><br><span class="line">mkinitcpio -p linux</span><br><span class="line">grub-install <span class="regexp">/dev/</span>vda</span><br><span class="line">grub-mkconfig -o <span class="regexp">/boot/</span>grub/grub.cfg</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置网络连接">配置网络连接</h2><p>其实操作上来说，以上安装就已经可以重启你的 VPS 享受乐趣，不过在此之前，先要做一些小的配置。</p>
+<ol>
+<li>配置IP</li>
+</ol>
+<p>如果不配置，你重启后系统会无法联网，做完这一步，以后你重启系统，就可以使用你自己的PC 的 SSH 来远程连接了。</p>
+<p><code>配置DHCP</code>，这一步比较简单，在你的命令行下接着输入：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl <span class="built_in">enable</span> dhcpcd</span><br></pre></td></tr></table></figure></p>
+<p>通常你会看到 ( Created symlink from /etc/systemd/system/multi-user.target.wants/dhcpcd.service to /usr/lib/systemd/system/dhcpcd.service.) </p>
+<ol>
+<li><p>重启前，记得使用 <code>passwd</code> 修改一下你的 root 密码，以利于下一步 ssh从你的 PC上登录，摆脱网页登录的烦恼</p>
+<p><figure class="highlight"><table><tr><td class="code"><pre><span class="line">passwd</span><br></pre></td></tr></table></figure>
+</p>
+</li>
+</ol>
+<p>输入你的密码，在你输入的时候是不显示密码的，但是不用担心，这是 Linux / Unix 机制造成。</p>
+<hr>
 <p> OK,启动你的机器试一下吧！</p>
-<p> ** 重启前，记得使用 password 修改一下你的 root 命令，以利于下一步 ssh从你的 PC上登录，摆脱网页登录的烦恼</p>
-<p> <em>*安装后有还有些额外调整，但不是必需的例如 hostname, locale, timezone，你完全可以不设置重启后再慢慢调整</em></p>
-<h2 id="安装_yaourt">安装 yaourt</h2><p> 这部分是额外的设定，Arch 使用 <strong><em>pacman</em></strong>来管理包，但是有时候这些包更新慢，我们可以使用<strong><em>yaourt</em></strong> 来代替，可称为神器。我们需要修改 <code>/etc/pacman.conf</code>，使用 <code>nano /etc/pacman.conf</code> 加入以下代码：  </p>
+<hr>
+<h2 id="远程连接">远程连接</h2><p>在机器重启的过程，你也不必闲着，准备一个工具，从现在开始，我们要用自己的电脑客户端来连接。如果你是 Linux / Unix / Mac ，就直接使用终端 ssh 命令 如果是 Windows 就使用 Putty 或者 Xshell ，两者都是免费的。</p>
+<blockquote>
+<p>提醒，SSH 连接涉及你的服务器安全，请一定要去官方网站下载工具，不要去网上找什么汉化版、修改版，以免这些工具利用你的 ssh 连接获取你的服务器密码、植入木马、作为攻击跳板等</p>
+</blockquote>
+<p>针对 Mac ，打开 <strong>终端</strong>，输入<br><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">ssh root@your<span class="class">.vps</span><span class="class">.ip</span><span class="class">.address</span></span><br></pre></td></tr></table></figure></p>
+<p>使用你的 IP 地址替换后半部分，连接时会询问你是不是要添加</p>
+<ul>
+<li><p>安装后有还有些额外调整，但不是必需的例如 hostname, locale, timezone，你完全可以不设置重启后再慢慢调整*</p>
+<h2 id="安装_yaourt">安装 yaourt</h2><p>这部分是额外的设定，Arch 使用 <strong><em>pacman</em></strong>来管理包，但是有时候这些包更新慢，我们可以使用<strong><em>yaourt</em></strong> 来代替，可称为神器。我们需要修改 <code>/etc/pacman.conf</code>，使用 <code>nano /etc/pacman.conf</code> 加入以下代码：  </p>
 <pre><code>
 [archlinuxcn]  
 SigLevel = Optional TrustedOnly
 Server   = http://repo.archlinuxcn.org/<span class="variable">$arch</span>
-</code></pre><p><code>Control + X</code> 保存( 选择 “yes “ ) ，并退出</p>
+</code></pre></li>
+</ul>
+<p><code>Control + X</code> 保存( 选择 “yes “ ) ，并退出</p>
 <p>然后使用 <code>pacman -Syu yaourt</code> 安装。此后，你就可以使用 <code>yaourt -Sy  软件包名称</code>来自动使用其他用户分享的包， Enjoy~ it !</p>
 <p>*Arch 上安装 ocserv的时候，请在安装时选择手动编辑，然后去掉 autogen ，因为这货有引起编译错误导致失败。</p>
 <p><strong><em>完结</em></strong></p>
