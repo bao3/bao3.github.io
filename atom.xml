@@ -4,7 +4,7 @@
   <subtitle><![CDATA[Geek]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://bao3.org/"/>
-  <updated>2015-10-07T11:36:01.000Z</updated>
+  <updated>2015-10-12T11:57:03.000Z</updated>
   <id>http://bao3.org/</id>
   
   <author>
@@ -13,6 +13,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[2testpage]]></title>
+    <link href="http://bao3.org/2015/10/12/testpage/"/>
+    <id>http://bao3.org/2015/10/12/testpage/</id>
+    <published>2015-10-12T11:56:07.000Z</published>
+    <updated>2015-10-12T11:57:03.000Z</updated>
+    <content type="html"><![CDATA[<h1 id="this_a_test">this a test</h1><p>haha</p>
+<blockquote>
+<p>quto</p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h1 id="this_a_test">this a test</h1><p>haha</p>
+<blockquote>
+<p>quto</p>
+</blockquote>
+]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[IE广告过滤]]></title>
