@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[活着真好]]></title>
+  <link href="http://bao3.org/atom.xml" rel="self"/>
+  <link href="http://bao3.org/"/>
+  <updated>2015-11-07T23:38:56+08:00</updated>
+  <id>http://bao3.org/</id>
+  <author>
+    <name><![CDATA[]]></name>
+    
+  </author>
+  <generator uri="http://www.coderforart.com/">CoderForArt</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[测试自动更新博客]]></title>
+    <link href="http://bao3.org/14469105374435.html"/>
+    <updated>2015-11-07T23:35:37+08:00</updated>
+    <id>http://bao3.org/14469105374435.html</id>
+    <content type="html"><![CDATA[
+<h1 id="toc_0">这只是一个测试</h1>
+
+<p>哈哈中<br/>
+=<mark>看看行不行</mark>=</p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[iOS 8 按需连接 VPN的描述文件]]></title>
+    <link href="http://bao3.org/14468654962557.html"/>
+    <updated>2015-11-07T11:04:56+08:00</updated>
+    <id>http://bao3.org/14468654962557.html</id>
+    <content type="html"><![CDATA[
+<p>适合阅读本文的人群：喜欢动手，有困难时可以查阅官方文档的 <strong><em>VPN使用者</em></strong>, 没错，不必是 VPN发行商。</p>
+
+<span id="more"></span><!-- more -->
+
+<p>最近在为<strong>黑帮</strong>制作一个 iPhone一个自动连接的 VPN配置文件，但发现实现起来有各种不爽，于是在网络上搜了一下。应该说全中文网没有好的共享方案，直到看到了<a href="https://maoxian.de/2014/10/setup-ikev2-on-demand-vpn-on-ios-8-and-ikev2-ikev1-cisco-ipsec-vpn-with-strongswan/1220.html">maoxian.de</a> 这篇在 iOS8上实现 VPN按需连接的文章，才算是勉强通用，不过也不尽如人意。原作者的问题在于，VPN为<code>长连接状态</code>而不是真的按需连接。原本是在作者的下面提供了我的一些见解，不过与作者的实战经验有差别，所以没能显示出来。所以我想另写一篇自己的经验分享，希望中文圈可以有自己的定制。</p>
+
+<p>这篇文章是参考了以下几章节：<br/>
++ <a href="https://help.apple.com/deployment/ios/#/iordfafc6ead">IOS 部署参考 - Apple </a><br/>
++ <a href="https://developer.apple.com/library/prerelease/mac/featuredarticles/iPhoneConfigurationProfileRef/Introduction/Introduction.html">Configuration Profile Key Reference -Apple 描述文件键值定义</a><br/>
++ <a href="https://maoxian.de/2014/10/setup-ikev2-on-demand-vpn-on-ios-8-and-ikev2-ikev1-cisco-ipsec-vpn-with-strongswan/1220.html">Setup IKEv2 On Demand VPN on iOS - Maoxian</a><br/>
++ <a href="https://wiki.strongswan.org/projects/strongswan/wiki/AppleIKEv2Profile">IKEv2 Configuration Profile for Apple iOS 8 and newer - Strongswan</a></p>
+
+<hr/>
+
+<p>在接下来的这个文章中我将实现的功能：<br/>
++ WiFi 下自动连接，关屏或者断 WiFi自动断开，目的是为了连接公共 WiFi的安全性<br/>
++ 按域名，自动连接<br/>
++ 长连接，无论何时永远连接 VPN</p>
+
+<p>显然以上三个目标是无法在一个VPN下面达成，不过我们可以多一个心眼 —— 多创建几个同样的 VPN，例如我创建的是<code>IKEv2-WiFi</code> ， <code>IKEv2-Domain</code> ，<code>IKEv2-Alaways</code> ，虽然这在 iOS上会显示成 3个不同的 VPN名字，但其实是同一个 VPN，只是功能不同，适合不同的人群需求。</p>
+
+<h1 id="toc_0">WiFi下自动连接 VPN</h1>
+
+<p>在苹果给出的开发手册上主要能实现的功能是<code>判断 SSID</code> 来决定连接或者不连接，或者所有 WiFi下都连接 VPN，甚至是在 SSID下测试某个 URL能否成功来决定是不是要连接 VPN。对于我们普通人而言，基本是在所有 WiFi下都自动连接最简单。</p>
+
+<p><em>对于越狱并且使用 Shadowsocks的朋友来说</em>，非常推荐使用  <code>在所有 WiFi下都自动连接VPN</code> &gt;</p>
+
+<pre><code>                &lt;!-- Setup WiFi --&gt;
+                &lt;key&gt;OnDemandEnabled&lt;/key&gt;
+                &lt;integer&gt;1&lt;/integer&gt;
+                &lt;key&gt;OnDemandRules&lt;/key&gt;
+                &lt;array&gt;
+            &lt;!-- 这个故意保留，您可以自定在哪些WiFi不必自动连接或连接
+            &lt;dict&gt;
+                        &lt;key&gt;Action&lt;/key&gt;
+                        &lt;string&gt;Disconnect&lt;/string&gt; 
+                        &lt;key&gt;InterfaceTypeMatch&lt;/key&gt;
+                        &lt;string&gt;WiFi&lt;/string&gt;
+                        &lt;key&gt;SSIDMatch&lt;/key&gt;
+                        &lt;array&gt;
+            --&gt;
+                            &lt;string&gt;Coco_baobao-5G&lt;/string&gt;
+                        &lt;/array&gt;
+          &lt;/dict&gt;
+          &lt;!-- 接下来这部分是规定了在 WiFi下自动连接Ikev2 --&gt;
+                    &lt;dict&gt;
+                        &lt;key&gt;Action&lt;/key&gt;
+                        &lt;string&gt;Connect&lt;/string&gt;
+                        &lt;key&gt;InterfaceTypeMatch&lt;/key&gt;
+                        &lt;string&gt;WiFi&lt;/string&gt;
+                    &lt;/dict&gt;
+          &lt;!-- 下面的 Cellular则是要求手机在3G/4G下不自动 VPN --&gt;
+                    &lt;dict&gt;
+                        &lt;key&gt;Action&lt;/key&gt;
+                        &lt;string&gt;Disconnect&lt;/string&gt;
+                        &lt;key&gt;InterfaceTypeMatch&lt;/key&gt;
+                        &lt;string&gt;Cellular&lt;/string&gt;
+                    &lt;/dict&gt;
+                &lt;/array&gt;
+        &lt;!--以上就是自动 WiFi连接的设定 --&gt;
+
+</code></pre>
+
+<p>是不是觉得很简单？代码中的注释，你可以不用删除，因为导入手机或者 <code>Apple Configurator</code> 之后自动就过滤掉了。<br/>
+<strong>那么问题来了，代码要插入到哪里？</strong>其实很简单，根据官方手册，只要插入到 VPN协商配置那一段就可以，这里我以 IKEv2的配置为例，入位置如下：</p>
+
+<pre><code>        &lt;dict&gt; &lt;!-- 请注意这第一个 dict --&gt;
+                &lt;key&gt;AuthName&lt;/key&gt;
+                &lt;string&gt;ios8&lt;/string&gt;
+                &lt;key&gt;AuthPassword&lt;/key&gt;
+                &lt;string&gt;Demo@iOS&lt;/string&gt;
+                &lt;key&gt;AuthenticationMethod&lt;/key&gt;
+                &lt;string&gt;SharedSecret&lt;/string&gt;
+                &lt;key&gt;ChildSecurityAssociationParameters&lt;/key&gt;
+                &lt;dict&gt;
+                    &lt;key&gt;DiffieHellmanGroup&lt;/key&gt;
+                    &lt;integer&gt;0&lt;/integer&gt;
+                    &lt;key&gt;EncryptionAlgorithm&lt;/key&gt;
+                    &lt;string&gt;3DES&lt;/string&gt;
+                    &lt;key&gt;IntegrityAlgorithm&lt;/key&gt;
+                    &lt;string&gt;SHA1-96&lt;/string&gt;
+                    &lt;key&gt;LifeTimeInMinutes&lt;/key&gt;
+                    &lt;integer&gt;1440&lt;/integer&gt;
+                &lt;/dict&gt;
+                &lt;key&gt;DeadPeerDetectionRate&lt;/key&gt;
+                &lt;string&gt;Low&lt;/string&gt;
+                &lt;key&gt;ExtendedAuthEnabled&lt;/key&gt;
+                &lt;true/&gt;
+                &lt;key&gt;IKESecurityAssociationParameters&lt;/key&gt;
+                &lt;dict&gt;
+                    &lt;key&gt;DiffieHellmanGroup&lt;/key&gt;
+                    &lt;integer&gt;0&lt;/integer&gt;
+                    &lt;key&gt;EncryptionAlgorithm&lt;/key&gt;
+                    &lt;string&gt;3DES&lt;/string&gt;
+                    &lt;key&gt;IntegrityAlgorithm&lt;/key&gt;
+                    &lt;string&gt;SHA1-96&lt;/string&gt;
+                    &lt;key&gt;LifeTimeInMinutes&lt;/key&gt;
+                    &lt;integer&gt;1440&lt;/integer&gt;
+                &lt;/dict&gt;
+                &lt;key&gt;LocalIdentifier&lt;/key&gt;
+                &lt;string&gt;vpn.googday.club&lt;/string&gt;
+                &lt;key&gt;RemoteAddress&lt;/key&gt;
+                &lt;string&gt;vpn.googday.club&lt;/string&gt;
+                &lt;key&gt;RemoteIdentifier&lt;/key&gt;
+                &lt;string&gt;vpn.googday.club&lt;/string&gt;
+                &lt;key&gt;SharedSecret&lt;/key&gt;
+                &lt;string&gt;googday&lt;/string&gt;
+
+
+        &lt;!-- 开始按需定制 WiFi连接 --&gt;
+                &lt;key&gt;OnDemandEnabled&lt;/key&gt;
+                &lt;integer&gt;1&lt;/integer&gt;
+                &lt;key&gt;OnDemandRules&lt;/key&gt;
+                &lt;array&gt;
+            &lt;!-- 这个故意保留，您可以自定在哪些WiFi不必自动连接
+            &lt;dict&gt;
+                        &lt;key&gt;Action&lt;/key&gt;
+                        &lt;string&gt;Disconnect&lt;/string&gt;
+                        &lt;key&gt;InterfaceTypeMatch&lt;/key&gt;
+                        &lt;string&gt;WiFi&lt;/string&gt;
+                        &lt;key&gt;SSIDMatch&lt;/key&gt;
+                        &lt;array&gt;
+                            &lt;string&gt;Coco_baobao-5G&lt;/string&gt;
+                        &lt;/array&gt;
+          &lt;/dict&gt;
+          --&gt;
+          &lt;!-- 接下来这部分是规定了在 WiFi下自动连接Ikev2 --&gt;
+                    &lt;dict&gt;
+                        &lt;key&gt;Action&lt;/key&gt;
+                        &lt;string&gt;Connect&lt;/string&gt;
+                        &lt;key&gt;InterfaceTypeMatch&lt;/key&gt;
+                        &lt;string&gt;WiFi&lt;/string&gt;
+                    &lt;/dict&gt;
+          &lt;!-- 下面的 Cellular则是要求手机在3G/4G下不自动 VPN --&gt;
+                    &lt;dict&gt;
+                        &lt;key&gt;Action&lt;/key&gt;
+                        &lt;string&gt;Disconnect&lt;/string&gt;
+                        &lt;key&gt;InterfaceTypeMatch&lt;/key&gt;
+                        &lt;string&gt;Cellular&lt;/string&gt;
+                    &lt;/dict&gt;
+                &lt;/array&gt;
+        &lt;!--以上就是自动 WiFi连接的设定 --&gt;
+
+            &lt;/dict&gt; &lt;!-- 注意这个dict ，请把代码插入这个中间的位置 --&gt;
+            &lt;key&gt;IPv4&lt;/key&gt;
+            &lt;dict&gt;
+                &lt;key&gt;OverridePrimary&lt;/key&gt;
+                &lt;integer&gt;1&lt;/integer&gt;
+            &lt;/dict&gt;
+            &lt;key&gt;PayloadDescription&lt;/key&gt;
+            &lt;string&gt;Configures VPN settings&lt;/string&gt;
+            &lt;key&gt;PayloadDisplayName&lt;/key&gt;
+            &lt;string&gt;VPN&lt;/string&gt;
+</code></pre>
+
+<p>怎么样，其实没有想象中的难吧，这样一来，你就可以将你所买到的 VPN供应商的描述文件自己动手改造一下咯。下面的部分我就不再这样重复了，因为要插入的位置是一样的。</p>
+
+<h1 id="toc_1">按域名自动连接</h1>
+
+<p>按域名的实现，很多前辈在 iOS 7以前的时代就实现过，不过很不幸 iOS 8有一些改变，有些字段不太一样了，所以我才要自己研究一下。不多说，功能就是按照域名列表来实现自动连接。</p>
+
+<pre><code>        
+        &lt;!-- 加入自己想要的域名 --&gt;
+                &lt;key&gt;OnDemandEnabled&lt;/key&gt;
+                &lt;integer&gt;1&lt;/integer&gt;
+                &lt;key&gt;OnDemandRules&lt;/key&gt;
+                &lt;array&gt;
+                &lt;dict&gt;
+                        &lt;key&gt;Action&lt;/key&gt;
+                        &lt;string&gt;EvaluateConnection&lt;/string&gt;
+                        &lt;key&gt;ActionParameters&lt;/key&gt;
+              &lt;array&gt;
+                &lt;dict&gt;
+                                &lt;key&gt;DomainAction&lt;/key&gt;
+                                &lt;string&gt;ConnectIfNeeded&lt;/string&gt;
+                                &lt;key&gt;Domains&lt;/key&gt;
+                                &lt;array&gt;
+                    &lt;!-- 加入自己想要的域名 --&gt;
+                                    &lt;string&gt;*twitter.com&lt;/string&gt;
+                                    &lt;string&gt;*dropbox.com&lt;/string&gt;
+                                    &lt;string&gt;*google.com&lt;/string&gt;
+                                    &lt;string&gt;*google.co.jp&lt;/string&gt;
+                                    &lt;string&gt;*facebook.com&lt;/string&gt;
+                                    &lt;string&gt;*youtube.com&lt;/string&gt;
+                                    &lt;string&gt;*instagram.com&lt;/string&gt;
+                                    &lt;string&gt;t.co&lt;/string&gt;
+                                &lt;/array&gt;
+              &lt;/dict&gt;
+            &lt;/array&gt;
+                    &lt;/dict&gt;
+                &lt;/array&gt;
+</code></pre>
+
+<h1 id="toc_2">长连接</h1>
+
+<p>也有人喜欢让自己的 VPN一直连着，那么只要加入下面这条就直接可以实现了：</p>
+
+<pre><code>        &lt;!-- 开始按需定制 WiFi连接 --&gt;
+                &lt;key&gt;OnDemandEnabled&lt;/key&gt;
+                &lt;integer&gt;1&lt;/integer&gt;
+                &lt;key&gt;OnDemandRules&lt;/key&gt;
+                &lt;array&gt;
+    &lt;dict&gt;
+        &lt;key&gt;Action&lt;/key&gt;
+            &lt;string&gt;Connect&lt;/string&gt;
+    &lt;/dict&gt; 
+    &lt;/arry&gt;
+
+</code></pre>
+
+<h1 id="toc_3">可否将这几种配置合成使用？</h1>
+
+<p>我也是这么想的，不过这涉及很混乱的逻辑以及判断性能，只能说， WiFi自动连接与按域名自动连接目前还没有很好的共存且共同起作用。我还在继续测试，目前我的解决方案就是前面提到的同一个VPN建三份，然后配上不同的配置，根据需要选定其中一个满足不同的人。就我个人来说，我只是使用 WiFi下自动连接 ，记住任何免费WiFi都有可能是蜜罐，用来入侵你的设备。</p>
+
+<p>文章先写到这里。 有空再补充<br/>
+<em>完结</em></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[增强 iPhone 的安全]]></title>
+    <link href="http://bao3.org/14468654962478.html"/>
+    <updated>2015-11-07T11:04:56+08:00</updated>
+    <id>http://bao3.org/14468654962478.html</id>
+    <content type="html"><![CDATA[
+<p>手机的安全不可忽视，iOS 因为有越狱就常被批评，其实越狱不会让手机不安全，真正影响手机安全的是使用者要安装何种软件。国内使用 iOS 越狱的用户都喜欢去国内的源下载被修改和汉化的插件，这才是真正的安全隐患。</p>
+
+<span id="more"></span><!-- more -->
+
+<h1 id="toc_0">iPhone手机的安全</h1>
+
+<p>最近曝出了<strong>抢红包插件</strong>在 iOS8 上作恶，窃取了 22万苹果手机用户的密码，所以我觉得我应该分享一下我的 iPhone iOS 8.4 的安全设置心得。</p>
+
+<h1 id="toc_1">手机目前状态</h1>
+
+<ul>
+<li>iOS 8.4 越狱</li>
+<li>SIM 卡 中国联不通</li>
+<li>Apple ID 使用 iCloud </li>
+<li>所有网络账号绑定在这张 SIM 上</li>
+<li>经常连接公共 WiFi</li>
+</ul>
+
+<h1 id="toc_2">我所涉及的安全危险</h1>
+
+<ol>
+<li>手机遗失被他们拾获，设定为飞行模式或者关机，从而躲避苹果官方的网络锁，使我们的<em><q>丢失模式</q></em>失效</li>
+<li>如果手机被窃，极有可能在不解锁的情况下用其他设备接收短信验证码，被用来重置网络账号密码，造成损失</li>
+<li>锁屏密码过于简单，被有很大机率被猜解，进而整个手机系统被攻入。</li>
+<li>手机上的账号陷入完全暴露</li>
+</ol>
+
+<h1 id="toc_3">我要解决这些问题</h1>
+
+<h2 id="toc_4">手机设置了飞行模式或者关机</h2>
+
+<p>似乎我们并没有很好的解决办法，不过如果你越狱了，就可以很好的解决这个问题。比如：<br/>
+- Bioprotect 指纹保护插件，要想关机，必须校对指纹，否则无法关机，同时由于 iPhone手机无法更换电池，因此当被人拿到后的一段时间里只能被不断重启或者重启进入 DFU来躲避，但这通常还是比较有难度的。因为一般都是长按关机，然后划一下关机条，然后放口袋藏，很少有人会看到在这之后的那个暗色的 Bioprotect 校验框，非常容易被忽略。至于那些偷了手机又能冷静掌控时间进入 DFU的人，我们只能认命了。<br/>
+- 各种控制中心插件，可以很好的屏蔽飞行模式在锁屏时显示，防止断网断 GPS。</p>
+
+<h2 id="toc_5">遗失后被用来重置密码</h2>
+
+<p>无论有没有上一步的保护，有心要窃取私人信息的人都会发生这一步的事情，那就是利用手机号来重置不同的网络账号。我倒并不担心网银被重置，反而更害怕支付宝/淘宝、京东、苏宁等这类有现实地址的网站，也包括中国联通的客户管理页面。我们杜绝这类事情发生，就必须要防止他人利用我们的 SIM卡。我的解决方法就是：</p>
+
+<h2 id="toc_6">SIM PIN</h2>
+
+<p>每张 SIM卡都带有一个 PIN，默认是<code>1234</code>，当我们在 iOS里打开这个PIN （<em>请记得改掉默认 PIN</em>)，重启手机时一定要输入 SIM卡的 PIN才可以使用 SIM的相关功能，也就是说无论对方换什么手机也都没用了。你可能会问，如果我的手机丢了，人家拿到一直不重启怎么办？</p>
+
+<ul>
+<li>iOS 的 Bug</li>
+</ul>
+
+<p>在你设定了 SIM PIN 锁的情况下，对方如果是重启你的 iOS （<em>重启</em>而不是“关闭电源再开启”），很不幸，此时再开机将不需要 SIM PIN而是直接网络可用。</p>
+
+<ul>
+<li>SIM PIN的意义</li>
+</ul>
+
+<p>目的主要是为了防止将 SIM卡插入其他手机用来重置银行、网银、SNS等重要数据。请不要对此抱有不屑，目前看来，中国互联网经历了这么多的数据库密码泄露，很容易利用大数据精神，将你的账户、邮箱、手机、身份证等做关联，基本上到最后就是一个手机号可以把你搞趴下。</p>
+
+<blockquote>
+<p>弄得了你的手机号，身份证号，可以到各大航空网站办理自助值机，然后就可以精确知道你航班，进而直接打你电话说你的航班要取消，需要你的银行卡用一下。。。。</p>
+</blockquote>
+
+<h2 id="toc_7">锁屏密码过于简单</h2>
+
+<p>我以前的锁屏密码是非常复杂的 8位大小定和特殊符号。然后用指纹解锁，但是后来我发现这并不好，例如经常跑步，所以经常发生无法解锁，要输入长密码的情况，这非常烦人。但普通人 （例如我老婆）则是直接就只有 4位的 PIN，于是安全性大大降低。</p>
+
+<p>尽管如果重复尝试过多， PIN 会锁屏幕一段时间 （错误越多，锁定时间越久），但是真的会有巧合被猜中， 10<sup>4</sup> 能有多少个组合，再统计大家常用的 （比如年份、生日、或者键盘十字位、田字位、斜对角等等），有很大的机率被猜解。</p>
+
+<p>后来我发现了有一个可能平衡这个安全性的设定，那就是进入 iOS的设定：</p>
+
+<p><code>TouchID和密码</code> -〉<code>需要密码</code> ，设置为“ <strong>立即</strong> ”</p>
+
+<p><code>简单密码</code> 设置为“ <strong>关闭</strong> ”</p>
+
+<p>接下来，设置你的密码的时候，<strong><em>只设定为数字</em></strong>，注意，只设定为数字，你可以设定为 1位，2位 ... ... 甚至 8位，10位，只要你愿意。</p>
+
+<blockquote>
+<p>额外地：非常重要的一点，但是大多数不愿意打开的功能是 <strong><em>抹除数据</em></strong> 就在这个密码页的最下方</p>
+
+<p>我问过同事为何不开，同事说担心万一被儿子乱输，把手机整个给抹除了。</p>
+
+<p>对于这些考量，每个人想法不同，需要自己取舍，所以这个抹除我没有写进正文，只是提醒大家，这个功能很有效并且除非他人有意这么做，否则不太可能发生意外抹除（除了短信外，大多数据是可以放在 iCloud的）。</p>
+
+<p>大可不必担心抹除后，自己的设备被坏人随意使用，毕竟在开机需要激活时，依然需要你的 Apple ID和密码来激活，这就涉及到了短信接收验证以及 Apple ID安全，在下面会有。</p>
+
+<p><strong><em>楼主自己是开启并且一直开启</em></strong></p>
+</blockquote>
+
+<p>接下来就是重开机，然后就会强制你输入纯数字密码，由于新密码的位数是你指定的，几乎不会被破解。</p>
+
+<h2 id="toc_8">Apple ID的保护</h2>
+
+<p>iPhone保护的核心环节就是 Apple ID，一般我们都设置一个自己方便输入的密码，毕竟有些机型没有指纹。但这是危险的开始，最危险的是钓鱼邮件，甚至通过修改邮件发送者的地址，伪造成 <a href="mailto:appleid@id.apple.com">appleid@id.apple.com</a>，诱使普通用户重设密码，进而骗到真密码。</p>
+
+<p>还有其他一些考量，总之，Apple ID + 密码并不够安全，我建议各位登入苹果官网的 Apple ID,然后打开<strong><em>两步验证</em></strong>。当我们的 ID 在他处登录时，都会弹出验证码。</p>
+
+<blockquote>
+<p>开启两步验证非常简单，但这里要说的是两步法验证，苹果会给你一个恢复码，请记住，把这个恢复码保存好，例如，你可以放到你的网络同步的笔记里，为了防止误删或者网络服务商出故障，你还应该存为 PDF一份放在另一个隐秘的地方。这个恢复码非常重要，万不可不记，也不可遗失。</p>
+
+<p>我对所有的 2-step 认证网站恢复密钥的保存都是另存为PDF，然后将 PDF放入到使用 Veracrypt 加密过的虚拟磁盘（格式为 FAT, 100MB），而后将此磁盘放入到 Dropbox以及 Onedrive，并且使用 syncthing与 VPS同步。</p>
+
+<p>虚拟磁盘使用两把密钥来解，两把密钥分开来放在不同邮箱、网盘，由于都是分开的，也并不担心会被同时得到。</p>
+</blockquote>
+
+<h2 id="toc_9">公共 WiFi的安全</h2>
+
+<p>这部分将在 08-28晚更新<br/>
+** 基本就是说，请在所有的公共 WiFi下连接 VPN 服务 **</p>
+
+<hr/>
+
+<p>现在我们来总结一下针对我自己的 iPhone所以做的安全性改进：<br/>
+<code><br/>
+- 如果已经越狱，可为手机安装 Bioprotect以及各种控制中心插件，实现屏蔽在锁屏时的飞行模式、GPS、数据开关等功能。尽可能延长 iOS设备的在线时间，利于我们远程锁定<br/>
+- 我们修改了 SIM PIN，防止坏人得到短信验证码以及 Apple ID 两步法验证码<br/>
+- 我们将锁屏的密码位数做了修改，几乎无法破解<br/>
+- 打开了 Apple ID 的两步法验证，即便你被人钓鱼骗到了密码，也无法登录，加上SIM PIN的锁定，对方完全无法破解 Apple ID 锁。<br/>
+</code><br/>
+这就是我自己现今在用的 iOS安全设置。可能当中有不对的部分，我想会随着时间积累，再来更新吧。</p>
+
+<h1 id="toc_10">针对越狱系统</h1>
+
+<p>作为自己 iPhone安全环节最后的一部分，应当会有很多人争议<em>越狱</em>的安全性。我不想去争论这件事情，但要嘱咐一下：<br/>
+1. 越狱后，必须，务必，一定要修改 root密码，方法其实在 cydia的手机端的首页中下部就有写。就是装个 openssh 和 new term之类，登录，然后 su , 输入密码 alpine ，再使用 password 改密码，你可以不必记住这个密码。<br/>
+2. 一定不要装 Apple File Cuit （?) 似乎是这个插件，也叫 AFC 2 插件。这个本来是为了方便访问手机所有的文件系统。恐怖之处就是在别人拿到你的手机后，极有可能也可以访问。反而如果不装这个，插到电脑上后看到跟未越狱手机是一样的文件系统。我没有验证安装了 AFC的 iOS新插入到一台 PC的情形，不过小心为妙,毕竟 iOS 那个是否信任此电脑的小框，不是每次都跳，也不是每次都起作用。(据说 iOS7和 iOS8.4的结构不太一样，这个没有验证)<br/>
+3. 请一定不要安装 <code>AppleSync</code> 或者 <code>AppleSync Unified</code> ,我知道这可以让我自由地安装软件，但你可能不知道，无论是否越狱，系统都会对所安装的软件进行签名检测，保证你安装的软件来源于正版的同时也保证软件不会破坏你的 iOS。一旦安装了 AppleSync 就屏蔽了这个安全检测，也就是说你下载的 App 就可能是有重大安全隐患的。</p>
+
+<p><em>完结</em></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在 Vultr上安装 Arch linux]]></title>
+    <link href="http://bao3.org/14468654962419.html"/>
+    <updated>2015-11-07T11:04:56+08:00</updated>
+    <id>http://bao3.org/14468654962419.html</id>
+    <content type="html"><![CDATA[
+<p>广告时间：在所有用过的 VPS服务商中，我一直依赖 Vultr，首先是日本线路质量比较可靠，其次价格平民，只要 <strong>5$/月</strong>（首次还送钱给你），最后就是最重要的，免费送你不限制的 Snapshot功能，让你克隆（备份）整机。所以不要由于，使用我的注册连接来注册试用（双方获利 ）：<a href="www.vultr.com/?ref=6813064">bao3的 Vultr 邀请</a></p>
+
+<span id="more"></span><!-- more -->
+
+<blockquote>
+<p>不过也要碰运气，在你 Deploy一台新的 VPS的时候要注意看分配给你的 IP地址，虽然同样是在日本，但是从中国过去的路由会有不同所以速度也一样会有差别，你可以不断地创建和删除 VPS，直到拿到对你来说比较不错的 IP地址。<br/>
+记得哦，免费且不限制的 <strong><em><strong>Snapshot</strong></em></strong> 功能可以随时克隆（备份）你的 VPS，这样你可以随时重装、还原、创建新的 VPS</p>
+</blockquote>
+
+<h1 id="toc_0">下载 iso安装盘</h1>
+
+<p>Vultr 上支持自定义系统而不必限于已经存在的系统，所以你去<code>ISOs</code> 输入 iso的地址，让 Vultr给你下载好。我的 VPS是日本节点，所以使用了日本的地址:  </p>
+
+<p><a href="http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso">http://ftp.jaist.ac.jp/pub/Linux/ArchLinux/iso/2015.08.01/archlinux-2015.08.01-dual.iso</a></p>
+
+<p><img src="media/14468562256318/downloadISO.png" alt="downloadISO" style="width:200px;"/></p>
+
+<h1 id="toc_1">创建系统</h1>
+
+<p>这个应该都会了吧， Deploy 一个新的，注意先择系统时，使用你刚才下载的 iso ，不过在创建好之后系统根本不会自动安装好 Arch Linux，只不过是用光盘启动了而已。    </p>
+
+<p><img src="media/14468562256318/vultrdeply.png" alt="vultrdeply" style="width:200px;"/></p>
+
+<blockquote>
+<p>注意一点，如果你创建的时候很不幸选了SATA （更多存储空间）那就郁闷了，因为有可能会莫名各种小毛病，影响后面的安装。<br/><br/>
+我经历过，所以只建议你使用 SSD套餐<br/><br/>
+并且 SATA套餐不能制作  Snapshot而 SSD可以，基于此，相当于多了一个免费的备份镜像，数据是数据是无价的。</p>
+</blockquote>
+
+<h1 id="toc_2">开始安装</h1>
+
+<p>我相信你应该是一个具有动手能力的人，因为接下来的安装需要使用很多命令行指令。请在 VPS控制台 上选使用 VNC Console的方式来使用新创建的 VPS。  </p>
+
+<h2 id="toc_3">硬盘分区</h2>
+
+<p>整个安装过程中最核心的地方就是硬盘分区。原因在于 Vultr是基于 KVM的虚拟机，而我们又是用的 SSD ，所以是基于 BIOS + GPT的系统。而在默认情况下咱们的引动器 Grub只能支持 BIOS+ MBR 或者 EFI + GPT 的方式。Vultr 恰是个混合模式，会导致 Grub不引导的。<br/><br/>
+ 1.     首先我们必须分出一个 bios安装分区，用于存放存放标准的 Grub 的引导文件。<br/><br/>
+ 2.  如果你要承载 Web类服务，例如<strong>网站</strong>或者<strong>私有云</strong> ( <strong><em>owncloud</em></strong>)，那么我们最好单独分一个 Swap 。<br/><br/>
+ 3. 默认情况下我们直接使用剩余的 <strong>SSD</strong> 作为整个系统磁盘，不单独分区了。<br/><br/>
+正面就开始咯：</p>
+
+<pre><code class="language-shell"> gdisk /dev/vda
+ n
+ +2M
+ 回车
+ EF02 （类型代码默认为 8300，要手动改）
+</code></pre>
+
+<p>截图如下：<br/><br/>
+ <img src="media/14468562256318/VultrEF02.png" alt="VultrEF02"/></p>
+
+<p>剩下的空间就是你自己自由支配，我的就仅供参考（与平时的分区没有区别），注意看图片中一定会有一个 <mark>BIOS</mark> 分区，这是成功的关键:</p>
+
+<p><img src="media/14468562256318/VultrSSD.png" alt="VultrSSD"/></p>
+
+<p><strong>当然最后还要写盘</strong>，这个我就不说按哪个键了。  </p>
+
+<h2 id="toc_4">开始安装</h2>
+
+<p>分区已经分好了，并且已经使用 ISO光盘启动了，接下来就是分区了，Arch Linux也有类似于 FreeBSD的交互式安装过程，不过在这里还是要用手动的过程，毕竟我也是第一次安装 Arch Linux 。 Vultr因为可以使用镜像来克隆，所以一次安装，永远安逸。</p>
+
+<p>不过你需要注意的是，如果你的分区跟我不太一样，那接下来的步骤你需要有些调整，通常的调整就是 <code>/dev/vda1</code> <code>/dev/vda2</code> <code>/dev/vda3</code>这些编号有所不同。我只会依照我的来写。</p>
+
+<pre><code> mkswap /dev/vda2 -L SWAP
+ swapon /dev/vda2
+ mkfs.ext4 /dev/vda3 -L ArchOS
+ mount /dev/vda3 /mnt
+</code></pre>
+
+<p>好了，至此所有准备工作都已经完成了，我们开始安装系统核心了。<br/><br/>
+ <code><br/>
+ pacstrap /mnt base base-devel net-tools<br/>
+</code><br/>
+ 这是要安装基本系统以及一些必要的套件，其中 <code>net-tools</code>是我额外加上的，因为这样可以在安装完使用诸如 <code>ifconfig</code> <code>nslookup</code>等等的小工具。经过等待（*通常为 2分钟 *左右），系统就已经完全OK了。</p>
+
+<p>不过此时的系统还没有引导器 <em>bootloader</em> ,因此我们需要为系统安装一下：<br/><br/>
+ <code><br/>
+ arch-chroot /mnt<br/>
+ pacman -Sy grub<br/>
+ mkinitcpio -p linux<br/>
+ grub-install /dev/vda<br/>
+ grub-mkconfig -o /boot/grub/grub.cfg<br/>
+</code></p>
+
+<h2 id="toc_5">配置网络连接</h2>
+
+<p>其实操作上来说，以上安装就已经可以重启你的 VPS 享受乐趣，不过在此之前，先要做一些小的配置。<br/>
+1. 配置IP</p>
+
+<p>如果不配置，你重启后系统会无法联网，做完这一步，以后你重启系统，就可以使用你自己的PC 的 SSH 来远程连接了。</p>
+
+<p><code>配置DHCP</code>，这一步比较简单，在你的命令行下接着输入：</p>
+
+<pre><code>systemctl enable dhcpcd
+
+或者是
+
+systemctl enable  dhcpcd@eth0
+
+</code></pre>
+
+<p>通常你会看到 ( Created symlink from /etc/systemd/system/multi-user.target.wants/dhcpcd.service to /usr/lib/systemd/system/dhcpcd （或者@eth0）.service.) </p>
+
+<ol>
+<li><p>重启前，记得使用 <code>passwd</code> 修改一下你的 root 密码，以利于下一步 ssh从你的 PC上登录，摆脱网页登录的烦恼</p>
+
+<pre><code>passwd
+</code></pre></li>
+</ol>
+
+<p>输入你的密码，在你输入的时候是不显示密码的，但是不用担心，这是 Linux / Unix 机制造成。</p>
+
+<hr/>
+
+<p>OK,启动你的机器试一下吧！</p>
+
+<hr/>
+
+<h2 id="toc_6">远程连接</h2>
+
+<p>在机器重启的过程，你也不必闲着，准备一个工具，从现在开始，我们要用自己的电脑客户端来连接。如果你是 Linux / Unix / Mac ，就直接使用终端 ssh 命令 如果是 Windows 就使用 Putty 或者 Xshell ，两者都是免费的。</p>
+
+<blockquote>
+<p>提醒，SSH 连接涉及你的服务器安全，请一定要去官方网站下载工具，不要去网上找什么汉化版、修改版，以免这些工具利用你的 ssh 连接获取你的服务器密码、植入木马、作为攻击跳板等</p>
+</blockquote>
+
+<p>针对 Mac ，打开 <strong>终端</strong>，输入</p>
+
+<pre><code class="language-shell">ssh root@your.vps.ip.address
+</code></pre>
+
+<p>使用你的 IP 地址替换后半部分，连接时会询问你是不是要添加</p>
+
+<ul>
+<li><p>安装后有还有些额外调整，但不是必需的例如 hostname, locale, timezone，你完全可以不设置重启后再慢慢调整*</p>
+
+<h2 id="toc_7">安装 yaourt</h2>
+
+<p>这部分是额外的设定，Arch 使用 <strong><em>pacman</em></strong>来管理包，但是有时候这些包更新慢，我们可以使用<strong><em>yaourt</em></strong> 来代替，可称为神器。我们需要修改 <code>/etc/pacman.conf</code>，使用 <code>nano /etc/pacman.conf</code> 加入以下代码：  </p></li>
+</ul>
+
+<pre><code>
+    [archlinuxcn]  
+    SigLevel = Optional TrustedOnly
+    Server   = http://repo.archlinuxcn.org/$arch
+</code></pre>
+
+<p><code>Control + X</code> 保存( 选择 <q>yes</q> ) ，并退出<br/>
+然后使用 <code>pacman -Syu yaourt</code> 安装。此后，你就可以使用 <code>yaourt -Sy  软件包名称</code>来自动使用其他用户分享的包， Enjoy~ it !</p>
+
+<p><em>Arch 上安装 ocserv的时候，请在安装时选择手动编辑，然后去掉 autogen ，因为这货有引起编译错误导致失败。</em></p>
+
+<p><strong><em>完结</em></strong></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[一些比较特别的 Cydia 源]]></title>
+    <link href="http://bao3.org/14468654962326.html"/>
+    <updated>2015-11-07T11:04:56+08:00</updated>
+    <id>http://bao3.org/14468654962326.html</id>
+    <content type="html"><![CDATA[
+<p>这些源地址将使用手机浏览器直接点击添加</p>
+
+<p>我以前常用的源，有一些是破解收费 （请尽量保持试用心态）</p>
+
+<p><a href="cydia://url/https://cydia.saurik.com/api/share#?source=http://repo.xarold.com">Xarold 源</a></p>
+
+<p><a href="cydia://url/https://cydia.saurik.com/api/share#?source=http://apt.abcydia.com/">雷锋源</a></p>
+
+<p><a href="cydia://url/https://cydia.saurik.com/api/share#?source=http://cydia.touchelf.com">触摸精灵 源</a></p>
+
+<p>触摸精灵是我用着还不错的 Lua 脚本环境,最方便的是中文开发环境。</p>
+
+<p>目前在用的主力源，破解收费软件,在免费软件上大小与原文件一样，所以我一直这么用，我觉得应该算是比较安全的。</p>
+
+<p>以下是给 windows IE 过滤广告用的</p>
+
+<p><a href="javascript:window.external.msAddTrackingProtectionList(&#x27;http://easylist-msie.adblockplus.org/chinalist+easylist.tpl&#x27;,%20&#x27;ChinaList+EasyList&#x27;)">China + EaasyLists</a></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于 hexo 生成 tags页空白]]></title>
+    <link href="http://bao3.org/14468654962248.html"/>
+    <updated>2015-11-07T11:04:56+08:00</updated>
+    <id>http://bao3.org/14468654962248.html</id>
+    <content type="html"><![CDATA[
+<p>有一个问题困扰了我很久，那就是 <strong>hexo</strong> 生成的 <strong>tags</strong> 页是空白的，我使用的是标准的 <code>hexo new page tags</code> ,也亲眼看到 <code>source/tags/index.md</code>正常生成，可是就是显示为空白。google 了很久也没找到，然后我打开 <strong>分类</strong> 的 md 发现，两个 md 文件的区别在于， <strong>tags</strong> 中的丢失了 <code>type: “tags”</code>。</p>
+
+]]></content>
+  </entry>
+  
+</feed>
