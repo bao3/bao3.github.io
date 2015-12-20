@@ -4,7 +4,7 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2015-12-20T18:54:50+08:00</updated>
+  <updated>2015-12-20T19:02:38+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://www.coderforart.com/">CoderForArt</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[这是第二个测试]]></title>
+    <link href="bao3.org/14506093307076.html"/>
+    <updated>2015-12-20T19:02:10+08:00</updated>
+    <id>bao3.org/14506093307076.html</id>
+    <content type="html"><![CDATA[
+<p>你看 #我们的#主题，应该可以使用吧</p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[第一个文章测试]]></title>
@@ -22,7 +33,7 @@
 <p>未来会有更多测试，只是来不及<br/>
 能跳则飞</p>
 
-<p>测试</p>
+<p>测试g gh </p>
 
 ]]></content>
   </entry>
