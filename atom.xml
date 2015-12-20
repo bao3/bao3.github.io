@@ -4,7 +4,7 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2015-12-20T18:28:18+08:00</updated>
+  <updated>2015-12-20T18:40:06+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -14,11 +14,18 @@
 
   
   <entry>
-    <title type="html"><![CDATA[]]></title>
+    <title type="html"><![CDATA[test 2]]></title>
     <link href="bao3.org/14506008378655.html"/>
     <updated>2015-12-20T16:40:37+08:00</updated>
     <id>bao3.org/14506008378655.html</id>
     <content type="html"><![CDATA[
+<p>哈哈哈哈中</p>
+
+<p>\(time= \)date+w<br/>
+<code><br/>
+这只是一个代码测试<br/>
+</code><br/>
+哈哈哈哈 =<mark>这是什么东西</mark>=</p>
 
 ]]></content>
   </entry>
