@@ -429,8 +429,14 @@ COMMIT
 
 <h2 id="toc_15">Strongswan 配置</h2>
 
-<p>　　这是一个麻烦，因为涉及太多了，而且每个人配置还不一样，比如我始终只使用证书认证，最后被迫开放了密码认证。所以这里可能不见得每个人都一样，你一定不要惊讶。主要涉及到了的配置文件就是 strongswan.conf, ipsec.conf,ipsec.secrets 。<br/>
-这是</p>
+<p>　　接下来的这部分我就不多说了，非常麻烦，所以我只贴我的配置咯，入门级的教程你可能需要问别人啦~<br/>
+　　<br/>
+　　这是一个麻烦，因为涉及太多了，而且每个人配置还不一样，比如我始终只使用证书认证，最后被迫开放了密码认证。所以这里可能不见得每个人都一样，你一定不要惊讶。主要涉及到了的配置文件就是 strongswan.conf, ipsec.conf,ipsec.secrets 。<br/>
+　　首先编辑 strongswan.conf 加入 <code>i_dont_care_about_security_and_use_aggressive_mode_psk = yes</code>和 <br/>
+    <code>duplicheck.enable = no</code> 这两项一个是让你可以使用 ipsec + 密码来上网，一个是为了允许同一个用户名（或者证书）在多个终端登录。</p>
+
+<pre><code>```
+</code></pre>
 
 		</div>
 	</article>
