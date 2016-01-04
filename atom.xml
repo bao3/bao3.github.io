@@ -4,7 +4,7 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2016-01-04T21:32:44+08:00</updated>
+  <updated>2016-01-04T21:35:00+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -304,14 +304,15 @@ COMMIT
 　　</code><br/>
 　　注意， 4698 要改成你自己的，并且要与防火墙里的配置相对应，至于 local port：1080 这个不起任何作用，仅当你用作客户端时才有用，但是保留它的好处是，你可以直接把这个配置文件复制到你电脑的客户端使用。<br/>
 　　接下来就是设置 Shadosocks的开机自动启动。ArchLinux的牛逼之处就是全程使用 systemd管理，非常省心。代码就是：<br/>
-　　<br/>
 　　<code><br/>
 　　systemctl enable shadowsocks-libev@config #开机启动<br/>
 　　systemctl start shadowsocks-libev@config  #立刻启动<br/>
 　　systemctl restart shadowsocks-libev@config  #重启（用于改过配置）<br/>
 　　netstat -npl | grep 4698   #查看配置有没有成功<br/>
 　　ss | grep 4698    #查看有没有客户端成功连接<br/>
+　　<br/>
 　　</code><br/>
+　　<br/>
 　　<br/>
 　　以上代码直接复制执行就可以了，截图如下：<br/>
 　　<br/>
@@ -328,6 +329,7 @@ COMMIT
     <code>duplicheck.enable = no</code> 这两项一个是让你可以使用 ipsec + 密码来上网，一个是为了允许同一个用户名（或者证书）在多个终端登录。</p>
 
 <pre><code>```
+```
 </code></pre>
 
 ]]></content>
