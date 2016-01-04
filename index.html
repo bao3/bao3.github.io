@@ -363,31 +363,30 @@ COMMIT
 <h2 id="toc_14">配置Shadowsocks-libev</h2>
 
 <p>　　我特意安装了这个版本，你不必担心，这货只是 Shadowsocks众多分支里我觉得非常不错的一个，而配置文件则是完全相同的。<br/>
-　　<code>nano /etc/shadowsocks/config.json</code> ，然后粘贴上代码：<br/>
-　　<br/>
-　　<br/>
-<code><br/>
-　　{<br/>
-    &quot;server&quot;:&quot;0.0.0.0&quot;,<br/>
-    &quot;server_port&quot;:4698,<br/>
-    &quot;local_port&quot;:1080,<br/>
-    &quot;password&quot;:&quot;YourPasswd&quot;,<br/>
-    &quot;timeout&quot;:60,<br/>
-    &quot;method&quot;:&quot;aes-256-cfb&quot;<br/>
-        }<br/>
-</code><br/>
-　　注意， 4698 要改成你自己的，并且要与防火墙里的配置相对应，至于 local port：1080 这个不起任何作用，仅当你用作客户端时才有用，但是保留它的好处是，你可以直接把这个配置文件复制到你电脑的客户端使用。<br/>
-　　接下来就是设置 Shadosocks的开机自动启动。ArchLinux的牛逼之处就是全程使用 systemd管理，非常省心。代码就是：<br/>
-<code><br/>
-systemctl enable shadowsocks-libev@config #开机启动<br/>
-systemctl start shadowsocks-libev@config  #立刻启动<br/>
-systemctl restart shadowsocks-libev@config  #重启（用于改过配置）<br/>
-netstat -npl | grep 4698   #查看配置有没有成功<br/>
-ss | grep 4698    #查看有没有客户端成功连接<br/>
-　　<br/>
-</code><br/>
-　　<br/>
-　　<br/>
+　　<code>nano /etc/shadowsocks/config.json</code> ，然后粘贴上代码:</p>
+
+<pre><code>{
+    &quot;server&quot;:&quot;0.0.0.0&quot;,
+    &quot;server_port&quot;:4698,
+    &quot;local_port&quot;:1080,
+    &quot;password&quot;:&quot;YourPasswd&quot;,
+    &quot;timeout&quot;:60,
+    &quot;method&quot;:&quot;aes-256-cfb&quot;
+    }
+</code></pre>
+
+<p>　　注意， 4698 要改成你自己的，并且要与防火墙里的配置相对应，至于 local port：1080 这个不起任何作用，仅当你用作客户端时才有用，但是保留它的好处是，你可以直接把这个配置文件复制到你电脑的客户端使用。<br/>
+　　接下来就是设置 Shadosocks的开机自动启动。ArchLinux的牛逼之处就是全程使用 systemd管理，非常省心。代码就是：</p>
+
+<pre><code>systemctl enable shadowsocks-libev@config #开机启动
+systemctl start shadowsocks-libev@config  #立刻启动
+
+systemctl restart shadowsocks-libev@config  #重启（用于改过配置）
+netstat -npl | grep 4698   #查看配置有没有成功
+ss | grep 4698    #查看有没有客户端成功连接
+</code></pre>
+
+<p>　　<br/>
 　　以上代码直接复制执行就可以了，截图如下：<br/>
 　　<br/>
 <img src="media/14518870323173/14518973569665.jpg" alt=""/></p>
@@ -401,10 +400,6 @@ ss | grep 4698    #查看有没有客户端成功连接<br/>
 　　这是一个麻烦，因为涉及太多了，而且每个人配置还不一样，比如我始终只使用证书认证，最后被迫开放了密码认证。所以这里可能不见得每个人都一样，你一定不要惊讶。主要涉及到了的配置文件就是 strongswan.conf, ipsec.conf,ipsec.secrets 。<br/>
 　　首先编辑 strongswan.conf 加入 <code>i_dont_care_about_security_and_use_aggressive_mode_psk = yes</code>和 <br/>
     <code>duplicheck.enable = no</code> 这两项一个是让你可以使用 ipsec + 密码来上网，一个是为了允许同一个用户名（或者证书）在多个终端登录。</p>
-
-<pre><code>```
-```
-</code></pre>
 
                         
                       </div>
