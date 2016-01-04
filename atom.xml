@@ -4,13 +4,14 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2016-01-04T21:24:51+08:00</updated>
+  <updated>2016-01-04T21:31:31+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
-  <generator uri="http://www.mweb.im/">MWeb</generator>
+  <generator uri="http://www.coderforart.com/">CoderForArt</generator>
+
   
   <entry>
     <title type="html"><![CDATA[在 Vultr上安装 Arch linux]]></title>
