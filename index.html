@@ -101,9 +101,9 @@
 
 <h1 id="toc_1">VPS 操作系统的选择</h1>
 
-<p>　　VPS有很多系统可选，通常都是用 Linux 的一些发行版，在这些发行版中，有一些虽然用的人多，可是安装软件后期分非常麻烦，例如 Debian 官方源里都是旧软件，这一点也不符合我们长期使用 VPS以及日后升级软件的需求，还有一些则要手动工作量多一点，比如 CentOS，还有活跃一点的 Ubuntu，但 Ubuntu多数是 deb分发，也不利于我们自定义。综合了很久，最后我将的 VPS操作系统从 FreeBSD 换到了 <mark>ArchLinux</mark>。这两个系统虽然分属于是 BSD-like Unix 和 Linux，不过理念非常像，有非常完备的官方手册，足以解决我们日常的问题。<br/>
-&lt;!&ndash; more &ndash;&gt;<br/>
-所以下面的部分都是使用 ArchLinux 来进行，而这个系统是 Vultr 官方所以不支持的，所以此文的目的就教你如何在 Vultr 上使用 ArchLinux 。</p>
+<p>　　VPS有很多系统可选，通常都是用 Linux 的一些发行版，在这些发行版中，有一些虽然用的人多，可是安装软件后期分非常麻烦，例如 Debian 官方源里都是旧软件，这一点也不符合我们长期使用 VPS以及日后升级软件的需求，还有一些则要手动工作量多一点，比如 CentOS，还有活跃一点的 Ubuntu，但 Ubuntu多数是 deb分发，也不利于我们自定义。综合了很久，最后我将的 VPS操作系统从 FreeBSD 换到了 <mark>ArchLinux</mark>。这两个系统虽然分属于是 BSD-like Unix 和 Linux，不过理念非常像，有非常完备的官方手册，足以解决我们日常的问题。</p>
+
+<p>所以下面的部分都是使用 ArchLinux 来进行，而这个系统是 Vultr 官方所以不支持的，所以此文的目的就教你如何在 Vultr 上使用 ArchLinux 。</p>
 
 <pre><code>你的收益: 一次付出，子嗣无忧 
 </code></pre>
@@ -400,6 +400,8 @@ ss | grep 4698    #查看有没有客户端成功连接
 　　这是一个麻烦，因为涉及太多了，而且每个人配置还不一样，比如我始终只使用证书认证，最后被迫开放了密码认证。所以这里可能不见得每个人都一样，你一定不要惊讶。主要涉及到了的配置文件就是 strongswan.conf, ipsec.conf,ipsec.secrets 。<br/>
 　　首先编辑 strongswan.conf 加入 <code>i_dont_care_about_security_and_use_aggressive_mode_psk = yes</code>和 <br/>
     <code>duplicheck.enable = no</code> 这两项一个是让你可以使用 ipsec + 密码来上网，一个是为了允许同一个用户名（或者证书）在多个终端登录。</p>
+
+<p>算了，想了想，还是不写配置了，好累。</p>
 
                         
                       </div>
