@@ -4,7 +4,7 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2016-01-05T10:31:13+08:00</updated>
+  <updated>2016-01-05T10:32:11+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -329,24 +329,6 @@ ss | grep 4698    #查看有没有客户端成功连接
 <p>算了，想了想，还是不写配置了，好累。   </p>
 
 <p><mark>改天补齊</mark>   </p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[第一个文章测试]]></title>
-    <link href="bao3.org/14505995899136.html"/>
-    <updated>2015-12-20T16:19:49+08:00</updated>
-    <id>bao3.org/14505995899136.html</id>
-    <content type="html"><![CDATA[
-<p>未来会有更多测试，只是来不及<br/>
-能跳则飞</p>
-
-<p>测试g gh </p>
-
-<p>lll😂</p>
-
-<p>👌</p>
 
 ]]></content>
   </entry>
