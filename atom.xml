@@ -4,13 +4,40 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2016-01-11T14:30:18+08:00</updated>
+  <updated>2016-01-25T10:36:03+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[利用 iTerm 实现 Mac自动挂载]]></title>
+    <link href="bao3.org/14536887612337.html"/>
+    <updated>2016-01-25T10:26:01+08:00</updated>
+    <id>bao3.org/14536887612337.html</id>
+    <content type="html"><![CDATA[
+<p>网易云音乐在 Mac上的下载目录不能自定义，这对于 128G SSD的 MBP来说非常不便，所以想把存储文件夹放在 SD卡，不过我在 SD 上制作替身，放在默认的 ~/Music/网易云音乐 位置，居然不行，无奈之下就在想如何能实现开机挂载这个目录。</p>
+
+<p>这里要用到的是 bindfs 和 zsh ( oh-my-zsh ) ，以及 iTerm，好在都是免费的，并不难得，原本是想把 bindfs 自动挂载写成 plist，使用 launchctl 实现开机自动挂载，不过现在来看不总是有问题，开机后进程确实运行了但目录却没挂载，所以就想到了曲线救国，利用 iTerm 每次开机自动启动，配合 .zshrc 这样来挂载。</p>
+
+<p><code>brew install bindfs</code></p>
+
+<p><code>vim ~/.zshrc</code><br/>
+加入以下代码，实现开机后自己检测是否已经挂载，如果没有就自动挂载</p>
+
+<pre><code class="language-Bash">function NeteaseMusic(){
+    music=&quot;网易云音乐&quot;
+    /usr/local/bin/bindfs /Volumes/64G/$music /Users/bao3/Music/$music
+}
+if [ -z &quot;`ps waux | grep bindfs | grep -v grep`&quot; ]; then
+    NeteaseMusic;
+fi
+</code></pre>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用 My Chrome 订制自己的浏览器]]></title>
@@ -212,7 +239,7 @@ hostnamectl set-hostname vps-jp  #设置主机名称叫 vps-jp
 
 <h2 id="toc_9">安装 yaourt</h2>
 
-<p>这部分是额外的设定，ArchLinux 使用 <strong><em>pacman</em></strong>来管理包，但是有时候这些包更新慢，我们可以使用<strong><em>yaourt</em></strong> 来代替，可称为神器。我们需要修改 <code>/etc/pacman.conf</code>，使用 <code>nano /etc/pacman.conf</code> (你也可以使用 vi ) ,在文件最后加入以下代码：</p>
+<p>这部分是额外的设定，ArchLinux 使用 <strong><em>pacman</em></strong>来管理包，但是有时候这些包更新慢，我们可以使用___yaourt___ 来代替，可称为神器。我们需要修改 <code>/etc/pacman.conf</code>，使用 <code>nano /etc/pacman.conf</code> (你也可以使用 vi ) ,在文件最后加入以下代码：</p>
 
 <pre><code class="language-Shell">[archlinuxfr]
 SigLevel = Optional TrustAll
