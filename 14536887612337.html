@@ -104,7 +104,9 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>网易云音乐在 Mac上的下载目录不能自定义，这对于 128G SSD的 MBP来说非常不便，所以想把存储文件夹放在 SD卡，不过我在 SD 上制作替身，放在默认的<code>~/Music/网易云音乐</code>位置，居然不行，无奈之下就在想如何能实现开机挂载这个目录。</p>
+      <p>本篇最重要的目的是实现 Mac 上网易云音乐的下载目录迁移到 SD上，不过你也可以用来做很多有趣的事，比如 <code>onedrive</code> 目录也迁移到 SD卡上</p>
+
+<p>网易云音乐在 Mac上的下载目录不能自定义，这对于 128G SSD的 MBP来说非常不便，所以想把存储文件夹放在 SD卡，不过我在 SD 上制作替身，放在默认的<code>~/Music/网易云音乐</code>位置，居然不行，无奈之下就在想如何能实现开机挂载这个目录 （这个方式比较 Dirty 但是有效 😁 )。</p>
 
 <p>这里要用到的是 <code>bindfs</code> 和 <code>zsh ( oh-my-zsh )</code> ，以及 <code>iTerm</code>，好在都是免费的，并不难得，原本是想把 bindfs 自动挂载写成 plist，使用 launchctl 实现开机自动挂载，不过现在来看总是有问题，<mark>开机后进程确实运行了但目录却没挂载</mark>，所以就想到了曲线救国，利用 iTerm 每次开机自动启动，配合 <code>.zshrc</code> 这样来挂载。</p>
 
