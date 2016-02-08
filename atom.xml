@@ -4,13 +4,52 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2016-01-11T14:30:18+08:00</updated>
+  <updated>2016-02-08T15:34:12+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
   <generator uri="http://www.mweb.im/">MWeb</generator>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac 和 iOS 一起使用 Surge]]></title>
+    <link href="bao3.org/14546753806896.html"/>
+    <updated>2016-02-05T20:29:40+08:00</updated>
+    <id>bao3.org/14546753806896.html</id>
+    <content type="html"><![CDATA[
+<p>Surge app 非常牛的一点是可以使用 icloud 同步，这样我们就可以实现手机端和 Mac 同步了，方法其实非常简单，接下来我就简要写一下。</p>
+
+<p>相信你的手机上一定是在运行 Surge for iOS 了，请在” More “页面打开 iCloud Sync。接下来我们开始设置 Mac 上。 按照 iOS 上的指导，先要激活一次 Surge For Mac ，然后你需要有一个 .surge.conf 放在自己的 $HOME 下面，你没有？哈哈哈哈，前面已经用 iCloud 同步一你的 Mac 上了哟，只是，这里有个小技巧：</p>
+
+<ol>
+<li>找到你的 Surge 目录，如下图所示，点进去，你能看到你的配置文件，例如我的 default.conf 。
+<img src="media/14546753806896/14546763443453.jpg" alt=""/></li>
+<li>打开 终端 app ，输入
+<code>
+ln -s /Users/`whoami`/Library/Mobile\ Documents/iCloud~run~surge/Documents/default.conf ~/.surge.conf
+</code>
+你要记得把 default.conf 换成你的配置名字。</li>
+</ol>
+
+<p><img src="media/14546753806896/14546770750355.jpg" alt=""/></p>
+
+<ol>
+<li>OK，现在你可以打开你的 Surge for Mac，不过作为一个严谨的人，我们还要确认一下我们的设定成功了没有。
+同样是在 终端 app 里
+<code>lsof -i :6152</code></li>
+</ol>
+
+<p><img src="media/14546753806896/14546778222917.jpg" alt=""/></p>
+
+<ol>
+<li>已经完成了，你可以在网络设置写上了，注意，作者说要把 http和 https 都写上。实际上，你也可以用你原有的 pac文件，但是改下代理也行的。</li>
+</ol>
+
+<p><img src="media/14546753806896/14546779494609.jpg" alt=""/></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[使用 My Chrome 订制自己的浏览器]]></title>
@@ -212,7 +251,7 @@ hostnamectl set-hostname vps-jp  #设置主机名称叫 vps-jp
 
 <h2 id="toc_9">安装 yaourt</h2>
 
-<p>这部分是额外的设定，ArchLinux 使用 <strong><em>pacman</em></strong>来管理包，但是有时候这些包更新慢，我们可以使用<strong><em>yaourt</em></strong> 来代替，可称为神器。我们需要修改 <code>/etc/pacman.conf</code>，使用 <code>nano /etc/pacman.conf</code> (你也可以使用 vi ) ,在文件最后加入以下代码：</p>
+<p>这部分是额外的设定，ArchLinux 使用 <strong><em>pacman</em></strong>来管理包，但是有时候这些包更新慢，我们可以使用___yaourt___ 来代替，可称为神器。我们需要修改 <code>/etc/pacman.conf</code>，使用 <code>nano /etc/pacman.conf</code> (你也可以使用 vi ) ,在文件最后加入以下代码：</p>
 
 <pre><code class="language-Shell">[archlinuxfr]
 SigLevel = Optional TrustAll

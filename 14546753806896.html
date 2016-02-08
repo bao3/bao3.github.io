@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  使用 My Chrome 订制自己的浏览器 - 活着真好
+  Mac 和 iOS 一起使用 Surge - 活着真好
   
   </title>
   
@@ -86,10 +86,10 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>使用 My Chrome 订制自己的浏览器</h1>
+          <h1>Mac 和 iOS 一起使用 Surge</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/1/10 22:30 下午</span>
+          <span class="date">2016/2/5 20:29 下午</span>
 
           
            
@@ -104,7 +104,35 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>事情的起因，是因为一个友人常在紧要关头需要下载东西，不得不借助一些手段，但是平时里并没有好好帮她调教她的 PC，因此一时之间并没有最快捷的方法让她能傻瓜式使用翻墙墙手段下载。于是花了 1 个小时来研究打造一个客制化的浏览器，随用随开且关闭后就清除一切痕迹。这个 MyChrome就是这今天的主角</p>
+      <p>Surge app 非常牛的一点是可以使用 icloud 同步，这样我们就可以实现手机端和 Mac 同步了，方法其实非常简单，接下来我就简要写一下。</p>
+
+<p>相信你的手机上一定是在运行 Surge for iOS 了，请在” More “页面打开 iCloud Sync。接下来我们开始设置 Mac 上。 按照 iOS 上的指导，先要激活一次 Surge For Mac ，然后你需要有一个 .surge.conf 放在自己的 $HOME 下面，你没有？哈哈哈哈，前面已经用 iCloud 同步一你的 Mac 上了哟，只是，这里有个小技巧：</p>
+
+<ol>
+<li>找到你的 Surge 目录，如下图所示，点进去，你能看到你的配置文件，例如我的 default.conf 。
+<img src="media/14546753806896/14546763443453.jpg" alt=""/></li>
+<li>打开 终端 app ，输入
+<code>
+ln -s /Users/`whoami`/Library/Mobile\ Documents/iCloud~run~surge/Documents/default.conf ~/.surge.conf
+</code>
+你要记得把 default.conf 换成你的配置名字。</li>
+</ol>
+
+<p><img src="media/14546753806896/14546770750355.jpg" alt=""/></p>
+
+<ol>
+<li>OK，现在你可以打开你的 Surge for Mac，不过作为一个严谨的人，我们还要确认一下我们的设定成功了没有。
+同样是在 终端 app 里
+<code>lsof -i :6152</code></li>
+</ol>
+
+<p><img src="media/14546753806896/14546778222917.jpg" alt=""/></p>
+
+<ol>
+<li>已经完成了，你可以在网络设置写上了，注意，作者说要把 http和 https 都写上。实际上，你也可以用你原有的 pac文件，但是改下代理也行的。</li>
+</ol>
+
+<p><img src="media/14546753806896/14546779494609.jpg" alt=""/></p>
 
       </div>
 
@@ -112,16 +140,13 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="14546753806896.html" 
-          title="Previous Post: Mac 和 iOS 一起使用 Surge">&laquo; Mac 和 iOS 一起使用 Surge</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="14519621000630.html" 
-          title="Next Post: 这是一个测试">这是一个测试 &raquo;</a>
+          <a  href="14524362507802.html" 
+          title="Next Post: 使用 My Chrome 订制自己的浏览器">使用 My Chrome 订制自己的浏览器 &raquo;</a>
       
       </p>
         </div>
