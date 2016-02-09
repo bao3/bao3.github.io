@@ -4,7 +4,7 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2016-02-09T17:25:09+08:00</updated>
+  <updated>2016-02-09T17:43:48+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -18,17 +18,28 @@
     <updated>2016-02-09T15:20:56+08:00</updated>
     <id>bao3.org/14550024568971.html</id>
     <content type="html"><![CDATA[
-<p>敝人乃懒人一枚，很久前购买了 myweb ，用来记点纯文本的笔记，偶尔发个 blog 到 github pages (github.io)。但是 myweb 是个 GUI 工具，发布到 github要换到 iTerm里自己输入命令 git add  &amp;&amp; git commit ，非常的麻烦，所以就又一次偷懒写了一个烂脚本，原则上适合用于所有的 app 自动发布到 GitHub。<br/>
-首先， 我的 mweb 发布到 Github 的文件夹是 blog，如下图所示：<br/>
+<blockquote>
+<p>理论上你有什么需要实时提交的 git repo 都可以使用这个方法，但为了节约，你需要设置 fswatch 的间隔时间</p>
+</blockquote>
+
+<p>　　敝人乃懒人一枚，很久前购买了 <mark>myweb</mark> ，用来记点纯文本的笔记，偶尔发个 blog 到 <strong>github pages (github.io)</strong>。但是 myweb 是个 GUI 工具，发布到 github要换到 iTerm里自己输入命令 git add  &amp;&amp; git commit ，非常的麻烦，所以就又一次偷懒写了一个烂脚本，原则上适合用于所有的 app 自动发布到 GitHub。</p>
+
+<h2 id="toc_0">首先， 确认你要发布的目录</h2>
+
+<p>　　我的 mweb 发布到 Github 的文件夹是 blog，如下图所示：<br/>
 <img src="media/14550024568971/14550028748116.jpg" alt=""/></p>
 
-<p>然后生成的网站目录在 /Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/ ，所以我的目标就是每次文件有变化时，就自动将文章发布到 github ，记住，重点是 “有变化时” 而不是每隔几分钟。</p>
+<p>　　然后生成的网站目录在 <code>/Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/</code>，所以我的目标就是每次文件有变化时，就自动将文章发布到 github ，记住，重点是 “有变化时” 而不是每隔几分钟。</p>
 
-<p>其次，我们需要用到 fswatch 这个命令，这需要使用 brew install fswatch </p>
+<h2 id="toc_1">其次,安装自动发布工具</h2>
 
-<p>最后，可选的一个 Shell 命令是 Proxychains4-ng ，这个东西的主要用途是为 git 命令添加代理，以防止网络质量不佳。要使用这个命令就需要有一个 Socks 代理，如果你没有，就不要安装了，而我自己有一个 shadowsocks ，所以非常方便。</p>
+<p>　　我们需要用到 <mark><strong>fswatch</strong></mark> 这个命令，这需要使用<code>brew install fswatch</code></p>
 
-<p>然后开始写我们的脚本吧：</p>
+<p>　　可选的一个 Shell 命令是 <code>Proxychains4-ng</code>，这个东西的主要用途是为 git 命令添加代理，以防止网络质量不佳。要使用这个命令就需要有一个 Socks 代理，如果你没有，就不要安装了，而我自己有一个<code>shadowsocks-libev</code> ，所以非常方便。</p>
+
+<h2 id="toc_2">脚本主体</h2>
+
+<p>　　我不是个程序员，所以写出来的脚本有点“脏”，好在还能用，自己动手丰衣足食嘛；然后开始写我们的脚本吧：</p>
 
 <pre><code>
 #!/bin/bash
@@ -39,7 +50,7 @@ export cmd=/usr/bin/git
 #locate the &#39;fswatch&#39; command ,you should install it via &quot;brew install fswatch&quot;
 export fsdog=`which fswatch`
 export proxy=`which proxychains4`
-args=&quot;$wdir&quot;
+args=&quot;-0 -a $wdir/atom.xml&quot;
 function gitpush() {
     $cmd add . ;
     reslut=$($cmd commit -a -m &quot;`date`&quot; | grep nothing)
@@ -47,32 +58,66 @@ function gitpush() {
     #when get $result length == zero ,means that there is new modified blog ,just git push  in next!
     if [ -z `$reslut` ] ; then
 
-        #Note : proxychains4 is a proxy tools which would let &quot;git &quot; use your proxy ( shadowsocks e.g.),just brew install it ;
-        `$proxy -q  $cmd push -q`;
+        #Note : proxychains4 is a proxy tools which would let &quot;git &quot; use your proxy ( shadowsocks e.g.),just brew install it OR it would skip auto.
+        `$proxy -q  $cmd push -q` || `$cmd push -q`
     fi;
     return 0;
     }
 cd $wdir;
 #gitpush ;
 export -f gitpush;
-$fsdog $args | xargs -n6 bash -c &#39;gitpush&#39;
+$fsdog $args | xargs -0 -n1 bash -c &#39;gitpush&#39;
 
 
 
 </code></pre>
 
-<blockquote>
-<p>如果你没有 proxychains4 ，那么以上代码中 <code>$proxy -q  $cmd push -q</code>需要换成   <code>$cmd push -q</code></p>
-</blockquote>
-
-<p>这段脚本实现的功能如下：</p>
+<h3 id="toc_3">这段脚本实现的功能如下：</h3>
 
 <ol>
-<li>使用 fswatch <em>实时</em> 检测 myweb 的 blog 目录</li>
+<li>使用 <code>fswatch</code> <em>实时</em> 检测 myweb 的 blog 目录</li>
 <li>一旦发现有新的博客文章，则会自动提交，并添加当时的时间为标记</li>
-<li>似乎有 bug，因此需要重新生成整个网站文章才会触发提交。</li>
-<li>...</li>
+<li>提交时会优先使用 <code>Proxychains4</code> 通过代理提交，如果没安装则自动使用 Git push 提交</li>
+<li>只有变化的文章才会提交，所以非常省流量</li>
+<li>每次你写完博客，只需要在 Myweb 里点 下面的菜单 <br>
+<img src="media/14550024568971/14550119677927.jpg" alt=""/></li>
 </ol>
+
+<h2 id="toc_4">happy Ending</h2>
+
+<p>　　保存你的这个脚本，例如名称为 <code>gitpush.sh</code> ，然后我们要生成一个 <strong>plist</strong> 让这个文件开机自动启动，这样就真的是完全自动化了。 plist 文件如下</p>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
+&lt;plist version=&quot;1.0&quot;&gt;
+&lt;dict&gt;
+    &lt;key&gt;Disabled&lt;/key&gt;
+    &lt;false/&gt;
+    &lt;key&gt;EnvironmentVariables&lt;/key&gt;
+    &lt;dict&gt;
+        &lt;key&gt;PATH&lt;/key&gt;
+        &lt;string&gt;/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin&lt;/string&gt;
+    &lt;/dict&gt;
+    &lt;key&gt;KeepAlive&lt;/key&gt;
+    &lt;dict&gt;
+        &lt;key&gt;SuccessfulExit&lt;/key&gt;
+        &lt;false/&gt;
+    &lt;/dict&gt;
+    &lt;key&gt;Label&lt;/key&gt;
+    &lt;string&gt;club.myauto.gitpush&lt;/string&gt;
+    &lt;key&gt;ProgramArguments&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;/bin/sh&lt;/string&gt;
+        &lt;string&gt;/Users/bao3/.wwwroot/custommymac/bin/gitpush.sh&lt;/string&gt;
+    &lt;/array&gt;
+    &lt;key&gt;RunAtLoad&lt;/key&gt;
+    &lt;true/&gt;
+&lt;/dict&gt;
+&lt;/plist&gt;
+
+</code></pre>
+
+<p>　　然后可以将此文件 放在<code>~/Library/LaunchAgents</code>,然后运行 <code>launchctl load -w ~/Library/LaunchAgents/XXXXXXX.plist</code>　然后验证一下是否有启动 <code>ps waux | grep fswatch</code></p>
 
 ]]></content>
   </entry>
