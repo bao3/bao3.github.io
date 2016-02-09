@@ -4,13 +4,14 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2016-02-09T18:17:27+08:00</updated>
+  <updated>2016-02-09T18:26:51+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
-  <generator uri="http://www.mweb.im/">MWeb</generator>
+  <generator uri="http://www.mweb.im">MWeb</generator>
+
   
   <entry>
     <title type="html"><![CDATA[Mac 上自动发布到 github pages]]></title>
