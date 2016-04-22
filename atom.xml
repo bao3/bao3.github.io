@@ -4,7 +4,7 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2016-04-22T17:07:39+08:00</updated>
+  <updated>2016-04-22T17:09:57+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -99,7 +99,7 @@ brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 m
 　　<img src="media/14550024568971/14613161793220.jpg" alt=""/></p>
 
 <p>　　<br/>
-　　然后生成的网站目录在 <code>/Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/</code>，所以我的目标就是每次文件有变化时，就自动将文章发布到 github ，记住，重点是 “有变化时” 而不是每隔几分钟。</p>
+　　然后生成的网站目录在 <code>/Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/</code>，所以我的目标就是每次文件有变化时，就自动将文章发布到 github ，记住，重点是 “有变化时” 实时更新。</p>
 
 <h2 id="toc_1">其次,安装自动发布工具</h2>
 
