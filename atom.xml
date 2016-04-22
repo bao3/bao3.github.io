@@ -4,7 +4,7 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2016-04-22T17:09:57+08:00</updated>
+  <updated>2016-04-22T17:10:12+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -79,13 +79,14 @@ brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 m
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mac 上自动发布到 github pages]]></title>
+    <title type="html"><![CDATA[Mac 上使用自动发布到 github pages]]></title>
     <link href="bao3.org/14550024568971.html"/>
     <updated>2016-02-09T15:20:56+08:00</updated>
     <id>bao3.org/14550024568971.html</id>
     <content type="html"><![CDATA[
 <blockquote>
-<p>理论上你有什么需要实时提交的 git repo 都可以使用这个方法，但为了节约，你需要设置 fswatch 的间隔时间</p>
+<p>理论上你有什么需要实时提交的 git repo 都可以使用这个方法，但为了节约，你需要设置 fswatch 的间隔时间<br/>
+虽然我下面使用进行的时候使用的是 MyWeb ，其实你也可以换成其他的 Markdown 工具，效果应该差不多，只是 MyWeb 实在是方便。</p>
 </blockquote>
 
 <p>　　敝人乃懒人一枚，很久前购买了 <mark>myweb</mark> ，用来记点纯文本的笔记，偶尔发个 blog 到 <strong>github pages (github.io)</strong>。但是 myweb 是个 GUI 工具，发布到 github要换到 iTerm里自己输入命令 git add  &amp;&amp; git commit ，非常的麻烦，所以就又一次偷懒写了一个烂脚本，原则上适合用于所有的 app 自动发布到 GitHub。</p>
