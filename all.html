@@ -247,7 +247,8 @@ brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 m
 
 <h2 id="toc_2">脚本主体</h2>
 
-<p>　　我不是个程序员，所以写出来的脚本有点“脏”，好在还能用，自己动手丰衣足食嘛；然后开始写我们的脚本吧：</p>
+<p>　　我不是个程序员，所以写出来的脚本有点“脏”，好在还能用，自己动手丰衣足食嘛；然后开始写我们的脚本吧：<br/>
+找一个目录存放这个脚本，比如自己的 &quot;/Users/`whoami`/ &quot;下面，文件名字叫 gitblog.command ，重点是一定要是 *.command 这种结尾，后面有重要用途。</p>
 
 <pre><code>
 #!/bin/bash
@@ -274,9 +275,10 @@ function gitpush() {
 cd $wdir;
 #gitpush ;
 export -f gitpush;
-$fsdog $args | xargs -0 -n1 bash -c &#39;gitpush&#39;
+$fsdog $args | xargs -0 -n1 bash -c &#39;gitpush&#39; &amp;
 
-
+osascript -e &#39;tell application &quot;Terminal&quot; to quit&#39; &amp;
+exit
 
 </code></pre>
 
@@ -291,41 +293,17 @@ $fsdog $args | xargs -0 -n1 bash -c &#39;gitpush&#39;
 <img src="media/14550024568971/14550119677927.jpg" alt=""/></li>
 </ol>
 
-<h2 id="toc_4">happy Ending</h2>
+<h2 id="toc_4">开机启动</h2>
 
-<p>　　保存你的这个脚本，例如名称为 <code>gitpush.sh</code> ，然后我们要生成一个 <strong>plist</strong> 让这个文件开机自动启动，这样就真的是完全自动化了。 plist 文件如下</p>
+<p>在做这一步前，请先双击刚刚生成的 gitblog.command ，应该可以启动一个黑窗口然后又消失了。<br/>
+接着，你打开 Terminal 输入下面的命令</p>
 
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;!DOCTYPE plist PUBLIC &quot;-//Apple//DTD PLIST 1.0//EN&quot; &quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;&gt;
-&lt;plist version=&quot;1.0&quot;&gt;
-&lt;dict&gt;
-    &lt;key&gt;Disabled&lt;/key&gt;
-    &lt;false/&gt;
-    &lt;key&gt;EnvironmentVariables&lt;/key&gt;
-    &lt;dict&gt;
-        &lt;key&gt;PATH&lt;/key&gt;
-        &lt;string&gt;/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin&lt;/string&gt;
-    &lt;/dict&gt;
-    &lt;key&gt;KeepAlive&lt;/key&gt;
-    &lt;dict&gt;
-        &lt;key&gt;SuccessfulExit&lt;/key&gt;
-        &lt;false/&gt;
-    &lt;/dict&gt;
-    &lt;key&gt;Label&lt;/key&gt;
-    &lt;string&gt;club.myauto.gitpush&lt;/string&gt;
-    &lt;key&gt;ProgramArguments&lt;/key&gt;
-    &lt;array&gt;
-        &lt;string&gt;/bin/sh&lt;/string&gt;
-        &lt;string&gt;/Users/bao3/.wwwroot/custommymac/bin/gitpush.sh&lt;/string&gt;
-    &lt;/array&gt;
-    &lt;key&gt;RunAtLoad&lt;/key&gt;
-    &lt;true/&gt;
-&lt;/dict&gt;
-&lt;/plist&gt;
+<p>$ ps waux | grep git | grep -v grep<br/>
+bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
 
-</code></pre>
+<p>这表示成功启动了。但如果没有，则表示你没有配置成功，多半是里面有什么特殊符号少了半边或者路径错了什么的，需要你自己调试了。</p>
 
-<p>　　然后可以将此文件 放在<code>~/Library/LaunchAgents</code>,然后运行 <code>launchctl load -w ~/Library/LaunchAgents/XXXXXXX.plist</code>　然后验证一下是否有启动 <code>ps waux | grep fswatch</code></p>
+<p>接下来就是</p>
 
 
 			
