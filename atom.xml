@@ -4,7 +4,7 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2016-02-09T18:28:06+08:00</updated>
+  <updated>2016-04-22T16:53:38+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -68,11 +68,12 @@ hw.acpi.cpu.cx_lowest=C3
     <updated>2016-02-20T13:32:35+08:00</updated>
     <id>bao3.org/14559463552140.html</id>
     <content type="html"><![CDATA[
-<p>brew tap caskroom/cask<br/>
-brew tap caskroom/versions<br/>
-brew install homebrew/fuse/bindfs<br/>
-<code>brew install proxychains-ng shadowsocks-libv dnsmasq  android-platform-tools fswatch</code><br/>
-<code>brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 macvim mpv  squirrel vmware-fusion flux enpass  omnidisksweeper java  karabiner diskmaker-x osxfuse</code></p>
+<pre><code class="language-Bash">brew tap caskroom/cask
+brew tap caskroom/versions
+brew install homebrew/fuse/bindfs
+`brew install proxychains-ng shadowsocks-libv dnsmasq  android-platform-tools fswatch`
+`brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 macvim mpv  squirrel vmware-fusion flux enpass  omnidisksweeper java  karabiner diskmaker-x osxfuse`
+</code></pre>
 
 ]]></content>
   </entry>
