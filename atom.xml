@@ -4,13 +4,78 @@
   <title><![CDATA[活着真好]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2016-02-09T18:27:43+08:00</updated>
+  <updated>2016-02-09T18:28:06+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
     
   </author>
-  <generator uri="http://www.mweb.im/">MWeb</generator>
+  <generator uri="http://www.coderforart.com/">CoderForArt</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[自己折腾 FreeNAS@ThinkPad x201i 的记录]]></title>
+    <link href="bao3.org/14596768251130.html"/>
+    <updated>2016-04-03T17:47:05+08:00</updated>
+    <id>bao3.org/14596768251130.html</id>
+    <content type="html"><![CDATA[
+<p>这些记录没有任何意义，请忽略</p>
+
+<pre><code class="language-Bash">cp -Rp acpi_ibm* /boot/kernel/
+cp -RP acpi_video.ko* /boot/kernel/
+cp -Rp iwn1000fw.ko* /boot/kernel/
+cp -Rp if_iwn.ko* /boot/kernel/
+cp -Rp wlan* /boot/kernel/
+cp -Rp fuse.ko* /boot/kernel/
+sed -i &quot;.bak&quot; &#39;s/yes/no/g&#39; /usr/local/etc/pkg/repos/local.conf
+sed -i &quot;.bak&quot; &#39;s/no/yes/g&#39; /usr/local/etc/pkg/repos/FreeBSD.conf
+
+pkg update
+pkg install vim-lite proxychains-ng shadowsocks-libev aria2
+
+vi /boot/loader.conf
+
+#######
+acpi_ibm_load=&quot;YES&quot;
+acpi_video_load=&quot;YES&quot;
+if_iwn_load=&quot;YES&quot;
+iwn1000fw_load=&quot;YES&quot;
+snd_ich_load=&quot;YES&quot;
+###########
+
+
+saver=&quot;green&quot; blanktime=&quot;300&quot; scrnmap=&quot;NO&quot;
+powerd_enable=&quot;YES&quot;
+powerd_flags=&quot;-i 80 -p 200 -b adaptive -a adaptive -n adaptive&quot;
+
+performance_cx_lowest=&quot;C3&quot;
+economy_cx_lowest=&quot;C3&quot;
+performance_cpu_freq=&quot;HIGH&quot;
+
+
+sysctl -a | grep cx_
+/etc/sysctl.conf
+hw.acpi.cpu.cx_lowest=C3
+
+</code></pre>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Brew Cask 安装软件]]></title>
+    <link href="bao3.org/14559463552140.html"/>
+    <updated>2016-02-20T13:32:35+08:00</updated>
+    <id>bao3.org/14559463552140.html</id>
+    <content type="html"><![CDATA[
+<p>brew tap caskroom/cask<br/>
+brew tap caskroom/versions<br/>
+brew install homebrew/fuse/bindfs<br/>
+<code>brew install proxychains-ng shadowsocks-libv dnsmasq  android-platform-tools fswatch</code><br/>
+<code>brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 macvim mpv  squirrel vmware-fusion flux enpass  omnidisksweeper java  karabiner diskmaker-x osxfuse</code></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac 上自动发布到 github pages]]></title>
@@ -368,7 +433,7 @@ SigLevel = Optional TrustAll
 Server = http://repo.archlinux.fr/$arch
 </code></pre>
 
-<p><code>Control + X</code> 保存( 选择 <q>yes</q> ) ，并退出</p>
+<p><code>Control + X</code> 保存( 选择 &quot;yes &quot; ) ，并退出</p>
 
 <p>然后使用 <code>pacman -Syu yaourt</code> 安装。此后，你就可以使用普通用户 <code>mylove</code> 登录然后直接 <code>yaourt -Sy  软件包名称</code>来帮你安装所需的软件， Enjoy~ it !</p>
 

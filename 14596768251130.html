@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>  
 	  
-  	使用 My Chrome 订制自己的浏览器 - 活着真好
+  	自己折腾 FreeNAS@ThinkPad x201i 的记录 - 活着真好
   	
 	</title>
 
@@ -125,9 +125,47 @@
 			<div class="mid-col-container"> <div id="content" class="inner">
 
 	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-		<h1 class="title" itemprop="name">使用 My Chrome 订制自己的浏览器</h1>
+		<h1 class="title" itemprop="name">自己折腾 FreeNAS@ThinkPad x201i 的记录</h1>
 		<div class="entry-content" itemprop="articleBody">
-			<p>事情的起因，是因为一个友人常在紧要关头需要下载东西，不得不借助一些手段，但是平时里并没有好好帮她调教她的 PC，因此一时之间并没有最快捷的方法让她能傻瓜式使用翻墙墙手段下载。于是花了 1 个小时来研究打造一个客制化的浏览器，随用随开且关闭后就清除一切痕迹。这个 MyChrome就是这今天的主角</p>
+			<p>这些记录没有任何意义，请忽略</p>
+
+<pre><code class="language-Bash">cp -Rp acpi_ibm* /boot/kernel/
+cp -RP acpi_video.ko* /boot/kernel/
+cp -Rp iwn1000fw.ko* /boot/kernel/
+cp -Rp if_iwn.ko* /boot/kernel/
+cp -Rp wlan* /boot/kernel/
+cp -Rp fuse.ko* /boot/kernel/
+sed -i &quot;.bak&quot; &#39;s/yes/no/g&#39; /usr/local/etc/pkg/repos/local.conf
+sed -i &quot;.bak&quot; &#39;s/no/yes/g&#39; /usr/local/etc/pkg/repos/FreeBSD.conf
+
+pkg update
+pkg install vim-lite proxychains-ng shadowsocks-libev aria2
+
+vi /boot/loader.conf
+
+#######
+acpi_ibm_load=&quot;YES&quot;
+acpi_video_load=&quot;YES&quot;
+if_iwn_load=&quot;YES&quot;
+iwn1000fw_load=&quot;YES&quot;
+snd_ich_load=&quot;YES&quot;
+###########
+
+
+saver=&quot;green&quot; blanktime=&quot;300&quot; scrnmap=&quot;NO&quot;
+powerd_enable=&quot;YES&quot;
+powerd_flags=&quot;-i 80 -p 200 -b adaptive -a adaptive -n adaptive&quot;
+
+performance_cx_lowest=&quot;C3&quot;
+economy_cx_lowest=&quot;C3&quot;
+performance_cpu_freq=&quot;HIGH&quot;
+
+
+sysctl -a | grep cx_
+/etc/sysctl.conf
+hw.acpi.cpu.cx_lowest=C3
+
+</code></pre>
 
 		</div>
 	</article>
