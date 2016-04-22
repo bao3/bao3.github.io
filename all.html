@@ -237,7 +237,11 @@ brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 m
 <p>　　我的 mweb 发布到 Github 的文件夹是 blog，如下图所示：<br/>
 <img src="media/14550024568971/14550028748116.jpg" alt=""/></p>
 
-<p>　　然后生成的网站目录在 <code>/Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/</code>，所以我的目标就是每次文件有变化时，就自动将文章发布到 github ，记住，重点是 “有变化时” 而不是每隔几分钟。</p>
+<p>　　先在 blog 这个目录上右击生成网站，然后再点如下图所示，找到生成网站的位置：<br/>
+　　<img src="media/14550024568971/14613161793220.jpg" alt=""/></p>
+
+<p>　　<br/>
+　　然后生成的网站目录在 <code>/Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/</code>，所以我的目标就是每次文件有变化时，就自动将文章发布到 github ，记住，重点是 “有变化时” 而不是每隔几分钟。</p>
 
 <h2 id="toc_1">其次,安装自动发布工具</h2>
 
@@ -303,7 +307,13 @@ bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
 
 <p>这表示成功启动了。但如果没有，则表示你没有配置成功，多半是里面有什么特殊符号少了半边或者路径错了什么的，需要你自己调试了。</p>
 
-<p>接下来就是</p>
+<p>接下来就是在“系统偏好设置”里的“用户和群组”，加上 gitblog.command 的开机登录选项。</p>
+
+<p><img src="media/14550024568971/14613159401465.jpg" alt=""/></p>
+
+<p>至此，已经全部完成，每次对你的 blog 有任何更改，全都会自动更新到 github 上，非常方便。</p>
+
+<p><mark>请你一定注意，在 MyWeb 里设置备份哟</mark></p>
 
 
 			
