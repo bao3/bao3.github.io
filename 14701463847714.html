@@ -1,0 +1,382 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  Mac 上使用自动发布到 github pages - 宝宝的家
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="宝宝的家" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:bao3.org ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 宝宝的家</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>Mac 上使用自动发布到 github pages</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">8/2 21:59 下午</span>
+
+          
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <blockquote>
+<p>理论上你有什么需要实时提交的 git repo 都可以使用这个方法，但为了节约，你需要设置 fswatch 的间隔时间<br/>
+虽然我下面使用进行的时候使用的是 MyWeb ，其实你也可以换成其他的 Markdown 工具，效果应该差不多，只是 MyWeb 实在是方便。</p>
+</blockquote>
+
+<p>　　敝人乃懒人一枚，很久前购买了 <mark>myweb</mark> ，用来记点纯文本的笔记，偶尔发个 blog 到 <strong>github pages (github.io)</strong>。但是 myweb 是个 GUI 工具，发布到 github要换到 iTerm里自己输入命令 git add  &amp;&amp; git commit ，非常的麻烦，所以就又一次偷懒写了一个烂脚本，原则上适合用于所有的 app 自动发布到 GitHub。</p>
+
+<h2 id="toc_0">首先， 确认你要发布的目录</h2>
+
+<p>　　我的 mweb 发布到 Github 的文件夹是 blog，如下图所示：<br/>
+<img src="media/14550024568971/14550028748116.jpg" alt=""/></p>
+
+<p>　　先在 blog 这个目录上右击生成网站，然后再点如下图所示，找到生成网站的位置：<br/>
+　　<img src="media/14550024568971/14613161793220.jpg" alt=""/></p>
+
+<p>　　<br/>
+　　然后生成的网站目录在 <code>/Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/</code>，所以我的目标就是每次文件有变化时，就自动将文章发布到 github ，记住，重点是 “有变化时” 实时更新。</p>
+
+<h2 id="toc_1">其次,安装自动发布工具</h2>
+
+<p>　　我们需要用到 <mark><strong>fswatch</strong></mark> 这个命令，这需要使用<code>brew install fswatch</code></p>
+
+<p>　　可选的一个 Shell 命令是 <code>Proxychains4-ng</code>，这个东西的主要用途是为 git 命令添加代理，以防止网络质量不佳。要使用这个命令就需要有一个 Socks 代理，如果你没有，就不要安装了，而我自己有一个<code>shadowsocks-libev</code> ，所以非常方便。</p>
+
+<h2 id="toc_2">脚本主体</h2>
+
+<p>　　我不是个程序员，所以写出来的脚本有点“脏”，好在还能用，自己动手丰衣足食嘛；然后开始写我们的脚本吧：<br/>
+找一个目录存放这个脚本，比如自己的 &quot;/Users/`whoami`/ &quot;下面，文件名字叫 gitblog.command ，重点是一定要是 *.command 这种结尾，后面有重要用途。</p>
+
+<pre><code>
+#!/bin/bash
+#$wdir is where your github blog dir
+wdir=/Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/
+export cmd=/usr/bin/git
+
+#locate the &#39;fswatch&#39; command ,you should install it via &quot;brew install fswatch&quot;
+export fsdog=`which fswatch`
+export proxy=`which proxychains4`
+args=&quot;-0 -a $wdir/atom.xml&quot;
+function gitpush() {
+    $cmd add . ;
+    reslut=$($cmd commit -a -m &quot;`date`&quot; | grep nothing)
+
+    #when get $result length == zero ,means that there is new modified blog ,just git push  in next!
+    if [ -z `$reslut` ] ; then
+
+        #Note : proxychains4 is a proxy tools which would let &quot;git &quot; use your proxy ( shadowsocks e.g.),just brew install it OR it would skip auto.
+        `$proxy -q  $cmd push -q` || `$cmd push -q`
+    fi;
+    return 0;
+    }
+cd $wdir;
+#gitpush ;
+export -f gitpush;
+$fsdog $args | xargs -0 -n1 bash -c &#39;gitpush&#39; &amp;
+
+exit
+
+</code></pre>
+
+<h3 id="toc_3">这段脚本实现的功能如下：</h3>
+
+<ol>
+<li>使用 <code>fswatch</code> <em>实时</em> 检测 myweb 的 blog 目录</li>
+<li>一旦发现有新的博客文章，则会自动提交，并添加当时的时间为标记</li>
+<li>提交时会优先使用 <code>Proxychains4</code> 通过代理提交，如果没安装则自动使用 Git push 提交</li>
+<li>只有变化的文章才会提交，所以非常省流量</li>
+<li>每次你写完博客，只需要在 Myweb 里点 下面的菜单 <br>
+<img src="media/14550024568971/14550119677927.jpg" alt=""/></li>
+</ol>
+
+<h2 id="toc_4">开机启动</h2>
+
+<p>在做这一步前，请先双击刚刚生成的 gitblog.command ，应该可以启动一个黑窗口然后又消失了。<br/>
+接着，你打开 Terminal 输入下面的命令</p>
+
+<p>$ ps waux | grep git | grep -v grep<br/>
+bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
+
+<p>这表示成功启动了。但如果没有，则表示你没有配置成功，多半是里面有什么特殊符号少了半边或者路径错了什么的，需要你自己调试了。</p>
+
+<p>接下来就是在“系统偏好设置”里的“用户和群组”，加上 gitblog.command 的开机登录选项。</p>
+
+<p><img src="media/14550024568971/14613159401465.jpg" alt=""/></p>
+
+<p>至此，已经全部完成，每次对你的 blog 有任何更改，全都会自动更新到 github 上，非常方便。</p>
+
+<p><mark>请你一定注意，在 MyWeb 里设置备份哟</mark></p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="14701463847475.html" 
+          title="Previous Post: 优雅女性一生一定要看的50篇黄文">&laquo; 优雅女性一生一定要看的50篇黄文</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="14701463847961.html" 
+          title="Next Post: 主题：如何处理wget mirror网站后应用程序文件名问题">主题：如何处理wget mirror网站后应用程序文件名问题 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1>宝宝的家</h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="14795779318609.html">an最终测试</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14701463847078.html">test 2</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14701463847399.html">使用 My Chrome 订制自己的浏览器</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14701463847780.html">Kodi(XBMC)视频播放软件</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14701463847239.html">在 Vultr上安装 Arch linux</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,464 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  主题：如何处理wget mirror网站后应用程序文件名问题 - 宝宝的家
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="宝宝的家" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:bao3.org ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 宝宝的家</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+  $(function(){
+    $('#menu_item_index').addClass('is_active');
+  });
+</script>
+<div class="row">
+  <div class="large-8 medium-8 columns">
+      <div class="markdown-body article-wrap">
+       <div class="article">
+          
+          <h1>主题：如何处理wget mirror网站后应用程序文件名问题</h1>
+     
+        <div class="read-more clearfix">
+          <span class="date">8/2 21:59 下午</span>
+
+          
+           
+         
+          <span class="comments">
+            
+
+            
+          </span>
+
+        </div>
+      </div><!-- article -->
+
+      <div class="article-content">
+      <pre><code>  By NetGuard Security Team --Chen Jun (chenjun@netguard.com.cn)
+</code></pre>
+
+<p>日期：2001.08.02<br/>
+    众所周知，在windows下的作mirror的程序很多，功能好的也很多。 <br/>
+    但是在unix如何作mirror呢？好多人并不是很清楚。其实在unix下作mirror的程序也很多，我今天讲讲使用wget来mirror 网站的后，如何转换的问题。</p>
+
+<h2 id="toc_0">    wget的用法，hehe,相信大家都是很熟悉的吧。在这，还是从网上抄点用法过来吧，出处我忘记了,对于作者,I say sorry。</h2>
+
+<p>wget常用参数如下 (以下资讯亦可藉由执行 wget --help获得)：</p>
+
+<p>GNU Wget 1.5.3, 一个非交互式的网路抓档工具.<br/>
+用法: wget [选项]... [URL]...</p>
+
+<p>命令的引数使用长项目与短项目相同.</p>
+
+<p>启动:<br/>
+  -V,  --version           显示 Wget 的版本并且离开.<br/>
+  -h,  --help              显示这个说明档.<br/>
+  -b,  -background         在启动之後跳到背景去.<br/>
+  -e,  -execute=COMMAND    执行一个 `.wgetrc&#39; 里面的 COMMAND 指令.</p>
+
+<p>纪录档与输入的档案:<br/>
+  -o,  --output-file=FILE     纪录讯息到 FILE 去.<br/>
+  -a,  -append-output=FILE    增加讯息到 FILE 去.<br/>
+  -d,  --debug                显示除错的输出.<br/>
+  -q,  --quiet                安静模式 (不输入任何讯息).<br/>
+  -v,  --verbose              冗长模式 (这是内定值).<br/>
+  -nv, --non-verbose          关闭 verboseness, 但不是安静模式.<br/>
+  -i,  --input-file=FILE      从 FILE 读取 URL .<br/>
+  -F,  --force-html           把输入的档案当作 HTML.</p>
+
+<p>下载:<br/>
+  -t,  --tries=NUMBER           设定重复尝试 NUMBER 次 (0 是无限制).<br/>
+  -O   --output-document=FILE   把文件写到 FILE 里.<br/>
+  -nc, --no-clobber             不破坏已经存在的档案.<br/>
+  -c,  --continue               重新取得一个已经存在的档案.<br/>
+       --dot-style=STYLE        设定取回状况的显示风格.<br/>
+  -N,  --timestamping           不取回比本地旧的档案.<br/>
+  -S,  --server-response        显示伺服器回应状况.<br/>
+       --spider                 不下载任何东西.<br/>
+  -T,  --timeout=SECONDS        设定读取时超过的时间为 SECONDS 秒.<br/>
+  -w,  --wait=SECONDS           在取回档案时等待 SECONDS 秒.<br/>
+  -Y,  --proxy=on/off           开启或关闭 Proxy.<br/>
+  -Q,  --quota=NUMBER           设定取回档案的定额限制为 NUMBER 个.</p>
+
+<p>目录:<br/>
+  -nd  --no-directories            不建立目录.<br/>
+  -x,  --force-directories         强制进行目录建立的工作.<br/>
+  -nH, --no-host-directories       不建立主机的目录.<br/>
+  -P,  --directory-prefix=PREFIX   把档案存到 PREFIX/...<br/>
+       --cut-dirs=NUMBER           忽略 NUMBER 个远端的目录元件.</p>
+
+<p>HTTP 选项:<br/>
+       --http-user=USER       设 http 使用者为 USER.<br/>
+       --http-passwd=PASS     设 http 使用者的密码为 PASS.<br/>
+  -C,  --cache=on/off         提供/关闭快取伺服器资料 (正常情况为提供).<br/>
+       --ignore-length        忽略 `Content-Length&#39; 标头栏位.<br/>
+       --proxy-user=USER      设 USER 为 Proxy 使用者名称.<br/>
+       --proxy-passwd=PASS    设 PASS 为 Proxy 密码.<br/>
+  -s,  --save-headers         储存 HTTP 标头成为档案.<br/>
+  -U,  --user-agent=AGENT     使用 AGENT 取代 Wget/VERSION 作为识别代号.</p>
+
+<p>FTP 选项:<br/>
+       --retr-symlinks   取回 FTP 的象徵连结.<br/>
+  -g,  --glob=on/off     turn file name globbing on ot off.<br/>
+       --passive-ftp     使用 &quot;passive&quot; 传输模式.</p>
+
+<p>使用递回方式的取回:<br/>
+  -r,  --recursive             像是吸入 web 的取回 -- 请小心使用!.<br/>
+  -l,  --level=NUMBER          递回层次的最大值 (0 不限制).<br/>
+       --delete-after          删除下载完毕的档案.<br/>
+  -k,  --convert-links         改变没有关连的连结成为有关连.<br/>
+  -m,  --mirror                开启适合用来映射的选项.<br/>
+  -nr, --dont-remove-listing   不要移除 `.listing&#39; 档.</p>
+
+<p>递回式作业的允许与拒绝选项:<br/>
+  -A,  --accept=LIST                允许的扩充项目的列表.<br/>
+  -R,  --reject=LIST                拒绝的扩充项目的列表.<br/>
+  -D,  --domains=LIST               允许的网域列表.<br/>
+       --exclude-domains=LIST       拒绝的网域列表 (使用逗号来分隔).<br/>
+  -L,  --relative                   只跟随关联连结前进.<br/>
+       --follow-ftp                 跟随 HTML 文件里面的 FTP 连结.<br/>
+  -H,  --span-hosts                 当开始递回时便到外面的主机.<br/>
+  -I,  --include-directories=LIST   允许的目录列表.<br/>
+  -X,  --exclude-directories=LIST   排除的目录列表.<br/>
+  -nh, --no-host-lookup             不透过 DNS 查寻主机.<br/>
+  -np, --no-parent                  不追朔到起源目录.</p>
+
+<p>范例一：mirror一个网站</p>
+
+<p>　wget -r <a href="http://www.redhat.com">http://www.redhat.com</a></p>
+
+<p>范例二：mirror一个网站下的某个目录：</p>
+
+<h2 id="toc_1">　wget -r <a href="http://www.redhat.com/apps/download/">http://www.redhat.com/apps/download/</a></h2>
+
+<pre><code>但是在实际中，现在的网站大多数是程序+数据库的模式，不象原来的那种单独的html方式，那样get下来的文件名就是不能直接访问的。(如果没有试过mirror的，估计不知我说的是怎么一回事)
+我们举个以mirror 一个网站的子目录下的例子，来说说吧。此网站是一台Linux的机器，在他们的上面用是jsp+mysql的模式。
+</code></pre>
+
+<p>一、<br/>
+先在你的机器上输入<br/>
+wget -m -r -k -np -b --user-agent=&#39;Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)&#39; <a href="http://www.mysite.com/solution/">http://www.mysite.com/solution/</a><br/>
+      ^  ^  ^  ^   ^       ^                                                                    <sup>__欲mirror的网站的url</sup><br/>
+      |  |  |  |   |       |__访问网站使用的程序的标识（我不想让那个网站知道我用的是wget,要mirror他的站，所以就假冒ie4)<br/>
+      |  |  |  |   |_____放到后台运行 (我可不想傻等)<br/>
+      |  |  |  |___ 限制在当前目录下的文件（如果不设，你就死定了)<br/>
+      |  |  |__转换连接(但是我没有感觉有多大的用)<br/>
+      |  |__递归抓取<br/><br/>
+      |__这个要用呀，是作mirror呀<br/>
+然后你先出去转转，等时间差不多了，再回来吧<br/>
+二、wget结束后，你会发现，那些list.jsp?id=什么什么的，都wget了下来，文件名就是list.jsp?id=xxx存放着。<br/>
+    类似这种:<br/>
+    -rw-r--r--    1 root     root        30588 Jul 31 18:49 showfom.jsp?i=1525<br/>
+    wget到没有错，可是在我们的机器上是不能直接访问的，这种文件名在win下也不能使用。unix对它支持，可是在apache或别的web server上不能正常访问。<br/>
+    如访问 <a href="http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525,%E6%88%91%E4%BB%AC%E7%9A%84web">http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525,我们的web</a> server会认为请求showfom.jsp文件，?后面是参数，所以造成我们不能直接访问。<br/>
+    说了这么半天，这才说到我要说的，就是我们如何处理这种情况。(唉，悲哀)<br/>
+三、转换<br/>
+    经过对测试，发现可以通过把?转换成@后，webserver可以正常访问。<br/>
+    即<a href="http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525%E6%94%B9%E6%88%90http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp@i=1525">http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525改成http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp@i=1525</a><br/>
+    明白了这个，我们就可以编写两个脚本来实现。<br/>
+1.批量改文件名<br/>
+$cat &gt;/var/tmp/s.sh</p>
+
+<h1 id="toc_2">!/bin/sh</h1>
+
+<p>FILES=<code>ls</code><br/><br/>
+for i in \(FILES ; do  <br/>
+  j=`echo \)i | sed &quot;s/?/@/&quot;`<br/><br/>
+  mv \(i \)j<br/><br/>
+done  </p>
+
+<p>2.替换掉文件内容中的提示<br/>
+$cat &gt;/var/tmp/s1.sh</p>
+
+<h1 id="toc_3">!/bin/sh</h1>
+
+<p>cat \(1 |sed s/.jsp?/.jsp@/ &gt;1.bak<br/>
+mv 1.bak \)1</p>
+
+<p>这两个脚本主要是利用sed的替换功能<br/>
+sed s/.jsp?/.jsp@/<br/>
+    |   |     |__欲改成的信息<br/>
+    |   |__须换掉的信息<br/>
+    |__发现并替换</p>
+
+<p>如果是cgi?换成cgi@,asp?换成asp@,php?换成php@,具体看情况而变。</p>
+
+<h1 id="toc_4">cd /www/mirror/solution/</h1>
+
+<p>先把文件名改过来</p>
+
+<h1 id="toc_5">/var/tmp/s.sh</h1>
+
+<p>mv: <code>historylist.jsp&#39; and</code>historylist.jsp&#39; are the same file<br/>
+mv: <code>index.html&#39; and</code>index.html&#39; are the same file</p>
+
+<p>hehe,这就是不用改名的文件，我们通过分析文件，了解通过这两个文件调用才能显示文章</p>
+
+<p>把index.htm或个别文件的内容作过滤</p>
+
+<h1 id="toc_6">/var/tmp/s1.sh index.html</h1>
+
+<h1 id="toc_7">/var/tmp/s1.sh historylist.jsp</h1>
+
+<p>过滤完后，我们现在输入<a href="http://192.168.0.1/mirror/www.mysite.com/solution/,%E7%84%B6%E5%90%8E%E7%9C%8B%E7%9C%8B%EF%BC%8C%E6%98%AF%E4%B8%8D%E6%98%AF%E5%87%BA%E6%9D%A5%E4%BA%86,%E5%86%8D%E7%82%B9links%EF%BC%8C%E9%83%BD%E6%AD%A3%E5%B8%B8%E8%AE%BF%E9%97%AE%E4%BA%86,Ok">http://192.168.0.1/mirror/www.mysite.com/solution/,然后看看，是不是出来了,再点links，都正常访问了,Ok</a>.<br/>
+在此先谢谢eist,e4gle的帮助。<br/>
+注：此文很乱，可取的就只一点：就是把?替换成@,让web server能正常识别。hehe,大家不要笑我哟。<br/>
+如有不足，请指教；如有兴趣，快来交流。</p>
+
+
+    
+
+      </div>
+
+      <div class="row">
+        <div class="large-6 columns">
+        <p class="text-left" style="padding:15px 0px;">
+      
+          <a href="14701463847714.html" 
+          title="Previous Post: Mac 上使用自动发布到 github pages">&laquo; Mac 上使用自动发布到 github pages</a>
+      
+        </p>
+        </div>
+        <div class="large-6 columns">
+      <p class="text-right" style="padding:15px 0px;">
+      
+          <a  href="14701463848112.html" 
+          title="Next Post: icloud 邮件设置">icloud 邮件设置 &raquo;</a>
+      
+      </p>
+        </div>
+      </div>
+      <div class="comments-wrap">
+        <div class="share-comments">
+          
+
+          
+
+          
+        </div>
+      </div>
+    </div><!-- article-wrap -->
+  </div><!-- large 8 -->
+
+
+
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1>宝宝的家</h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+
+
+
+
+
+
+
+
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="14795779318609.html">an最终测试</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14701463847078.html">test 2</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14701463847399.html">使用 My Chrome 订制自己的浏览器</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14701463847780.html">Kodi(XBMC)视频播放软件</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14701463847239.html">在 Vultr上安装 Arch linux</a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    <script src="asset/chart/all-min.js"></script><script type="text/javascript">$(function(){    var mwebii=0;    var mwebChartEleId = 'mweb-chart-ele-';    $('pre>code').each(function(){        mwebii++;        var eleiid = mwebChartEleId+mwebii;        if($(this).hasClass('language-sequence')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = Diagram.parse($(this).text());            diagram.drawSVG(eleiid,{theme: 'simple'});        }else if($(this).hasClass('language-flow')){            var ele = $(this).addClass('nohighlight').parent();            $('<div id="'+eleiid+'"></div>').insertAfter(ele);            ele.hide();            var diagram = flowchart.parse($(this).text());            diagram.drawSVG(eleiid);        }    });});</script>
+
+
+
+  </body>
+</html>
