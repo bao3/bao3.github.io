@@ -122,6 +122,41 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2017-04-01T21:28:20+08:00" itemprop="datePublished">2017/4/1</time>
+			</div>
+			
+			 
+			
+		</div>
+		<h1 class="title" itemprop="name"><a href="14910533008368.html" itemprop="url">
+		养成使用 Mac Brew 安装软件</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>这是很奇怪的一种感觉，虽然我们可以在各官网下载软件，但是非常麻烦，于是就有了一个简单的工具，只要用命令行就可以完成需要的软件安装，当然是大多数软件，毕竟这也是需要志愿者来维护的</p>
+
+<h1 id="toc_0">首先你要安装好 Brew</h1>
+
+<p><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code></p>
+
+<p>然后如我这样，安装所需要的软件，你可以使用 <code>brew search</code> 先查找软件。<br/>
+<code><br/>
+brew install mac-vim git youtube-dl you-get &amp;&amp;\<br/>
+brew cask install resilio-sync cleanmymac \<br/>
+    dropbox aria2gui surge google-chrome \<br/>
+    iterm2 bartender alfred vmware-fusion istat-menus \<br/>
+    keka  ifunbox airflow fswatch<br/>
+</code></p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2016-08-02T21:59:44+08:00" itemprop="datePublished">2016/8/2</time>
 			</div>
 			
@@ -934,79 +969,6 @@ bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
 <p>至此，已经全部完成，每次对你的 blog 有任何更改，全都会自动更新到 github 上，非常方便。</p>
 
 <p><mark>请你一定注意，在 MyWeb 里设置备份哟</mark></p>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2016-08-02T21:59:44+08:00" itemprop="datePublished">2016/8/2</time>
-			</div>
-			
-			 
-			
-		</div>
-		<h1 class="title" itemprop="name"><a href="14701463847780.html" itemprop="url">
-		Kodi(XBMC)视频播放软件</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<p>Kodi 是视频播放软件, 很好支持流媒体播放, 据说是看电影,美剧,在线播放的神器. Kodi可以用于播放本地的视频/音乐文件, 也可以通过插件实现在线观看或音乐收听, 甚至支持字幕哦! 主要强大的功能主要通过插件实现, 支持图片, 视频 (TV流, 电影, 电视剧), 音乐 程序, 字幕等插件. 最最关键的肯定是视频插件了. 插件这里叫Add-ons, 相关收录插件主要放在库Repository中, 而Repository可以通过zip文件加载, 也可以通过网上的源source来自动下载和更新. 当然选择Source网上加载比zip文件靠谱啦.<br/>
-设置中文界面：<br/>
-主界面—&gt;点击Settings-&gt;点击 Appearance-&gt; 左侧的 SKIN，然后选右边的 FONTS为 Arial based，注意本步骤应先操作，否则下一步选中文后就会变成不能识别的乱码!!!<br/>
-点击左侧的International -&gt; 然后选右边的 Language 为 Chinese (Simple) 、 Character set为 Chinese Simplified（GBK)<br/>
-添加源和库<br/>
-添加网上的源: 主界面-&gt; System -&gt; File Manager -&gt; 左下的Add Source -&gt; None双击, 开始输入相应网址, 并添加一个名字用于识别该源(随意起). 完成后可以双击点进去看看是不是像文件夹一样里面含有文件夹或者zip文件一类.<br/>
-添加库: 主界面 -&gt; System -&gt; Add-ons -&gt; Install from zip file (没有见到就后退(mac的delete或者Win的&lt;-退回键), 推到见到这个) -&gt; 选择源 (本地放zip源的文件夹或者网上源的源名) -&gt; 找到相应的zip文件.<br/>
-可以参考Genesis的库图文安装教程2. 更多库和源的安装(不停update)的可参考一个好博客3.<br/>
-会设置源和加载库后, 就可以安装各种插件实现Kodi的强大功能了~~~<br/>
-TVMC<br/>
-Kodi一个预安装插件版, 非纯净版. 下载: <a href="http://www.tvaddons.ag/">http://www.tvaddons.ag/</a>. 主要借用了fusion installer来方便安装插件. 可以在一般的Kodi中手动安装(源<a href="http://fusion.tvaddons.ag,%E5%8F%AF%E5%90%8D%E4%B8%BAfusion">http://fusion.tvaddons.ag,可名为fusion</a>), 用远程zip文件安装, 在start-here中可以找到Config Wizard, Addon Installer and Fresh Start三个插件,第一个是TVMC运行主要自动注册插件, 第二个是自行安装插件, 第三个是恢复Kodi. 理论上用第一个Config Wizard安装就可以完成Kodi-&gt;TVMC的过程, 但是在Mac上安装报错.Window版精测也挂了(14.2版的TVMC). 基本上TVMC难以安装使用. 还是要靠手动安装.<br/>
-常用源及插件<br/>
-安装插件可以在在视频里选插件, more… 去添加. 也可以在System-&gt; Add-ons里面, 选择用库安装, 选择相应库再找. 一个安装很多插件的方法的视频(可能会过时)<br/>
-TVAddons fusion</p>
-
-<p>源<a href="http://fusion.tvaddons.ag">http://fusion.tvaddons.ag</a>: TVAddons的主要源(也就是TVMC的主要源), 主要库zip在 xbmc-repos 内. 常见安装上面提及的Addon Installer. 貌似不太好使.<br/>
-SuperRepo</p>
-
-<p>源<a href="http://srp.nu">http://srp.nu</a>, 可命名SuperRepo -&gt; 新加插件, 选zip方式再选源super-&gt;选helix-&gt;all-&gt;选repository.superrepo.helix.all-latest.zip. 这样, 号称最大的库源就加载了, 啥都有, 中文的库都有…建议最好再安装这个库…因为东西太多太杂了,貌似先安装的会影响后面的库出现插件?<br/>
-建议安装1Channel, Genesis, Icefilms, Phoenix, Navi-X, Cartoon HD 和Cartoon HD extra等<br/>
-MetalKettle</p>
-
-<p>源<a href="http://kodi.metalkettle.co">http://kodi.metalkettle.co</a>. 内含著名的 Genesis 插件, 该插件有极其丰富的电影资源! 该插件按理也可以在Addon Installer中安装.<br/>
-也可以手动安装, 图文安装参考2. 简而言之, 就是文件管理-&gt; 添加源-&gt;输入<a href="http://kodi.metalkettle.co,%E8%B5%B7%E5%90%8D%E4%BE%8B%E5%A6%82MK">http://kodi.metalkettle.co,起名例如MK</a> Repo,随后在添加插件-&gt;Install from zip file-&gt;选MK Repo后-&gt;选1…Recommended Repositories-&gt;选repository.lambda-x.x.x.zip-&gt;然后Install from repository中选刚才加的lambda-&gt; 选Video Add-ons-&gt;Genesis完成添加.<br/>
-iwillfolo/iwf (SportDevil)</p>
-
-<p>源<a href="http://iwillfolo.com/iwf/">http://iwillfolo.com/iwf/</a>, 一个看体育直播不错的源, 找到同名的库安装即可. 内有著名的 SportDevil 插件, 视频教程参看. 还有使用本地zip安装的例子4. 除此以外还有Genesis, Navi-X等.<br/>
-Xunitytalk</p>
-
-<p>源<a href="http://xunitytalk.com/xfinity/">http://xunitytalk.com/xfinity/</a>, 可以添加其iSteam和XunityTalk. XunityTalk有如Cartoon HD 和Cartoon HD extra, Pak Hind, Pak India Live, Film on, Robinhood-people list, Vdubt25, World TV XunityTalk等.<br/>
-noobsandnerds</p>
-
-<p>源<a href="http://noobsandnerds.com/portal%E5%8E%9F%E5%90%8D%E4%B8%BAtotalxbmc">http://noobsandnerds.com/portal原名为totalxbmc</a> (原源 <a href="http://i.totalxbmc.tv/">http://i.totalxbmc.tv/</a>).<br/>
-本地视频资源<br/>
-这个本来貌似没啥特别的, 在图片/视频/音乐中进去后第一个菜单选照片/文件/Music, 或者对应本地位置(可选最后一个 添加照片/视频/音乐 -&gt; 浏览 来添加本地目录) 来加载自己的媒体文件. 选择后就能添加本地源进行播放了, 很方便. 在选择视频添加本地源时, 会进入内容设置界面, 这里可以设置刮削器(从网上自动抓信息, 可以参考刮削器5 ). 自己尝试吧~<br/>
-国内相关论坛: 原动力社区, 高清范论坛<br/>
-Kodi Wiki ↩<br/>
-Tutorial How to Install Genesis Kodi XBMC ↩ ↩2<br/>
-Seo-Michael博客 ↩<br/>
-SportDevil Install ↩<br/>
-利用刮削器加载媒体库 ↩</p>
-
-<p>◆本文地址: <a href="http://platinhom.github.io2015/12/04/Kodi(XBMC)%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E8%BD%AF%E4%BB%B6">http://platinhom.github.io2015/12/04/Kodi(XBMC)视频播放软件</a>, 转载请注明◆<br/>
-前一篇:　Sublime:Anaconda<br/>
-后一篇:　Python:文件编码问题</p>
-
-<p>Contact: Hom / 2015-12-04 17:50:39 已阅读(436)<br/>
-类别: IT  标签: Software </p>
-
-<p>本站总访问量23034次, 访客数4756人.    |   Give your Comments: 留言   |   Last updated: 2016-02-09 03:47:22 CST<br/>
-Powered by Jekyll | License: (CC) BY-NC-SA   |   Copyright 2008 - 2016 by Hom -- Contact me in Weibo<br/>
-GoTop</p>
 
 
 			

@@ -4,7 +4,7 @@
   <title><![CDATA[黑洞]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2017-04-01T21:19:17+08:00</updated>
+  <updated>2017-04-01T21:25:13+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://www.coderforart.com/">CoderForArt</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[养成使用 Mac Brew 安装软件]]></title>
+    <link href="bao3.org/14910533008368.html"/>
+    <updated>2017-04-01T21:28:20+08:00</updated>
+    <id>bao3.org/14910533008368.html</id>
+    <content type="html"><![CDATA[
+<p>这是很奇怪的一种感觉，虽然我们可以在各官网下载软件，但是非常麻烦，于是就有了一个简单的工具，只要用命令行就可以完成需要的软件安装，当然是大多数软件，毕竟这也是需要志愿者来维护的</p>
+
+<h1 id="toc_0">首先你要安装好 Brew</h1>
+
+<p><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code></p>
+
+<p>然后如我这样，安装所需要的软件，你可以使用 <code>brew search</code> 先查找软件。<br/>
+<code><br/>
+brew install mac-vim git youtube-dl you-get &amp;&amp;\<br/>
+brew cask install resilio-sync cleanmymac \<br/>
+    dropbox aria2gui surge google-chrome \<br/>
+    iterm2 bartender alfred vmware-fusion istat-menus \<br/>
+    keka  ifunbox airflow fswatch<br/>
+</code></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[在 Vultr上安装 Arch linux]]></title>
