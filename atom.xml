@@ -4,7 +4,7 @@
   <title><![CDATA[黑洞]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2017-04-02T02:04:37+08:00</updated>
+  <updated>2017-04-02T02:06:52+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -14,11 +14,13 @@
 
   
   <entry>
-    <title type="html"><![CDATA[VPS 过程]]></title>
+    <title type="html"><![CDATA[打造多用户 Shadowsocks$ VPS 过程]]></title>
     <link href="bao3.org/14910699523430.html"/>
     <updated>2017-04-02T02:05:52+08:00</updated>
     <id>bao3.org/14910699523430.html</id>
     <content type="html"><![CDATA[
+<p>这是我自己的安装过程，非常方便</p>
+
 <h1 id="toc_0">安装 Docker</h1>
 
 <p>参考<a href="https://docs.docker.com/engine/installation/#docker-variants">这里的文章</a>  进行 Docker 安装，我使用的是 <strong>Ubuntu</strong> 所以要看这里<a href="https://docs.docker.com/engine/installation/linux/ubuntu/"> Docker for Ubuntu</a>，请务必注意自己的系统版本:</p>
