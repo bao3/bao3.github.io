@@ -120,7 +120,8 @@
 	<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 		<h1 class="title" itemprop="name">打造多用户 ShadowsocksR VPS 过程</h1>
 		<div class="entry-content" itemprop="articleBody">
-			<p>这是我自己的安装过程，非常方便，核心功能 lnmp 和 resilio sync 使用 docker 实现，省太多事了。</p>
+			<p>这是我自己的安装过程，非常方便，核心功能 lnmp 和 resilio sync 使用 docker 实现，省太多事了。<br/>
+主要功能是：建立一个网页客户界面，方便管理 SSR 参数；shadowsocksR 读取每一个用户独立的 SSR 参数并启动；数据库默认只能被本机使用；</p>
 
 <h1 id="toc_0">安装 Docker</h1>
 
@@ -166,12 +167,14 @@ sudo docker run -d --name Sync  \
 <pre><code>cd ~ \
     &amp;&amp; git clone https://github.com/bao3/mini_lnmp.git \
     &amp;&amp; cd mini_lnmp
-docker run -d --restart=always -v ~/mini_lnmp:/mnt  \
+</code></pre>
+
+<p>接下来就是模仿 <strong>~/mini_lnmp/nginx_conf/default.conf</strong> 写自己的网站配置，然后把自己的网站数据库放在 <strong>~/mini_lnmp/sql</strong> ，把自己的网站证书放在 <strong>ssl</strong> 下面，将网站目录放在 <strong>webroot</strong> 。启动我们的网页服务器，记住 <code>sql</code> 里的数据库文件在第一次启动时，是自动导入，省心太多了，是不是？</p>
+
+<pre><code>docker run -d --restart=always -v ~/mini_lnmp:/mnt  \
         -p 127.0.0.1:1222:22 -p 80:80 -p 443:443   \
         -p 127.0.0.1:3306:3306 --name lnmp bao3/mini_lnmp
 </code></pre>
-
-<p>接下来就是模仿 <strong>~/mini_lnmp/nginx_conf/default.conf</strong> 写自己的网站配置，然后把自己的网站数据库放在 <strong>~/mini_lnmp/sql</strong> ，把自己的网站证书放在 <strong>ssl</strong> 下面，将网站目录放在 <strong>webroot</strong> 。然后 <code>docker restart lnmp</code> 就好了.</p>
 
 <h1 id="toc_3">安装多用户版 shadowsocksr</h1>
 
