@@ -122,6 +122,117 @@
 	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
 		<div class="meta">
 			<div class="date">
+				<time datetime="2017-04-02T02:05:52+08:00" itemprop="datePublished">2017/4/2</time>
+			</div>
+			
+			 
+			
+		</div>
+		<h1 class="title" itemprop="name"><a href="14910699523430.html" itemprop="url">
+		VPS 过程</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<h1 id="toc_0">安装 Docker</h1>
+
+<p>参考<a href="https://docs.docker.com/engine/installation/#docker-variants">这里的文章</a>  进行 Docker 安装，我使用的是 <strong>Ubuntu</strong> 所以要看这里<a href="https://docs.docker.com/engine/installation/linux/ubuntu/"> Docker for Ubuntu</a>，请务必注意自己的系统版本:</p>
+
+<pre><code>sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
+   &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable&quot;
+sudo apt-get update -y &amp;&amp; sudo apt-get install docker-ce -y 
+
+   
+</code></pre>
+
+<h1 id="toc_1">安装 Resilio Sync</h1>
+
+<p>这是因为我偶尔有时候需要 VPS 跟我的笔记本同步一些数据，你不使用 Btsync 的话，就可以不安装，请跳过。  </p>
+
+<pre><code>DATA_FOLDER=~/sync
+WEBUI_PORT=8888
+mkdir -p  $DATA_FOLDER/folders  
+sudo docker run -d --name Sync  \
+     -p 127.0.0.1:$WEBUI_PORT:8888 -p 55555 \
+     -v $DATA_FOLDER:/mnt/sync \
+     --restart=on-failure resilio/sync
+</code></pre>
+
+<p>然后在你自己的电脑上使用 :<br/>
+<code>ssh -N -L 9888:127.0.0.1:8888 username@your.vps.ip.or.domain</code><br/>
+打开你的浏览器，网址输入 <strong>127.0.0.1:9888</strong> 就可以配置 Btsync 同步，从些之后你要跟你的 VPS 之间传输什么文件或者要做备份，就方便多了。</p>
+
+<h1 id="toc_2">安装 lnmp</h1>
+
+<p>如果你要制作基于数据库的 shadowsocks 多用户使用，这一步建议你还是要进行的，这一步将会为你直接配置好数据库、web、php ，简单省事。</p>
+
+<pre><code>cd ~ \
+    &amp;&amp; git clone https://github.com/bao3/mini_lnmp.git \
+    &amp;&amp; cd mini_lnmp
+docker run -d --restart=always -v ~/mini_lnmp:/mnt  \
+        -p 127.0.0.1:1222:22 -p 80:80 -p 443:443   \
+        -p 127.0.0.1:3306:3306 --name lnmp bao3/mini_lnmp
+</code></pre>
+
+<p>接下来就是模仿 <strong>~/mini_lnmp/nginx_conf/default.conf</strong> 写自己的网站配置，然后把自己的网站数据库放在 <strong>~/mini_lnmp/sql</strong> ，把自己的网站证书放在 <strong>ssl</strong> 下面，将网站目录放在 <strong>webroot</strong> 。然后 <code>docker restart lnmp</code> 就好了.</p>
+
+<h1 id="toc_3">安装多用户版 shadowsocksr</h1>
+
+<p>十分建议你将 ss 服务端换成 shadowsocksR，也就是 SSR，主要是这个客户端既可以兼容旧的 SS 又支持新的混淆，非常的方便和安全，而且围绕它的周边软件非常多。</p>
+
+<pre><code>cd ~ \
+    &amp;&amp; git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git \
+    &amp;&amp; cd shadowsocksr \
+    &amp;&amp; bash initcfg.sh \
+    &amp;&amp; sed -i &quot;s/API_INTERFACE =.*$/API_INTERFACE = &#39;sspanelv3ssr&#39; /&quot; userapiconfig.py \
+    &amp;&amp; sed -i &#39;s/&quot;host&quot;:.*/&quot;host&quot;: &quot;10.146.0.2&quot; ,/&#39; usermysql.json \
+    &amp;&amp; sed -i &#39;s/&quot;user&quot;:.*/&quot;user&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json \
+    &amp;&amp; sed -i &#39;s/&quot;password&quot;:.*/&quot;password&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json \
+    &amp;&amp; sed -i &#39;s/&quot;db&quot;:.*/&quot;db&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json
+</code></pre>
+
+<p>然后修改 <code>userapiconfig.py</code> <code>usermysql.json</code> <code>user-config.json</code>等等，这个就属于 SSR 的配置问题咯。<br/>
+<strong>但是</strong> 请确保你的系统安装了 <code>python</code>,<code>pip</code>,<code>setuptools</code>,然后还要安装 <code>pip install cymysql</code> 用以让 shadowsocksR 使用数据库方式来连接</p>
+
+<pre><code>sudo apt install python-pip -y
+export LC_ALL=C
+pip install cymysql
+</code></pre>
+
+<p><code>python server.py</code> 看看能不能运行，OK 的话，就可以使用 supervisord 来保持后台了。</p>
+
+<h1 id="toc_4">安装 Supervisor 保持后台运行</h1>
+
+<pre><code>sudo apt install supervisor -y \
+sudo vim /etc/supervisor/supervisord.conf   
+</code></pre>
+
+<p>在最后一行，加入：</p>
+
+<pre><code>  [program:ssr]
+  command=/usr/bin/python /home/bao3/shadowsocksr/server.py
+  user=bao3
+</code></pre>
+
+<p># 完工</p>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
 				<time datetime="2017-04-01T21:28:20+08:00" itemprop="datePublished">2017/4/1</time>
 			</div>
 			
@@ -138,14 +249,14 @@
 
 <p><code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code></p>
 
-<p>然后如我这样，安装所需要的软件，你可以使用 <code>brew search</code> 先查找软件。<br/>
-<code><br/>
-brew install mac-vim git youtube-dl you-get &amp;&amp;\<br/>
-brew cask install resilio-sync cleanmymac \<br/>
-    dropbox aria2gui surge google-chrome \<br/>
-    iterm2 bartender alfred vmware-fusion istat-menus \<br/>
-    keka  ifunbox airflow fswatch veracrypt omnidisksweeper<br/>
-</code></p>
+<p>然后如我这样，安装所需要的软件，你可以使用 <code>brew search</code> 先查找软件。</p>
+
+<pre><code>brew install mac-vim git youtube-dl you-get &amp;&amp;\
+brew cask install resilio-sync cleanmymac \
+    dropbox aria2gui surge google-chrome \
+    iterm2 bartender alfred vmware-fusion istat-menus \
+    keka  ifunbox airflow fswatch veracrypt omnidisksweeper
+</code></pre>
 
 
 			
@@ -860,115 +971,6 @@ BY THE WAY，我最喜欢这一卦的男主角了，表达喜欢的方式就是�
 <p>大奶菌<br/>
 今天 14:56<br/>
 @机智的莽子 推荐你哦，不用谢</p>
-
-
-			
-			
-		</div>
-
-	</article>
- 
-	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-		<div class="meta">
-			<div class="date">
-				<time datetime="2016-08-02T21:59:44+08:00" itemprop="datePublished">2016/8/2</time>
-			</div>
-			
-			 
-			
-		</div>
-		<h1 class="title" itemprop="name"><a href="14701463847714.html" itemprop="url">
-		Mac 上使用自动发布到 github pages</a></h1>
-		<div class="entry-content" itemprop="articleBody">
-			
-			<blockquote>
-<p>理论上你有什么需要实时提交的 git repo 都可以使用这个方法，但为了节约，你需要设置 fswatch 的间隔时间<br/>
-虽然我下面使用进行的时候使用的是 MyWeb ，其实你也可以换成其他的 Markdown 工具，效果应该差不多，只是 MyWeb 实在是方便。</p>
-</blockquote>
-
-<p>　　敝人乃懒人一枚，很久前购买了 <mark>myweb</mark> ，用来记点纯文本的笔记，偶尔发个 blog 到 <strong>github pages (github.io)</strong>。但是 myweb 是个 GUI 工具，发布到 github要换到 iTerm里自己输入命令 git add  &amp;&amp; git commit ，非常的麻烦，所以就又一次偷懒写了一个烂脚本，原则上适合用于所有的 app 自动发布到 GitHub。</p>
-
-<h2 id="toc_0">首先， 确认你要发布的目录</h2>
-
-<p>　　我的 mweb 发布到 Github 的文件夹是 blog，如下图所示：<br/>
-<img src="media/14550024568971/14550028748116.jpg" alt="" style="width:314px;"/></p>
-
-<p>　　先在 blog 这个目录上右击生成网站，然后再点如下图所示，找到生成网站的位置：<br/>
-　　<img src="media/14550024568971/14613161793220.jpg" alt="w:100" style="width:297px;"/></p>
-
-<p>　<br/>
-　　然后生成的网站目录在 <code>/Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/</code>，所以我的目标就是每次文件有变化时，就自动将文章发布到 github ，记住，重点是 “有变化时” 实时更新。</p>
-
-<h2 id="toc_1">其次,安装自动发布工具</h2>
-
-<p>　　我们需要用到 <mark><strong>fswatch</strong></mark> 这个命令，这需要使用<code>brew install fswatch</code></p>
-
-<p>　　可选的一个 Shell 命令是 <code>Proxychains4-ng</code>，这个东西的主要用途是为 git 命令添加代理，以防止网络质量不佳。要使用这个命令就需要有一个 Socks 代理，如果你没有，就不要安装了，而我自己有一个<code>shadowsocks-libev</code> ，所以非常方便。</p>
-
-<h2 id="toc_2">脚本主体</h2>
-
-<p>　　我不是个程序员，所以写出来的脚本有点“脏”，好在还能用，自己动手丰衣足食嘛；然后开始写我们的脚本吧：<br/>
-找一个目录存放这个脚本，比如自己的 &quot;/Users/`whoami`/ &quot;下面，文件名字叫 gitblog.command ，重点是一定要是 *.command 这种结尾，后面有重要用途。</p>
-
-<pre><code>
-#!/bin/bash
-#$wdir is where your github blog dir
-wdir=/Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/
-export cmd=/usr/bin/git
-
-#locate the &#39;fswatch&#39; command ,you should install it via &quot;brew install fswatch&quot;
-export fsdog=`which fswatch`
-export proxy=`which proxychains4`
-args=&quot;-0 -a $wdir/atom.xml&quot;
-function gitpush() {
-    $cmd add . ;
-    reslut=$($cmd commit -a -m &quot;`date`&quot; | grep nothing)
-
-    #when get $result length == zero ,means that there is new modified blog ,just git push  in next!
-    if [ -z `$reslut` ] ; then
-
-        #Note : proxychains4 is a proxy tools which would let &quot;git &quot; use your proxy ( shadowsocks e.g.),just brew install it OR it would skip auto.
-        `$proxy -q  $cmd push -q` || `$cmd push -q`
-    fi;
-    return 0;
-    }
-cd $wdir;
-#gitpush ;
-export -f gitpush;
-$fsdog $args | xargs -0 -n1 bash -c &#39;gitpush&#39; &amp;
-
-exit
-
-</code></pre>
-
-<h3 id="toc_3">这段脚本实现的功能如下：</h3>
-
-<ol>
-<li>使用 <code>fswatch</code> <em>实时</em> 检测 myweb 的 blog 目录</li>
-<li>一旦发现有新的博客文章，则会自动提交，并添加当时的时间为标记</li>
-<li>提交时会优先使用 <code>Proxychains4</code> 通过代理提交，如果没安装则自动使用 Git push 提交</li>
-<li>只有变化的文章才会提交，所以非常省流量</li>
-<li>每次你写完博客，只需要在 Myweb 里点 下面的菜单 <br>
-<img src="media/14550024568971/14550119677927.jpg" alt=""/></li>
-</ol>
-
-<h2 id="toc_4">开机启动</h2>
-
-<p>在做这一步前，请先双击刚刚生成的 gitblog.command ，应该可以启动一个黑窗口然后又消失了。<br/>
-接着，你打开 Terminal 输入下面的命令</p>
-
-<p>$ ps waux | grep git | grep -v grep<br/>
-bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
-
-<p>这表示成功启动了。但如果没有，则表示你没有配置成功，多半是里面有什么特殊符号少了半边或者路径错了什么的，需要你自己调试了。</p>
-
-<p>接下来就是在“系统偏好设置”里的“用户和群组”，加上 gitblog.command 的开机登录选项。</p>
-
-<p><img src="media/14550024568971/14613159401465.jpg" alt=""/></p>
-
-<p>至此，已经全部完成，每次对你的 blog 有任何更改，全都会自动更新到 github 上，非常方便。</p>
-
-<p><mark>请你一定注意，在 MyWeb 里设置备份哟</mark></p>
 
 
 			

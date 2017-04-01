@@ -128,6 +128,66 @@
 			 
 			
 		</div>
+		<h1 class="title" itemprop="name"><a href="14701463848256.html" itemprop="url">
+		自己折腾 FreeNAS@ThinkPad x201i 的记录</a></h1>
+		<div class="entry-content" itemprop="articleBody">
+			
+			<p>这些记录没有任何意义，请忽略</p>
+
+<pre><code class="language-Bash">cp -Rp acpi_ibm* /boot/kernel/
+cp -RP acpi_video.ko* /boot/kernel/
+cp -Rp iwn1000fw.ko* /boot/kernel/
+cp -Rp if_iwn.ko* /boot/kernel/
+cp -Rp wlan* /boot/kernel/
+cp -Rp fuse.ko* /boot/kernel/
+sed -i &quot;.bak&quot; &#39;s/yes/no/g&#39; /usr/local/etc/pkg/repos/local.conf
+sed -i &quot;.bak&quot; &#39;s/no/yes/g&#39; /usr/local/etc/pkg/repos/FreeBSD.conf
+
+pkg update
+pkg install vim-lite proxychains-ng shadowsocks-libev aria2
+
+vi /boot/loader.conf
+
+#######
+acpi_ibm_load=&quot;YES&quot;
+acpi_video_load=&quot;YES&quot;
+if_iwn_load=&quot;YES&quot;
+iwn1000fw_load=&quot;YES&quot;
+snd_ich_load=&quot;YES&quot;
+###########
+
+
+saver=&quot;green&quot; blanktime=&quot;300&quot; scrnmap=&quot;NO&quot;
+powerd_enable=&quot;YES&quot;
+powerd_flags=&quot;-i 80 -p 200 -b adaptive -a adaptive -n adaptive&quot;
+
+performance_cx_lowest=&quot;C3&quot;
+economy_cx_lowest=&quot;C3&quot;
+performance_cpu_freq=&quot;HIGH&quot;
+
+
+sysctl -a | grep cx_
+/etc/sysctl.conf
+hw.acpi.cpu.cx_lowest=C3
+
+</code></pre>
+
+
+			
+			
+		</div>
+
+	</article>
+ 
+	<article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+		<div class="meta">
+			<div class="date">
+				<time datetime="2016-08-02T21:59:44+08:00" itemprop="datePublished">2016/8/2</time>
+			</div>
+			
+			 
+			
+		</div>
 		<h1 class="title" itemprop="name"><a href="14701463848381.html" itemprop="url">
 		Mac 上使用 Syncthing 同步文档</a></h1>
 		<div class="entry-content" itemprop="articleBody">
