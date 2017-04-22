@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
+
   <title><![CDATA[黑洞]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2017-04-22T22:13:32+08:00</updated>
+  <updated>2017-04-22T22:14:32+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
+    
   </author>
-  <generator uri="http://www.coderforart.com/">CoderForArt</generator>
+  <generator uri="http://www.mweb.im/">MWeb</generator>
   
   <entry>
     <title type="html"><![CDATA[打造多用户 ShadowsocksR VPS 过程]]></title>
     <link href="bao3.org/14910699523430.html"/>
     <updated>2017-04-02T02:05:52+08:00</updated>
     <id>bao3.org/14910699523430.html</id>
-    <content type="html">
-<![CDATA[<p>这是我自己的安装过程，非常方便，核心功能 lnmp 和 resilio sync 使用 docker 实现，省太多事了。<br/>
+    <content type="html"><![CDATA[
+<p>这是我自己的安装过程，非常方便，核心功能 lnmp 和 resilio sync 使用 docker 实现，省太多事了。<br/>
 主要功能是：建立一个网页客户界面，方便管理 SSR 参数；shadowsocksR 读取每一个用户独立的 SSR 参数并启动；数据库默认只能被本机使用；</p>
 
 <h1 id="toc_0">安装 Docker</h1>
@@ -112,8 +114,8 @@ sudo vim /etc/supervisord.conf
 </code></pre>
 
 <h1 id="toc_5">完工</h1>
-]]>
-    </content>
+
+]]></content>
   </entry>
   
   <entry>
@@ -121,8 +123,8 @@ sudo vim /etc/supervisord.conf
     <link href="bao3.org/14910533008368.html"/>
     <updated>2017-04-01T21:28:20+08:00</updated>
     <id>bao3.org/14910533008368.html</id>
-    <content type="html">
-<![CDATA[<p>这是很奇怪的一种感觉，虽然我们可以在各官网下载软件，但是非常麻烦，于是就有了一个简单的工具，只要用命令行就可以完成需要的软件安装，当然是大多数软件，毕竟这也是需要志愿者来维护的</p>
+    <content type="html"><![CDATA[
+<p>这是很奇怪的一种感觉，虽然我们可以在各官网下载软件，但是非常麻烦，于是就有了一个简单的工具，只要用命令行就可以完成需要的软件安装，当然是大多数软件，毕竟这也是需要志愿者来维护的</p>
 
 <h1 id="toc_0">首先你要安装好 Brew</h1>
 
@@ -136,8 +138,8 @@ brew cask install resilio-sync cleanmymac \
     iterm2 bartender alfred vmware-fusion istat-menus \
     keka  ifunbox airflow fswatch veracrypt omnidisksweeper
 </code></pre>
-]]>
-    </content>
+
+]]></content>
   </entry>
   
   <entry>
@@ -145,8 +147,8 @@ brew cask install resilio-sync cleanmymac \
     <link href="bao3.org/14701463847239.html"/>
     <updated>2016-08-02T21:59:44+08:00</updated>
     <id>bao3.org/14701463847239.html</id>
-    <content type="html">
-<![CDATA[<h1 id="toc_0"><mark>广告时间</mark></h1>
+    <content type="html"><![CDATA[
+<h1 id="toc_0"><mark>广告时间</mark></h1>
 
 <p>在所有用过的 VPS服务商中，我一直信赖 <code>Vultr</code>，首先是日本线路质量比较可靠，其次价格平民，只要 5$/月（首次还送钱给你），最后就是最重要的，免费送你不限制的 Snapshot功能，让你克隆（备份）整机。</p>
 
@@ -449,8 +451,8 @@ ss | grep 4698    #查看有没有客户端成功连接
 <p>算了，想了想，还是不写配置了，好累。   </p>
 
 <p><mark>改天补齊</mark>         </p>
-]]>
-    </content>
+
+]]></content>
   </entry>
   
   <entry>
@@ -458,10 +460,10 @@ ss | grep 4698    #查看有没有客户端成功连接
     <link href="bao3.org/14701463847399.html"/>
     <updated>2016-08-02T21:59:44+08:00</updated>
     <id>bao3.org/14701463847399.html</id>
-    <content type="html">
-<![CDATA[<p>事情的起因，是因为一个友人常在紧要关头需要下载东西，不得不借助一些手段，但是平时里并没有好好帮她调教她的 PC，因此一时之间并没有最快捷的方法让她能傻瓜式使用翻墙墙手段下载。于是花了 1 个小时来研究打造一个客制化的浏览器，随用随开且关闭后就清除一切痕迹。这个 MyChrome就是这今天的主角</p>
-]]>
-    </content>
+    <content type="html"><![CDATA[
+<p>事情的起因，是因为一个友人常在紧要关头需要下载东西，不得不借助一些手段，但是平时里并没有好好帮她调教她的 PC，因此一时之间并没有最快捷的方法让她能傻瓜式使用翻墙墙手段下载。于是花了 1 个小时来研究打造一个客制化的浏览器，随用随开且关闭后就清除一切痕迹。这个 MyChrome就是这今天的主角</p>
+
+]]></content>
   </entry>
   
   <entry>
@@ -469,8 +471,8 @@ ss | grep 4698    #查看有没有客户端成功连接
     <link href="bao3.org/14701463847475.html"/>
     <updated>2016-08-02T21:59:44+08:00</updated>
     <id>bao3.org/14701463847475.html</id>
-    <content type="html">
-<![CDATA[<p>2015-10-21 21:14 无节操火哥<br/>
+    <content type="html"><![CDATA[
+<p>2015-10-21 21:14 无节操火哥<br/>
 阅读 118万+</p>
 
 <p>1、《媚者无疆》<br/>
@@ -817,8 +819,8 @@ BY THE WAY，我最喜欢这一卦的男主角了，表达喜欢的方式就是�
 <p>大奶菌<br/>
 今天 14:56<br/>
 @机智的莽子 推荐你哦，不用谢</p>
-]]>
-    </content>
+
+]]></content>
   </entry>
   
   <entry>
@@ -826,8 +828,8 @@ BY THE WAY，我最喜欢这一卦的男主角了，表达喜欢的方式就是�
     <link href="bao3.org/14701463847714.html"/>
     <updated>2016-08-02T21:59:44+08:00</updated>
     <id>bao3.org/14701463847714.html</id>
-    <content type="html">
-<![CDATA[<blockquote>
+    <content type="html"><![CDATA[
+<blockquote>
 <p>理论上你有什么需要实时提交的 git repo 都可以使用这个方法，但为了节约，你需要设置 fswatch 的间隔时间<br/>
 虽然我下面使用进行的时候使用的是 MyWeb ，其实你也可以换成其他的 Markdown 工具，效果应该差不多，只是 MyWeb 实在是方便。</p>
 </blockquote>
@@ -915,8 +917,8 @@ bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
 <p>至此，已经全部完成，每次对你的 blog 有任何更改，全都会自动更新到 github 上，非常方便。</p>
 
 <p><mark>请你一定注意，在 MyWeb 里设置备份哟</mark></p>
-]]>
-    </content>
+
+]]></content>
   </entry>
   
   <entry>
@@ -924,8 +926,8 @@ bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
     <link href="bao3.org/14701463847780.html"/>
     <updated>2016-08-02T21:59:44+08:00</updated>
     <id>bao3.org/14701463847780.html</id>
-    <content type="html">
-<![CDATA[<p>Kodi 是视频播放软件, 很好支持流媒体播放, 据说是看电影,美剧,在线播放的神器. Kodi可以用于播放本地的视频/音乐文件, 也可以通过插件实现在线观看或音乐收听, 甚至支持字幕哦! 主要强大的功能主要通过插件实现, 支持图片, 视频 (TV流, 电影, 电视剧), 音乐 程序, 字幕等插件. 最最关键的肯定是视频插件了. 插件这里叫Add-ons, 相关收录插件主要放在库Repository中, 而Repository可以通过zip文件加载, 也可以通过网上的源source来自动下载和更新. 当然选择Source网上加载比zip文件靠谱啦.<br/>
+    <content type="html"><![CDATA[
+<p>Kodi 是视频播放软件, 很好支持流媒体播放, 据说是看电影,美剧,在线播放的神器. Kodi可以用于播放本地的视频/音乐文件, 也可以通过插件实现在线观看或音乐收听, 甚至支持字幕哦! 主要强大的功能主要通过插件实现, 支持图片, 视频 (TV流, 电影, 电视剧), 音乐 程序, 字幕等插件. 最最关键的肯定是视频插件了. 插件这里叫Add-ons, 相关收录插件主要放在库Repository中, 而Repository可以通过zip文件加载, 也可以通过网上的源source来自动下载和更新. 当然选择Source网上加载比zip文件靠谱啦.<br/>
 设置中文界面：<br/>
 主界面—&gt;点击Settings-&gt;点击 Appearance-&gt; 左侧的 SKIN，然后选右边的 FONTS为 Arial based，注意本步骤应先操作，否则下一步选中文后就会变成不能识别的乱码!!!<br/>
 点击左侧的International -&gt; 然后选右边的 Language 为 Chinese (Simple) 、 Character set为 Chinese Simplified（GBK)<br/>
@@ -977,8 +979,8 @@ SportDevil Install ↩<br/>
 <p>本站总访问量23034次, 访客数4756人.    |   Give your Comments: 留言   |   Last updated: 2016-02-09 03:47:22 CST<br/>
 Powered by Jekyll | License: (CC) BY-NC-SA   |   Copyright 2008 - 2016 by Hom &ndash; Contact me in Weibo<br/>
 GoTop</p>
-]]>
-    </content>
+
+]]></content>
   </entry>
   
   <entry>
@@ -986,8 +988,8 @@ GoTop</p>
     <link href="bao3.org/14701463847961.html"/>
     <updated>2016-08-02T21:59:44+08:00</updated>
     <id>bao3.org/14701463847961.html</id>
-    <content type="html">
-<![CDATA[<pre><code>  By NetGuard Security Team --Chen Jun (chenjun@netguard.com.cn)
+    <content type="html"><![CDATA[
+<pre><code>  By NetGuard Security Team --Chen Jun (chenjun@netguard.com.cn)
 </code></pre>
 
 <p>日期：2001.08.02<br/>
@@ -1157,8 +1159,8 @@ mv: <code>index.html&#39; and</code>index.html&#39; are the same file</p>
 在此先谢谢eist,e4gle的帮助。<br/>
 注：此文很乱，可取的就只一点：就是把?替换成@,让web server能正常识别。hehe,大家不要笑我哟。<br/>
 如有不足，请指教；如有兴趣，快来交流。</p>
-]]>
-    </content>
+
+]]></content>
   </entry>
   
   <entry>
@@ -1166,8 +1168,8 @@ mv: <code>index.html&#39; and</code>index.html&#39; are the same file</p>
     <link href="bao3.org/14701463848112.html"/>
     <updated>2016-08-02T21:59:44+08:00</updated>
     <id>bao3.org/14701463848112.html</id>
-    <content type="html">
-<![CDATA[<p>适用于收件服务器的 IMAP 信息<br/>
+    <content type="html"><![CDATA[
+<p>适用于收件服务器的 IMAP 信息<br/>
 服务器名称：imap.mail.me.com<br/>
 是否需要 SSL：是<br/>
 如果您在使用 SSL 时看到错误信息，请尝试使用 TLS。<br/>
@@ -1182,8 +1184,8 @@ mv: <code>index.html&#39; and</code>index.html&#39; are the same file</p>
 是否需要 SMTP 鉴定：是<br/>
 用户名：您的完整 iCloud 电子邮件地址（例如，<a href="mailto:emilyparker@icloud.com">emilyparker@icloud.com</a>，而不是 emilyparker）<br/>
 密码：您的 iCloud 密码</p>
-]]>
-    </content>
+
+]]></content>
   </entry>
   
   <entry>
@@ -1191,15 +1193,15 @@ mv: <code>index.html&#39; and</code>index.html&#39; are the same file</p>
     <link href="bao3.org/14701463848186.html"/>
     <updated>2016-08-02T21:59:44+08:00</updated>
     <id>bao3.org/14701463848186.html</id>
-    <content type="html">
-<![CDATA[<pre><code class="language-Bash">brew tap caskroom/cask
+    <content type="html"><![CDATA[
+<pre><code class="language-Bash">brew tap caskroom/cask
 brew tap caskroom/versions
 brew install homebrew/fuse/bindfs
 brew install proxychains-ng shadowsocks-libv dnsmasq  android-platform-tools fswatch
 brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 macvim mpv  squirrel vmware-fusion flux enpass  omnidisksweeper java  karabiner diskmaker-x osxfuse
 </code></pre>
-]]>
-    </content>
+
+]]></content>
   </entry>
   
   <entry>
@@ -1207,8 +1209,8 @@ brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 m
     <link href="bao3.org/14701463848256.html"/>
     <updated>2016-08-02T21:59:44+08:00</updated>
     <id>bao3.org/14701463848256.html</id>
-    <content type="html">
-<![CDATA[<p>这些记录没有任何意义，请忽略</p>
+    <content type="html"><![CDATA[
+<p>这些记录没有任何意义，请忽略</p>
 
 <pre><code class="language-Bash">cp -Rp acpi_ibm* /boot/kernel/
 cp -RP acpi_video.ko* /boot/kernel/
@@ -1247,8 +1249,8 @@ sysctl -a | grep cx_
 hw.acpi.cpu.cx_lowest=C3
 
 </code></pre>
-]]>
-    </content>
+
+]]></content>
   </entry>
   
   <entry>
@@ -1256,8 +1258,8 @@ hw.acpi.cpu.cx_lowest=C3
     <link href="bao3.org/14701463848381.html"/>
     <updated>2016-08-02T21:59:44+08:00</updated>
     <id>bao3.org/14701463848381.html</id>
-    <content type="html">
-<![CDATA[<p>最早的时候个人同步我使用的是 BTsync ，但这家伙后来改版后有诸多不便，于是转投了我一直看好的另一个同步工具 &mdash;- Syncthing 。开源且多平台 （ iOS 上不行，不过 iOS 除了照片也没什么可以同步的了 ），我最喜欢的就是可以自建一个 relay 。详细使用上比较简单，我今天只记录一下我在 Mac 上的操作。</p>
+    <content type="html"><![CDATA[
+<p>最早的时候个人同步我使用的是 BTsync ，但这家伙后来改版后有诸多不便，于是转投了我一直看好的另一个同步工具 &mdash;- Syncthing 。开源且多平台 （ iOS 上不行，不过 iOS 除了照片也没什么可以同步的了 ），我最喜欢的就是可以自建一个 relay 。详细使用上比较简单，我今天只记录一下我在 Mac 上的操作。</p>
 
 <p>操作需要使用 iTerm 或者 Terminal 请自备。</p>
 
@@ -1309,8 +1311,8 @@ sed -n &#39;/local/p&#39; ./syncthing.plist
 </code></pre>
 
 <p>随后会打开网页，让你登录 <a href="http://127.0.0.1:8384">http://127.0.0.1:8384</a></p>
-]]>
-    </content>
+
+]]></content>
   </entry>
   
 </feed>
