@@ -1,63 +1,82 @@
-
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="atom.xml" rel="alternate" title="黑洞" type="application/atom+xml">
-    <title> 
-	  
-  	黑洞
-  	
-  	</title>
-    <link href="asset/css/bootstrap.min.css" rel="stylesheet">
-    <link href="asset/css/style.css" rel="stylesheet">
-    <script src="asset/js/jquery.min.js"></script>
-    <script src="asset/js/bootstrap.min.js"></script>
-    <script src="asset/js/docs.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  黑洞
+  
+  </title>
+ <meta name="description" content="">
+ <link href="atom.xml" rel="alternate" title="黑洞" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
     <script src="asset/highlightjs/highlight.pack.js"></script>
-	<link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
-	<script>hljs.initHighlightingOnLoad();</script>
-    <!--[if lt IE 9]>
-      <script src="asset/js/html5shiv.min.js"></script>
-    <![endif]-->
+    <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <script>hljs.initHighlightingOnLoad();</script>
+    
   </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
 
-  <body>
 
-    <div class="blog-masthead">
-      <div class="container">
-        <nav class="blog-nav">
-          <a class="blog-nav-item" id="menu-index" href="index.html">Home</a>
-          <a class="blog-nav-item" id="menu-help" href="help.html">Documentation</a>
-          <a class="blog-nav-item" id="menu-blog" href="all.html">Blog</a>
-          <a class="blog-nav-item" id="menu-about" href="about.html">About</a>
-          <a class="blog-nav-item" style="float:right;" href="http://zh.mweb.im">中文</a>
-        </nav>
-      </div>
-    </div>
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
 
-        <div class="container" id="content-wrap">
+<div id="header">
+    <h1><a href="index.html">黑洞</a></h1>
+</div>
 
-      <script type="text/javascript">
-      $(function(){
-      	$('#menu-blog').addClass('active');
-      });
-      </script>
-      <div class="row">
+</nav>
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 黑洞</span>
+  </a>
+</nav>
 
-        <div class="col-sm-8 blog-main">
-			
-					<div class="blog-post">
-			            <h2 class="blog-post-title">Mac 上使用自动发布到 github pages</h2>
-			            <p class="blog-post-meta">2016/8/2 
-				            
-							 
-							
-			            </p>
-			            <div class="content-responsive">
-			            <blockquote>
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+      <li><a href="index.html">Home</a></li>
+      
+
+      
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+        <section id="main-content" role="main" class="scroll-container">
+
+          <div class="row">
+            <div class="large-3 medium-3 columns">
+              <div class="hide-for-small">
+                <div class="sidebar">
+                <nav>
+                  <ul id="side-nav" class="side-nav">
+
+                    
+
+                    
+                  </ul>
+                </nav>
+                </div>
+              </div>
+            </div>
+            <div class="large-9 medium-9 columns">
+
+ 
+
+
+	
+		<div class="markdown-body">
+		<h1>Mac 上使用自动发布到 github pages</h1>
+
+		<blockquote>
 <p>理论上你有什么需要实时提交的 git repo 都可以使用这个方法，但为了节约，你需要设置 fswatch 的间隔时间<br/>
 虽然我下面使用进行的时候使用的是 MyWeb ，其实你也可以换成其他的 Markdown 工具，效果应该差不多，只是 MyWeb 实在是方便。</p>
 </blockquote>
@@ -147,444 +166,53 @@ bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
 <p><mark>请你一定注意，在 MyWeb 里设置备份哟</mark></p>
 
 
-
-						
-			           </div>
-			          </div><!-- /.blog-post -->
-			 
-					<div class="blog-post">
-			            <h2 class="blog-post-title">Kodi(XBMC)视频播放软件</h2>
-			            <p class="blog-post-meta">2016/8/2 
-				            
-							 
-							
-			            </p>
-			            <div class="content-responsive">
-			            <p>Kodi 是视频播放软件, 很好支持流媒体播放, 据说是看电影,美剧,在线播放的神器. Kodi可以用于播放本地的视频/音乐文件, 也可以通过插件实现在线观看或音乐收听, 甚至支持字幕哦! 主要强大的功能主要通过插件实现, 支持图片, 视频 (TV流, 电影, 电视剧), 音乐 程序, 字幕等插件. 最最关键的肯定是视频插件了. 插件这里叫Add-ons, 相关收录插件主要放在库Repository中, 而Repository可以通过zip文件加载, 也可以通过网上的源source来自动下载和更新. 当然选择Source网上加载比zip文件靠谱啦.<br/>
-设置中文界面：<br/>
-主界面—&gt;点击Settings-&gt;点击 Appearance-&gt; 左侧的 SKIN，然后选右边的 FONTS为 Arial based，注意本步骤应先操作，否则下一步选中文后就会变成不能识别的乱码!!!<br/>
-点击左侧的International -&gt; 然后选右边的 Language 为 Chinese (Simple) 、 Character set为 Chinese Simplified（GBK)<br/>
-添加源和库<br/>
-添加网上的源: 主界面-&gt; System -&gt; File Manager -&gt; 左下的Add Source -&gt; None双击, 开始输入相应网址, 并添加一个名字用于识别该源(随意起). 完成后可以双击点进去看看是不是像文件夹一样里面含有文件夹或者zip文件一类.<br/>
-添加库: 主界面 -&gt; System -&gt; Add-ons -&gt; Install from zip file (没有见到就后退(mac的delete或者Win的&lt;-退回键), 推到见到这个) -&gt; 选择源 (本地放zip源的文件夹或者网上源的源名) -&gt; 找到相应的zip文件.<br/>
-可以参考Genesis的库图文安装教程2. 更多库和源的安装(不停update)的可参考一个好博客3.<br/>
-会设置源和加载库后, 就可以安装各种插件实现Kodi的强大功能了~~~<br/>
-TVMC<br/>
-Kodi一个预安装插件版, 非纯净版. 下载: <a href="http://www.tvaddons.ag/">http://www.tvaddons.ag/</a>. 主要借用了fusion installer来方便安装插件. 可以在一般的Kodi中手动安装(源<a href="http://fusion.tvaddons.ag,%E5%8F%AF%E5%90%8D%E4%B8%BAfusion">http://fusion.tvaddons.ag,可名为fusion</a>), 用远程zip文件安装, 在start-here中可以找到Config Wizard, Addon Installer and Fresh Start三个插件,第一个是TVMC运行主要自动注册插件, 第二个是自行安装插件, 第三个是恢复Kodi. 理论上用第一个Config Wizard安装就可以完成Kodi-&gt;TVMC的过程, 但是在Mac上安装报错.Window版精测也挂了(14.2版的TVMC). 基本上TVMC难以安装使用. 还是要靠手动安装.<br/>
-常用源及插件<br/>
-安装插件可以在在视频里选插件, more… 去添加. 也可以在System-&gt; Add-ons里面, 选择用库安装, 选择相应库再找. 一个安装很多插件的方法的视频(可能会过时)<br/>
-TVAddons fusion</p>
-
-<p>源<a href="http://fusion.tvaddons.ag">http://fusion.tvaddons.ag</a>: TVAddons的主要源(也就是TVMC的主要源), 主要库zip在 xbmc-repos 内. 常见安装上面提及的Addon Installer. 貌似不太好使.<br/>
-SuperRepo</p>
-
-<p>源<a href="http://srp.nu">http://srp.nu</a>, 可命名SuperRepo -&gt; 新加插件, 选zip方式再选源super-&gt;选helix-&gt;all-&gt;选repository.superrepo.helix.all-latest.zip. 这样, 号称最大的库源就加载了, 啥都有, 中文的库都有…建议最好再安装这个库…因为东西太多太杂了,貌似先安装的会影响后面的库出现插件?<br/>
-建议安装1Channel, Genesis, Icefilms, Phoenix, Navi-X, Cartoon HD 和Cartoon HD extra等<br/>
-MetalKettle</p>
-
-<p>源<a href="http://kodi.metalkettle.co">http://kodi.metalkettle.co</a>. 内含著名的 Genesis 插件, 该插件有极其丰富的电影资源! 该插件按理也可以在Addon Installer中安装.<br/>
-也可以手动安装, 图文安装参考2. 简而言之, 就是文件管理-&gt; 添加源-&gt;输入<a href="http://kodi.metalkettle.co,%E8%B5%B7%E5%90%8D%E4%BE%8B%E5%A6%82MK">http://kodi.metalkettle.co,起名例如MK</a> Repo,随后在添加插件-&gt;Install from zip file-&gt;选MK Repo后-&gt;选1…Recommended Repositories-&gt;选repository.lambda-x.x.x.zip-&gt;然后Install from repository中选刚才加的lambda-&gt; 选Video Add-ons-&gt;Genesis完成添加.<br/>
-iwillfolo/iwf (SportDevil)</p>
-
-<p>源<a href="http://iwillfolo.com/iwf/">http://iwillfolo.com/iwf/</a>, 一个看体育直播不错的源, 找到同名的库安装即可. 内有著名的 SportDevil 插件, 视频教程参看. 还有使用本地zip安装的例子4. 除此以外还有Genesis, Navi-X等.<br/>
-Xunitytalk</p>
-
-<p>源<a href="http://xunitytalk.com/xfinity/">http://xunitytalk.com/xfinity/</a>, 可以添加其iSteam和XunityTalk. XunityTalk有如Cartoon HD 和Cartoon HD extra, Pak Hind, Pak India Live, Film on, Robinhood-people list, Vdubt25, World TV XunityTalk等.<br/>
-noobsandnerds</p>
-
-<p>源<a href="http://noobsandnerds.com/portal%E5%8E%9F%E5%90%8D%E4%B8%BAtotalxbmc">http://noobsandnerds.com/portal原名为totalxbmc</a> (原源 <a href="http://i.totalxbmc.tv/">http://i.totalxbmc.tv/</a>).<br/>
-本地视频资源<br/>
-这个本来貌似没啥特别的, 在图片/视频/音乐中进去后第一个菜单选照片/文件/Music, 或者对应本地位置(可选最后一个 添加照片/视频/音乐 -&gt; 浏览 来添加本地目录) 来加载自己的媒体文件. 选择后就能添加本地源进行播放了, 很方便. 在选择视频添加本地源时, 会进入内容设置界面, 这里可以设置刮削器(从网上自动抓信息, 可以参考刮削器5 ). 自己尝试吧~<br/>
-国内相关论坛: 原动力社区, 高清范论坛<br/>
-Kodi Wiki ↩<br/>
-Tutorial How to Install Genesis Kodi XBMC ↩ ↩2<br/>
-Seo-Michael博客 ↩<br/>
-SportDevil Install ↩<br/>
-利用刮削器加载媒体库 ↩</p>
-
-<p>◆本文地址: <a href="http://platinhom.github.io2015/12/04/Kodi(XBMC)%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E8%BD%AF%E4%BB%B6">http://platinhom.github.io2015/12/04/Kodi(XBMC)视频播放软件</a>, 转载请注明◆<br/>
-前一篇:　Sublime:Anaconda<br/>
-后一篇:　Python:文件编码问题</p>
-
-<p>Contact: Hom / 2015-12-04 17:50:39 已阅读(436)<br/>
-类别: IT  标签: Software </p>
-
-<p>本站总访问量23034次, 访客数4756人.    |   Give your Comments: 留言   |   Last updated: 2016-02-09 03:47:22 CST<br/>
-Powered by Jekyll | License: (CC) BY-NC-SA   |   Copyright 2008 - 2016 by Hom &ndash; Contact me in Weibo<br/>
-GoTop</p>
-
-
-
-						
-			           </div>
-			          </div><!-- /.blog-post -->
-			 
-					<div class="blog-post">
-			            <h2 class="blog-post-title">主题：如何处理wget mirror网站后应用程序文件名问题</h2>
-			            <p class="blog-post-meta">2016/8/2 
-				            
-							 
-							
-			            </p>
-			            <div class="content-responsive">
-			            <pre><code>  By NetGuard Security Team --Chen Jun (chenjun@netguard.com.cn)
-</code></pre>
-
-<p>日期：2001.08.02<br/>
-    众所周知，在windows下的作mirror的程序很多，功能好的也很多。 <br/>
-    但是在unix如何作mirror呢？好多人并不是很清楚。其实在unix下作mirror的程序也很多，我今天讲讲使用wget来mirror 网站的后，如何转换的问题。</p>
-
-<h2 id="toc_0">    wget的用法，hehe,相信大家都是很熟悉的吧。在这，还是从网上抄点用法过来吧，出处我忘记了,对于作者,I say sorry。</h2>
-
-<p>wget常用参数如下 (以下资讯亦可藉由执行 wget &ndash;help获得)：</p>
-
-<p>GNU Wget 1.5.3, 一个非交互式的网路抓档工具.<br/>
-用法: wget [选项]&hellip; [URL]&hellip;</p>
-
-<p>命令的引数使用长项目与短项目相同.</p>
-
-<p>启动:<br/>
-  -V,  &ndash;version           显示 Wget 的版本并且离开.<br/>
-  -h,  &ndash;help              显示这个说明档.<br/>
-  -b,  -background         在启动之後跳到背景去.<br/>
-  -e,  -execute=COMMAND    执行一个 `.wgetrc&#39; 里面的 COMMAND 指令.</p>
-
-<p>纪录档与输入的档案:<br/>
-  -o,  &ndash;output-file=FILE     纪录讯息到 FILE 去.<br/>
-  -a,  -append-output=FILE    增加讯息到 FILE 去.<br/>
-  -d,  &ndash;debug                显示除错的输出.<br/>
-  -q,  &ndash;quiet                安静模式 (不输入任何讯息).<br/>
-  -v,  &ndash;verbose              冗长模式 (这是内定值).<br/>
-  -nv, &ndash;non-verbose          关闭 verboseness, 但不是安静模式.<br/>
-  -i,  &ndash;input-file=FILE      从 FILE 读取 URL .<br/>
-  -F,  &ndash;force-html           把输入的档案当作 HTML.</p>
-
-<p>下载:<br/>
-  -t,  &ndash;tries=NUMBER           设定重复尝试 NUMBER 次 (0 是无限制).<br/>
-  -O   &ndash;output-document=FILE   把文件写到 FILE 里.<br/>
-  -nc, &ndash;no-clobber             不破坏已经存在的档案.<br/>
-  -c,  &ndash;continue               重新取得一个已经存在的档案.<br/>
-       &ndash;dot-style=STYLE        设定取回状况的显示风格.<br/>
-  -N,  &ndash;timestamping           不取回比本地旧的档案.<br/>
-  -S,  &ndash;server-response        显示伺服器回应状况.<br/>
-       &ndash;spider                 不下载任何东西.<br/>
-  -T,  &ndash;timeout=SECONDS        设定读取时超过的时间为 SECONDS 秒.<br/>
-  -w,  &ndash;wait=SECONDS           在取回档案时等待 SECONDS 秒.<br/>
-  -Y,  &ndash;proxy=on/off           开启或关闭 Proxy.<br/>
-  -Q,  &ndash;quota=NUMBER           设定取回档案的定额限制为 NUMBER 个.</p>
-
-<p>目录:<br/>
-  -nd  &ndash;no-directories            不建立目录.<br/>
-  -x,  &ndash;force-directories         强制进行目录建立的工作.<br/>
-  -nH, &ndash;no-host-directories       不建立主机的目录.<br/>
-  -P,  &ndash;directory-prefix=PREFIX   把档案存到 PREFIX/&hellip;<br/>
-       &ndash;cut-dirs=NUMBER           忽略 NUMBER 个远端的目录元件.</p>
-
-<p>HTTP 选项:<br/>
-       &ndash;http-user=USER       设 http 使用者为 USER.<br/>
-       &ndash;http-passwd=PASS     设 http 使用者的密码为 PASS.<br/>
-  -C,  &ndash;cache=on/off         提供/关闭快取伺服器资料 (正常情况为提供).<br/>
-       &ndash;ignore-length        忽略 `Content-Length&#39; 标头栏位.<br/>
-       &ndash;proxy-user=USER      设 USER 为 Proxy 使用者名称.<br/>
-       &ndash;proxy-passwd=PASS    设 PASS 为 Proxy 密码.<br/>
-  -s,  &ndash;save-headers         储存 HTTP 标头成为档案.<br/>
-  -U,  &ndash;user-agent=AGENT     使用 AGENT 取代 Wget/VERSION 作为识别代号.</p>
-
-<p>FTP 选项:<br/>
-       &ndash;retr-symlinks   取回 FTP 的象徵连结.<br/>
-  -g,  &ndash;glob=on/off     turn file name globbing on ot off.<br/>
-       &ndash;passive-ftp     使用 &ldquo;passive&rdquo; 传输模式.</p>
-
-<p>使用递回方式的取回:<br/>
-  -r,  &ndash;recursive             像是吸入 web 的取回 &ndash; 请小心使用!.<br/>
-  -l,  &ndash;level=NUMBER          递回层次的最大值 (0 不限制).<br/>
-       &ndash;delete-after          删除下载完毕的档案.<br/>
-  -k,  &ndash;convert-links         改变没有关连的连结成为有关连.<br/>
-  -m,  &ndash;mirror                开启适合用来映射的选项.<br/>
-  -nr, &ndash;dont-remove-listing   不要移除 `.listing&#39; 档.</p>
-
-<p>递回式作业的允许与拒绝选项:<br/>
-  -A,  &ndash;accept=LIST                允许的扩充项目的列表.<br/>
-  -R,  &ndash;reject=LIST                拒绝的扩充项目的列表.<br/>
-  -D,  &ndash;domains=LIST               允许的网域列表.<br/>
-       &ndash;exclude-domains=LIST       拒绝的网域列表 (使用逗号来分隔).<br/>
-  -L,  &ndash;relative                   只跟随关联连结前进.<br/>
-       &ndash;follow-ftp                 跟随 HTML 文件里面的 FTP 连结.<br/>
-  -H,  &ndash;span-hosts                 当开始递回时便到外面的主机.<br/>
-  -I,  &ndash;include-directories=LIST   允许的目录列表.<br/>
-  -X,  &ndash;exclude-directories=LIST   排除的目录列表.<br/>
-  -nh, &ndash;no-host-lookup             不透过 DNS 查寻主机.<br/>
-  -np, &ndash;no-parent                  不追朔到起源目录.</p>
-
-<p>范例一：mirror一个网站</p>
-
-<p>　wget -r <a href="http://www.redhat.com">http://www.redhat.com</a></p>
-
-<p>范例二：mirror一个网站下的某个目录：</p>
-
-<h2 id="toc_1">　wget -r <a href="http://www.redhat.com/apps/download/">http://www.redhat.com/apps/download/</a></h2>
-
-<pre><code>但是在实际中，现在的网站大多数是程序+数据库的模式，不象原来的那种单独的html方式，那样get下来的文件名就是不能直接访问的。(如果没有试过mirror的，估计不知我说的是怎么一回事)
-我们举个以mirror 一个网站的子目录下的例子，来说说吧。此网站是一台Linux的机器，在他们的上面用是jsp+mysql的模式。
-</code></pre>
-
-<p>一、<br/>
-先在你的机器上输入<br/>
-wget -m -r -k -np -b &ndash;user-agent=&lsquo;Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)&rsquo; <a href="http://www.mysite.com/solution/">http://www.mysite.com/solution/</a><br/>
-      ^  ^  ^  ^   ^       ^                                                                    <sup>__欲mirror的网站的url</sup><br/>
-      |  |  |  |   |       |__访问网站使用的程序的标识（我不想让那个网站知道我用的是wget,要mirror他的站，所以就假冒ie4)<br/>
-      |  |  |  |   |_____放到后台运行 (我可不想傻等)<br/>
-      |  |  |  |___ 限制在当前目录下的文件（如果不设，你就死定了)<br/>
-      |  |  |__转换连接(但是我没有感觉有多大的用)<br/>
-      |  |__递归抓取<br/><br/>
-      |__这个要用呀，是作mirror呀<br/>
-然后你先出去转转，等时间差不多了，再回来吧<br/>
-二、wget结束后，你会发现，那些list.jsp?id=什么什么的，都wget了下来，文件名就是list.jsp?id=xxx存放着。<br/>
-    类似这种:<br/>
-    -rw-r&ndash;r&ndash;    1 root     root        30588 Jul 31 18:49 showfom.jsp?i=1525<br/>
-    wget到没有错，可是在我们的机器上是不能直接访问的，这种文件名在win下也不能使用。unix对它支持，可是在apache或别的web server上不能正常访问。<br/>
-    如访问 <a href="http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525,%E6%88%91%E4%BB%AC%E7%9A%84web">http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525,我们的web</a> server会认为请求showfom.jsp文件，?后面是参数，所以造成我们不能直接访问。<br/>
-    说了这么半天，这才说到我要说的，就是我们如何处理这种情况。(唉，悲哀)<br/>
-三、转换<br/>
-    经过对测试，发现可以通过把?转换成@后，webserver可以正常访问。<br/>
-    即<a href="http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525%E6%94%B9%E6%88%90http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp@i=1525">http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525改成http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp@i=1525</a><br/>
-    明白了这个，我们就可以编写两个脚本来实现。<br/>
-1.批量改文件名<br/>
-$cat &gt;/var/tmp/s.sh</p>
-
-<h1 id="toc_2">!/bin/sh</h1>
-
-<p>FILES=<code>ls</code><br/><br/>
-for i in \(FILES ; do  <br/>
-  j=`echo \)i | sed &ldquo;s/?/@/&rdquo;`<br/><br/>
-  mv \(i \)j<br/><br/>
-done  </p>
-
-<p>2.替换掉文件内容中的提示<br/>
-$cat &gt;/var/tmp/s1.sh</p>
-
-<h1 id="toc_3">!/bin/sh</h1>
-
-<p>cat \(1 |sed s/.jsp?/.jsp@/ &gt;1.bak<br/>
-mv 1.bak \)1</p>
-
-<p>这两个脚本主要是利用sed的替换功能<br/>
-sed s/.jsp?/.jsp@/<br/>
-    |   |     |__欲改成的信息<br/>
-    |   |__须换掉的信息<br/>
-    |__发现并替换</p>
-
-<p>如果是cgi?换成cgi@,asp?换成asp@,php?换成php@,具体看情况而变。</p>
-
-<h1 id="toc_4">cd /www/mirror/solution/</h1>
-
-<p>先把文件名改过来</p>
-
-<h1 id="toc_5">/var/tmp/s.sh</h1>
-
-<p>mv: <code>historylist.jsp&#39; and</code>historylist.jsp&#39; are the same file<br/>
-mv: <code>index.html&#39; and</code>index.html&#39; are the same file</p>
-
-<p>hehe,这就是不用改名的文件，我们通过分析文件，了解通过这两个文件调用才能显示文章</p>
-
-<p>把index.htm或个别文件的内容作过滤</p>
-
-<h1 id="toc_6">/var/tmp/s1.sh index.html</h1>
-
-<h1 id="toc_7">/var/tmp/s1.sh historylist.jsp</h1>
-
-<p>过滤完后，我们现在输入<a href="http://192.168.0.1/mirror/www.mysite.com/solution/,%E7%84%B6%E5%90%8E%E7%9C%8B%E7%9C%8B%EF%BC%8C%E6%98%AF%E4%B8%8D%E6%98%AF%E5%87%BA%E6%9D%A5%E4%BA%86,%E5%86%8D%E7%82%B9links%EF%BC%8C%E9%83%BD%E6%AD%A3%E5%B8%B8%E8%AE%BF%E9%97%AE%E4%BA%86,Ok">http://192.168.0.1/mirror/www.mysite.com/solution/,然后看看，是不是出来了,再点links，都正常访问了,Ok</a>.<br/>
-在此先谢谢eist,e4gle的帮助。<br/>
-注：此文很乱，可取的就只一点：就是把?替换成@,让web server能正常识别。hehe,大家不要笑我哟。<br/>
-如有不足，请指教；如有兴趣，快来交流。</p>
-
-
-
-						
-			           </div>
-			          </div><!-- /.blog-post -->
-			 
-					<div class="blog-post">
-			            <h2 class="blog-post-title">icloud 邮件设置</h2>
-			            <p class="blog-post-meta">2016/8/2 
-				            
-							 
-							
-			            </p>
-			            <div class="content-responsive">
-			            <p>适用于收件服务器的 IMAP 信息<br/>
-服务器名称：imap.mail.me.com<br/>
-是否需要 SSL：是<br/>
-如果您在使用 SSL 时看到错误信息，请尝试使用 TLS。<br/>
-端口：993<br/>
-用户名：通常是您的 iCloud 电子邮件地址的名称部分（例如 emilyparker，而不是 <a href="mailto:emilyparker@icloud.com">emilyparker@icloud.com</a>）。如果仅使用 iCloud 电子邮件地址时您的电子邮件客户端无法连接 iCloud，请尝试使用完整地址。<br/>
-密码：您的 iCloud 密码<br/>
-适用于发件服务器的 SMTP 信息<br/>
-服务器名称：smtp.mail.me.com<br/>
-是否需要 SSL：是<br/>
-如果您在使用 SSL 时看到错误信息，请尝试使用 TLS 或 STARTTLS。<br/>
-端口：587<br/>
-是否需要 SMTP 鉴定：是<br/>
-用户名：您的完整 iCloud 电子邮件地址（例如，<a href="mailto:emilyparker@icloud.com">emilyparker@icloud.com</a>，而不是 emilyparker）<br/>
-密码：您的 iCloud 密码</p>
-
-
-
-						
-			           </div>
-			          </div><!-- /.blog-post -->
-			 
-					<div class="blog-post">
-			            <h2 class="blog-post-title">Brew Cask 安装软件</h2>
-			            <p class="blog-post-meta">2016/8/2 
-				            
-							 
-							
-			            </p>
-			            <div class="content-responsive">
-			            <pre><code class="language-Bash">brew tap caskroom/cask
-brew tap caskroom/versions
-brew install homebrew/fuse/bindfs
-brew install proxychains-ng shadowsocks-libv dnsmasq  android-platform-tools fswatch
-brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 macvim mpv  squirrel vmware-fusion flux enpass  omnidisksweeper java  karabiner diskmaker-x osxfuse
-</code></pre>
-
-
-
-						
-			           </div>
-			          </div><!-- /.blog-post -->
-			  
-
-
-          <nav>
-            <ul class="pager">
-            
-            	<li class=""><a href="all.html"><span aria-hidden="true">&larr;</span> Newer</a></li>
-            
-
-				<li class=""><a href="archives.html">Archives</a></li>
-
-			
-			<li class=""><a href="all_2.html">Older <span aria-hidden="true">&rarr;</span></a></li>
-			
-            </ul>
-          </nav>
-
-        </div><!-- /.blog-main -->
-
-       <!-- slider start -->
-
-  		<div class="col-sm-3 col-sm-offset-1 blog-sidebar">
-          
-
-          <div class="sidebar-module">
-            <h4>About</h4>
-            <p><a target="_blank" href="atom.xml">RSS</a></p>
-            <p><a href="help.html">MWeb Documentation</a></p>
-            
-
-          </div>
-          <div class="sidebar-module">
-            <h4>Categories</h4>
-            
-	        
-	      </li>
-	   
-            </ol>
-          </div>
-
-          <div class="sidebar-module">
-            <h4>Recent Posts</h4>
-            
-	  
-	      
-		      
-		        <a href="14910699523430.html">打造多用户 ShadowsocksR VPS 过程</a><br />
-		      
-	     
-	  
-	      
-		      
-		        <a href="14910533008368.html">养成使用 Mac Brew 安装软件</a><br />
-		      
-	     
-	  
-	      
-		      
-		        <a href="14701463847239.html">在 Vultr上安装 Arch linux</a><br />
-		      
-	     
-	  
-	      
-		      
-		        <a href="14701463847399.html">使用 My Chrome 订制自己的浏览器</a><br />
-		      
-	     
-	  
-	      
-		      
-		        <a href="14701463847475.html">优雅女性一生一定要看的50篇黄文</a><br />
-		      
-	     
-	  
-	      
-		      
-		        <a href="14701463847714.html">Mac 上使用自动发布到 github pages</a><br />
-		      
-	     
-	  
-	      
-		      
-		        <a href="14701463847780.html">Kodi(XBMC)视频播放软件</a><br />
-		      
-	     
-	  
-	      
-		      
-		        <a href="14701463847961.html">主题：如何处理wget mirror网站后应用程序文件名问题</a><br />
-		      
-	     
-	  
-	      
-		      
-		        <a href="14701463848112.html">icloud 邮件设置</a><br />
-		      
-	     
-	  
-	      
-		      
-		        <a href="14701463848186.html">Brew Cask 安装软件</a><br />
-		      
-	     
-	  
-	      
-	  
-	      
-	   
-
-          </div>
-         
-        </div><!-- /.blog-sidebar -->
-
-
-      </div><!-- /.row -->
-
-    </div><!-- /.container -->
-
-  <footer class="blog-footer">
-      <p>Copyright &copy; 2015
-Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a> &nbsp;&nbsp; 
-Theme by <a target="_blank" href="http://getbootstrap.com">Bootstrap</a>、<a target="_blank" href="https://twitter.com/mdo">@mdo</a>
-&nbsp;&nbsp; host on <a target="_blank" href="https://coding.net/">Coding.net Pages</a>.</p>
-      <p>
-        <a href="#">Back to top</a>
-      </p>
-    </footer>
-
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="asset/js/ie10-viewport-bug-workaround.js"></script>
+		</div>
+	
+
+ 
+	
+
+ 
+	
+
+ 
+	
+
+ 
+	
+
+  
+  
+</div></div>
+
+
+<div class="page-bottom">
+  <div class="row">
+  <hr />
+  <div class="small-9 columns">
+  <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+  <div class="small-3 columns">
+  <p class="copyright text-right"><a href="#header">TOP</a></p>
+  </div>
+   
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+    
+    
+    <script src="asset/js/foundation.min.js"></script>
+    <script src="asset/js/foundation/foundation.offcanvas.js"></script>
+    <script>
+      $(document).foundation();
+
+     
+    </script>
     
 
 
