@@ -97,124 +97,6 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
-                <a class="clearlink" href="14701463847714.html">
-                
-                  <h1>Mac 上使用自动发布到 github pages</h1>
-                  <div class="a-content">
-                      
-                      <div class="a-content-text">
-                        
-                        	<blockquote>
-<p>理论上你有什么需要实时提交的 git repo 都可以使用这个方法，但为了节约，你需要设置 fswatch 的间隔时间<br/>
-虽然我下面使用进行的时候使用的是 MyWeb ，其实你也可以换成其他的 Markdown 工具，效果应该差不多，只是 MyWeb 实在是方便。</p>
-</blockquote>
-
-<p>　　敝人乃懒人一枚，很久前购买了 <mark>myweb</mark> ，用来记点纯文本的笔记，偶尔发个 blog 到 <strong>github pages (github.io)</strong>。但是 myweb 是个 GUI 工具，发布到 github要换到 iTerm里自己输入命令 git add  &amp;&amp; git commit ，非常的麻烦，所以就又一次偷懒写了一个烂脚本，原则上适合用于所有的 app 自动发布到 GitHub。</p>
-
-<h2 id="toc_0">首先， 确认你要发布的目录</h2>
-
-<p>　　我的 mweb 发布到 Github 的文件夹是 blog，如下图所示：<br/>
-<img src="media/14550024568971/14550028748116.jpg" alt="" style="width:314px;"/></p>
-
-<p>　　先在 blog 这个目录上右击生成网站，然后再点如下图所示，找到生成网站的位置：<br/>
-　　<img src="media/14550024568971/14613161793220.jpg" alt="w:100" style="width:297px;"/></p>
-
-<p>　<br/>
-　　然后生成的网站目录在 <code>/Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/</code>，所以我的目标就是每次文件有变化时，就自动将文章发布到 github ，记住，重点是 “有变化时” 实时更新。</p>
-
-<h2 id="toc_1">其次,安装自动发布工具</h2>
-
-<p>　　我们需要用到 <mark><strong>fswatch</strong></mark> 这个命令，这需要使用<code>brew install fswatch</code></p>
-
-<p>　　可选的一个 Shell 命令是 <code>Proxychains4-ng</code>，这个东西的主要用途是为 git 命令添加代理，以防止网络质量不佳。要使用这个命令就需要有一个 Socks 代理，如果你没有，就不要安装了，而我自己有一个<code>shadowsocks-libev</code> ，所以非常方便。</p>
-
-<h2 id="toc_2">脚本主体</h2>
-
-<p>　　我不是个程序员，所以写出来的脚本有点“脏”，好在还能用，自己动手丰衣足食嘛；然后开始写我们的脚本吧：<br/>
-找一个目录存放这个脚本，比如自己的 &ldquo;/Users/`whoami`/ &quot;下面，文件名字叫 gitblog.command ，重点是一定要是 *.command 这种结尾，后面有重要用途。</p>
-
-<pre><code>
-#!/bin/bash
-#$wdir is where your github blog dir
-wdir=/Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/
-export cmd=/usr/bin/git
-
-#locate the &#39;fswatch&#39; command ,you should install it via &quot;brew install fswatch&quot;
-export fsdog=`which fswatch`
-export proxy=`which proxychains4`
-args=&quot;-0 -a $wdir/atom.xml&quot;
-function gitpush() {
-    $cmd add . ;
-    reslut=$($cmd commit -a -m &quot;`date`&quot; | grep nothing)
-
-    #when get $result length == zero ,means that there is new modified blog ,just git push  in next!
-    if [ -z `$reslut` ] ; then
-
-        #Note : proxychains4 is a proxy tools which would let &quot;git &quot; use your proxy ( shadowsocks e.g.),just brew install it OR it would skip auto.
-        `$proxy -q  $cmd push -q` || `$cmd push -q`
-    fi;
-    return 0;
-    }
-cd $wdir;
-#gitpush ;
-export -f gitpush;
-$fsdog $args | xargs -0 -n1 bash -c &#39;gitpush&#39; &amp;
-
-exit
-
-</code></pre>
-
-<h3 id="toc_3">这段脚本实现的功能如下：</h3>
-
-<ol>
-<li>使用 <code>fswatch</code> <em>实时</em> 检测 myweb 的 blog 目录</li>
-<li>一旦发现有新的博客文章，则会自动提交，并添加当时的时间为标记</li>
-<li>提交时会优先使用 <code>Proxychains4</code> 通过代理提交，如果没安装则自动使用 Git push 提交</li>
-<li>只有变化的文章才会提交，所以非常省流量</li>
-<li>每次你写完博客，只需要在 Myweb 里点 下面的菜单 <br>
-<img src="media/14550024568971/14550119677927.jpg" alt=""/></li>
-</ol>
-
-<h2 id="toc_4">开机启动</h2>
-
-<p>在做这一步前，请先双击刚刚生成的 gitblog.command ，应该可以启动一个黑窗口然后又消失了。<br/>
-接着，你打开 Terminal 输入下面的命令</p>
-
-<p>$ ps waux | grep git | grep -v grep<br/>
-bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
-
-<p>这表示成功启动了。但如果没有，则表示你没有配置成功，多半是里面有什么特殊符号少了半边或者路径错了什么的，需要你自己调试了。</p>
-
-<p>接下来就是在“系统偏好设置”里的“用户和群组”，加上 gitblog.command 的开机登录选项。</p>
-
-<p><img src="media/14550024568971/14613159401465.jpg" alt=""/></p>
-
-<p>至此，已经全部完成，每次对你的 blog 有任何更改，全都会自动更新到 github 上，非常方便。</p>
-
-<p><mark>请你一定注意，在 MyWeb 里设置备份哟</mark></p>
-
-                        
-                      </div>
-                  </div>
-                </a>
-                <div class="read-more clearfix">
-                  <div class="more-left left">
-                  
-                    <span class="date">2016/8/2</span>
-                    
-          				   
-                  </div>
-                  <div class="more-right right">
-                  <span class="comments">
-                      
-
-                       
-                  </span>
-                  </div>
-                </div>
-              </div><!-- article -->
-        
-			<div class="article">
                 <a class="clearlink" href="14701463847780.html">
                 
                   <h1>Kodi(XBMC)视频播放软件</h1>
@@ -577,6 +459,75 @@ brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 m
                 </div>
               </div><!-- article -->
         
+			<div class="article">
+                <a class="clearlink" href="14701463848256.html">
+                
+                  <h1>自己折腾 FreeNAS@ThinkPad x201i 的记录</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>这些记录没有任何意义，请忽略</p>
+
+<pre><code class="language-Bash">cp -Rp acpi_ibm* /boot/kernel/
+cp -RP acpi_video.ko* /boot/kernel/
+cp -Rp iwn1000fw.ko* /boot/kernel/
+cp -Rp if_iwn.ko* /boot/kernel/
+cp -Rp wlan* /boot/kernel/
+cp -Rp fuse.ko* /boot/kernel/
+sed -i &quot;.bak&quot; &#39;s/yes/no/g&#39; /usr/local/etc/pkg/repos/local.conf
+sed -i &quot;.bak&quot; &#39;s/no/yes/g&#39; /usr/local/etc/pkg/repos/FreeBSD.conf
+
+pkg update
+pkg install vim-lite proxychains-ng shadowsocks-libev aria2
+
+vi /boot/loader.conf
+
+#######
+acpi_ibm_load=&quot;YES&quot;
+acpi_video_load=&quot;YES&quot;
+if_iwn_load=&quot;YES&quot;
+iwn1000fw_load=&quot;YES&quot;
+snd_ich_load=&quot;YES&quot;
+###########
+
+
+saver=&quot;green&quot; blanktime=&quot;300&quot; scrnmap=&quot;NO&quot;
+powerd_enable=&quot;YES&quot;
+powerd_flags=&quot;-i 80 -p 200 -b adaptive -a adaptive -n adaptive&quot;
+
+performance_cx_lowest=&quot;C3&quot;
+economy_cx_lowest=&quot;C3&quot;
+performance_cpu_freq=&quot;HIGH&quot;
+
+
+sysctl -a | grep cx_
+/etc/sysctl.conf
+hw.acpi.cpu.cx_lowest=C3
+
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/8/2</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
               
 
 
@@ -650,12 +601,6 @@ brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 m
 		  
 		      
 			      <li class="post">
-			        <a href="14910533008368.html">养成使用 Mac Brew 安装软件</a>
-			      </li>
-		     
-		  
-		      
-			      <li class="post">
 			        <a href="14701463847239.html">在 Vultr上安装 Arch linux</a>
 			      </li>
 		     
@@ -673,6 +618,10 @@ brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 m
 		     
 		  
 		      
+			      <li class="post">
+			        <a href="14701463847714.html">Mac 上使用自动发布到 github pages</a>
+			      </li>
+		     
 		  
 		      
 		  
