@@ -4,7 +4,7 @@
   <title><![CDATA[黑洞]]></title>
   <link href="bao3.org/atom.xml" rel="self"/>
   <link href="bao3.org/"/>
-  <updated>2017-04-22T22:27:47+08:00</updated>
+  <updated>2017-05-21T15:48:01+08:00</updated>
   <id>bao3.org/</id>
   <author>
     <name><![CDATA[]]></name>
@@ -62,7 +62,8 @@ sudo docker run -d --name Sync  \
 
 <p>如果你要制作基于数据库的 shadowsocks 多用户使用，这一步建议你还是要进行的，这一步将会为你直接配置好数据库、web、php ，简单省事。</p>
 
-<pre><code>cd ~ \
+<pre><code>DOCKER_FOLDER=~/docker
+cd $DOCKER_FOLDER\
     &amp;&amp; git clone https://github.com/bao3/mini_lnmp.git \
     &amp;&amp; cd mini_lnmp
 </code></pre>
@@ -79,11 +80,11 @@ sudo docker run -d --name Sync  \
 <p>十分建议你将 ss 服务端换成 shadowsocksR，也就是 SSR，主要是这个客户端既可以兼容旧的 SS 又支持新的混淆，非常的方便和安全，而且围绕它的周边软件非常多。</p>
 
 <pre><code>cd ~ \
-    &amp;&amp; git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git \
+    &amp;&amp; git clone -b manyuser https://github.com/shadowsocksr-backup/shadowsocksr.git \
     &amp;&amp; cd shadowsocksr \
     &amp;&amp; bash initcfg.sh \
     &amp;&amp; sed -i &quot;s/API_INTERFACE =.*$/API_INTERFACE = &#39;sspanelv3ssr&#39; /&quot; userapiconfig.py \
-    &amp;&amp; sed -i &#39;s/&quot;host&quot;:.*/&quot;host&quot;: &quot;10.146.0.2&quot; ,/&#39; usermysql.json \
+    &amp;&amp; sed -i &#39;s/&quot;host&quot;:.*/&quot;host&quot;: &quot;127.0.0.1&quot; ,/&#39; usermysql.json \
     &amp;&amp; sed -i &#39;s/&quot;user&quot;:.*/&quot;user&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json \
     &amp;&amp; sed -i &#39;s/&quot;password&quot;:.*/&quot;password&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json \
     &amp;&amp; sed -i &#39;s/&quot;db&quot;:.*/&quot;db&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json
@@ -1173,8 +1174,9 @@ mv: <code>index.html&#39; and</code>index.html&#39; are the same file</p>
 <pre><code class="language-Bash">brew tap caskroom/cask
 brew tap caskroom/versions
 brew install homebrew/fuse/bindfs
-brew install proxychains-ng shadowsocks-libv dnsmasq  android-platform-tools fswatch
-brew cask install qq  neteasemusic   aliwangwang telegram google-chrome iterm2 macvim mpv  squirrel vmware-fusion flux enpass  omnidisksweeper java  karabiner diskmaker-x osxfuse
+brew install proxychains-ng shadowsocks-libv   android-platform-tools fswatch
+brew cask install qq  neteasemusic   telegram google-chrome iterm2  mpv  squirrel vmware-fusion flux enpass  omnidisksweeper java  diskmaker-x osxfuse  keka  ifunbox airflow   aria2gui surge 
+brew install macvim --with-cscope --with-lua --override-system-vim
 </code></pre>
 
 ]]></content>

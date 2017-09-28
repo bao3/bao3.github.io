@@ -159,7 +159,8 @@ sudo docker run -d --name Sync  \
 
 <p>如果你要制作基于数据库的 shadowsocks 多用户使用，这一步建议你还是要进行的，这一步将会为你直接配置好数据库、web、php ，简单省事。</p>
 
-<pre><code>cd ~ \
+<pre><code>DOCKER_FOLDER=~/docker
+cd $DOCKER_FOLDER\
     &amp;&amp; git clone https://github.com/bao3/mini_lnmp.git \
     &amp;&amp; cd mini_lnmp
 </code></pre>
@@ -176,11 +177,11 @@ sudo docker run -d --name Sync  \
 <p>十分建议你将 ss 服务端换成 shadowsocksR，也就是 SSR，主要是这个客户端既可以兼容旧的 SS 又支持新的混淆，非常的方便和安全，而且围绕它的周边软件非常多。</p>
 
 <pre><code>cd ~ \
-    &amp;&amp; git clone -b manyuser https://github.com/shadowsocksr/shadowsocksr.git \
+    &amp;&amp; git clone -b manyuser https://github.com/shadowsocksr-backup/shadowsocksr.git \
     &amp;&amp; cd shadowsocksr \
     &amp;&amp; bash initcfg.sh \
     &amp;&amp; sed -i &quot;s/API_INTERFACE =.*$/API_INTERFACE = &#39;sspanelv3ssr&#39; /&quot; userapiconfig.py \
-    &amp;&amp; sed -i &#39;s/&quot;host&quot;:.*/&quot;host&quot;: &quot;10.146.0.2&quot; ,/&#39; usermysql.json \
+    &amp;&amp; sed -i &#39;s/&quot;host&quot;:.*/&quot;host&quot;: &quot;127.0.0.1&quot; ,/&#39; usermysql.json \
     &amp;&amp; sed -i &#39;s/&quot;user&quot;:.*/&quot;user&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json \
     &amp;&amp; sed -i &#39;s/&quot;password&quot;:.*/&quot;password&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json \
     &amp;&amp; sed -i &#39;s/&quot;db&quot;:.*/&quot;db&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json
@@ -379,7 +380,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
     
 
-
+<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ehgbFVdJOgsLVBkVFw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a>
 
   </body>
 </html>
