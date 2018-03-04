@@ -118,90 +118,90 @@
       <pre><code>  By NetGuard Security Team --Chen Jun (chenjun@netguard.com.cn)
 </code></pre>
 
-<p>日期：2001.08.02<br/>
-    众所周知，在windows下的作mirror的程序很多，功能好的也很多。 <br/>
+<p>日期：2001.08.02
+    众所周知，在windows下的作mirror的程序很多，功能好的也很多。 
     但是在unix如何作mirror呢？好多人并不是很清楚。其实在unix下作mirror的程序也很多，我今天讲讲使用wget来mirror 网站的后，如何转换的问题。</p>
 
 <h2 id="toc_0">    wget的用法，hehe,相信大家都是很熟悉的吧。在这，还是从网上抄点用法过来吧，出处我忘记了,对于作者,I say sorry。</h2>
 
 <p>wget常用参数如下 (以下资讯亦可藉由执行 wget &ndash;help获得)：</p>
 
-<p>GNU Wget 1.5.3, 一个非交互式的网路抓档工具.<br/>
+<p>GNU Wget 1.5.3, 一个非交互式的网路抓档工具.
 用法: wget [选项]&hellip; [URL]&hellip;</p>
 
 <p>命令的引数使用长项目与短项目相同.</p>
 
-<p>启动:<br/>
-  -V,  &ndash;version           显示 Wget 的版本并且离开.<br/>
-  -h,  &ndash;help              显示这个说明档.<br/>
-  -b,  -background         在启动之後跳到背景去.<br/>
+<p>启动:
+  -V,  &ndash;version           显示 Wget 的版本并且离开.
+  -h,  &ndash;help              显示这个说明档.
+  -b,  -background         在启动之後跳到背景去.
   -e,  -execute=COMMAND    执行一个 `.wgetrc&#39; 里面的 COMMAND 指令.</p>
 
-<p>纪录档与输入的档案:<br/>
-  -o,  &ndash;output-file=FILE     纪录讯息到 FILE 去.<br/>
-  -a,  -append-output=FILE    增加讯息到 FILE 去.<br/>
-  -d,  &ndash;debug                显示除错的输出.<br/>
-  -q,  &ndash;quiet                安静模式 (不输入任何讯息).<br/>
-  -v,  &ndash;verbose              冗长模式 (这是内定值).<br/>
-  -nv, &ndash;non-verbose          关闭 verboseness, 但不是安静模式.<br/>
-  -i,  &ndash;input-file=FILE      从 FILE 读取 URL .<br/>
+<p>纪录档与输入的档案:
+  -o,  &ndash;output-file=FILE     纪录讯息到 FILE 去.
+  -a,  -append-output=FILE    增加讯息到 FILE 去.
+  -d,  &ndash;debug                显示除错的输出.
+  -q,  &ndash;quiet                安静模式 (不输入任何讯息).
+  -v,  &ndash;verbose              冗长模式 (这是内定值).
+  -nv, &ndash;non-verbose          关闭 verboseness, 但不是安静模式.
+  -i,  &ndash;input-file=FILE      从 FILE 读取 URL .
   -F,  &ndash;force-html           把输入的档案当作 HTML.</p>
 
-<p>下载:<br/>
-  -t,  &ndash;tries=NUMBER           设定重复尝试 NUMBER 次 (0 是无限制).<br/>
-  -O   &ndash;output-document=FILE   把文件写到 FILE 里.<br/>
-  -nc, &ndash;no-clobber             不破坏已经存在的档案.<br/>
-  -c,  &ndash;continue               重新取得一个已经存在的档案.<br/>
-       &ndash;dot-style=STYLE        设定取回状况的显示风格.<br/>
-  -N,  &ndash;timestamping           不取回比本地旧的档案.<br/>
-  -S,  &ndash;server-response        显示伺服器回应状况.<br/>
-       &ndash;spider                 不下载任何东西.<br/>
-  -T,  &ndash;timeout=SECONDS        设定读取时超过的时间为 SECONDS 秒.<br/>
-  -w,  &ndash;wait=SECONDS           在取回档案时等待 SECONDS 秒.<br/>
-  -Y,  &ndash;proxy=on/off           开启或关闭 Proxy.<br/>
+<p>下载:
+  -t,  &ndash;tries=NUMBER           设定重复尝试 NUMBER 次 (0 是无限制).
+  -O   &ndash;output-document=FILE   把文件写到 FILE 里.
+  -nc, &ndash;no-clobber             不破坏已经存在的档案.
+  -c,  &ndash;continue               重新取得一个已经存在的档案.
+       &ndash;dot-style=STYLE        设定取回状况的显示风格.
+  -N,  &ndash;timestamping           不取回比本地旧的档案.
+  -S,  &ndash;server-response        显示伺服器回应状况.
+       &ndash;spider                 不下载任何东西.
+  -T,  &ndash;timeout=SECONDS        设定读取时超过的时间为 SECONDS 秒.
+  -w,  &ndash;wait=SECONDS           在取回档案时等待 SECONDS 秒.
+  -Y,  &ndash;proxy=on/off           开启或关闭 Proxy.
   -Q,  &ndash;quota=NUMBER           设定取回档案的定额限制为 NUMBER 个.</p>
 
-<p>目录:<br/>
-  -nd  &ndash;no-directories            不建立目录.<br/>
-  -x,  &ndash;force-directories         强制进行目录建立的工作.<br/>
-  -nH, &ndash;no-host-directories       不建立主机的目录.<br/>
-  -P,  &ndash;directory-prefix=PREFIX   把档案存到 PREFIX/&hellip;<br/>
+<p>目录:
+  -nd  &ndash;no-directories            不建立目录.
+  -x,  &ndash;force-directories         强制进行目录建立的工作.
+  -nH, &ndash;no-host-directories       不建立主机的目录.
+  -P,  &ndash;directory-prefix=PREFIX   把档案存到 PREFIX/&hellip;
        &ndash;cut-dirs=NUMBER           忽略 NUMBER 个远端的目录元件.</p>
 
-<p>HTTP 选项:<br/>
-       &ndash;http-user=USER       设 http 使用者为 USER.<br/>
-       &ndash;http-passwd=PASS     设 http 使用者的密码为 PASS.<br/>
-  -C,  &ndash;cache=on/off         提供/关闭快取伺服器资料 (正常情况为提供).<br/>
-       &ndash;ignore-length        忽略 `Content-Length&#39; 标头栏位.<br/>
-       &ndash;proxy-user=USER      设 USER 为 Proxy 使用者名称.<br/>
-       &ndash;proxy-passwd=PASS    设 PASS 为 Proxy 密码.<br/>
-  -s,  &ndash;save-headers         储存 HTTP 标头成为档案.<br/>
+<p>HTTP 选项:
+       &ndash;http-user=USER       设 http 使用者为 USER.
+       &ndash;http-passwd=PASS     设 http 使用者的密码为 PASS.
+  -C,  &ndash;cache=on/off         提供/关闭快取伺服器资料 (正常情况为提供).
+       &ndash;ignore-length        忽略 `Content-Length&#39; 标头栏位.
+       &ndash;proxy-user=USER      设 USER 为 Proxy 使用者名称.
+       &ndash;proxy-passwd=PASS    设 PASS 为 Proxy 密码.
+  -s,  &ndash;save-headers         储存 HTTP 标头成为档案.
   -U,  &ndash;user-agent=AGENT     使用 AGENT 取代 Wget/VERSION 作为识别代号.</p>
 
-<p>FTP 选项:<br/>
-       &ndash;retr-symlinks   取回 FTP 的象徵连结.<br/>
-  -g,  &ndash;glob=on/off     turn file name globbing on ot off.<br/>
+<p>FTP 选项:
+       &ndash;retr-symlinks   取回 FTP 的象徵连结.
+  -g,  &ndash;glob=on/off     turn file name globbing on ot off.
        &ndash;passive-ftp     使用 &ldquo;passive&rdquo; 传输模式.</p>
 
-<p>使用递回方式的取回:<br/>
-  -r,  &ndash;recursive             像是吸入 web 的取回 &ndash; 请小心使用!.<br/>
-  -l,  &ndash;level=NUMBER          递回层次的最大值 (0 不限制).<br/>
-       &ndash;delete-after          删除下载完毕的档案.<br/>
-  -k,  &ndash;convert-links         改变没有关连的连结成为有关连.<br/>
-  -m,  &ndash;mirror                开启适合用来映射的选项.<br/>
+<p>使用递回方式的取回:
+  -r,  &ndash;recursive             像是吸入 web 的取回 &ndash; 请小心使用!.
+  -l,  &ndash;level=NUMBER          递回层次的最大值 (0 不限制).
+       &ndash;delete-after          删除下载完毕的档案.
+  -k,  &ndash;convert-links         改变没有关连的连结成为有关连.
+  -m,  &ndash;mirror                开启适合用来映射的选项.
   -nr, &ndash;dont-remove-listing   不要移除 `.listing&#39; 档.</p>
 
-<p>递回式作业的允许与拒绝选项:<br/>
-  -A,  &ndash;accept=LIST                允许的扩充项目的列表.<br/>
-  -R,  &ndash;reject=LIST                拒绝的扩充项目的列表.<br/>
-  -D,  &ndash;domains=LIST               允许的网域列表.<br/>
-       &ndash;exclude-domains=LIST       拒绝的网域列表 (使用逗号来分隔).<br/>
-  -L,  &ndash;relative                   只跟随关联连结前进.<br/>
-       &ndash;follow-ftp                 跟随 HTML 文件里面的 FTP 连结.<br/>
-  -H,  &ndash;span-hosts                 当开始递回时便到外面的主机.<br/>
-  -I,  &ndash;include-directories=LIST   允许的目录列表.<br/>
-  -X,  &ndash;exclude-directories=LIST   排除的目录列表.<br/>
-  -nh, &ndash;no-host-lookup             不透过 DNS 查寻主机.<br/>
+<p>递回式作业的允许与拒绝选项:
+  -A,  &ndash;accept=LIST                允许的扩充项目的列表.
+  -R,  &ndash;reject=LIST                拒绝的扩充项目的列表.
+  -D,  &ndash;domains=LIST               允许的网域列表.
+       &ndash;exclude-domains=LIST       拒绝的网域列表 (使用逗号来分隔).
+  -L,  &ndash;relative                   只跟随关联连结前进.
+       &ndash;follow-ftp                 跟随 HTML 文件里面的 FTP 连结.
+  -H,  &ndash;span-hosts                 当开始递回时便到外面的主机.
+  -I,  &ndash;include-directories=LIST   允许的目录列表.
+  -X,  &ndash;exclude-directories=LIST   排除的目录列表.
+  -nh, &ndash;no-host-lookup             不透过 DNS 查寻主机.
   -np, &ndash;no-parent                  不追朔到起源目录.</p>
 
 <p>范例一：mirror一个网站</p>
@@ -216,50 +216,50 @@
 我们举个以mirror 一个网站的子目录下的例子，来说说吧。此网站是一台Linux的机器，在他们的上面用是jsp+mysql的模式。
 </code></pre>
 
-<p>一、<br/>
-先在你的机器上输入<br/>
-wget -m -r -k -np -b &ndash;user-agent=&lsquo;Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)&rsquo; <a href="http://www.mysite.com/solution/">http://www.mysite.com/solution/</a><br/>
-      ^  ^  ^  ^   ^       ^                                                                    <sup>__欲mirror的网站的url</sup><br/>
-      |  |  |  |   |       |__访问网站使用的程序的标识（我不想让那个网站知道我用的是wget,要mirror他的站，所以就假冒ie4)<br/>
-      |  |  |  |   |_____放到后台运行 (我可不想傻等)<br/>
-      |  |  |  |___ 限制在当前目录下的文件（如果不设，你就死定了)<br/>
-      |  |  |__转换连接(但是我没有感觉有多大的用)<br/>
-      |  |__递归抓取<br/><br/>
-      |__这个要用呀，是作mirror呀<br/>
-然后你先出去转转，等时间差不多了，再回来吧<br/>
-二、wget结束后，你会发现，那些list.jsp?id=什么什么的，都wget了下来，文件名就是list.jsp?id=xxx存放着。<br/>
-    类似这种:<br/>
-    -rw-r&ndash;r&ndash;    1 root     root        30588 Jul 31 18:49 showfom.jsp?i=1525<br/>
-    wget到没有错，可是在我们的机器上是不能直接访问的，这种文件名在win下也不能使用。unix对它支持，可是在apache或别的web server上不能正常访问。<br/>
-    如访问 <a href="http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525,%E6%88%91%E4%BB%AC%E7%9A%84web">http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525,我们的web</a> server会认为请求showfom.jsp文件，?后面是参数，所以造成我们不能直接访问。<br/>
-    说了这么半天，这才说到我要说的，就是我们如何处理这种情况。(唉，悲哀)<br/>
-三、转换<br/>
-    经过对测试，发现可以通过把?转换成@后，webserver可以正常访问。<br/>
-    即<a href="http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525%E6%94%B9%E6%88%90http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp@i=1525">http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525改成http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp@i=1525</a><br/>
-    明白了这个，我们就可以编写两个脚本来实现。<br/>
-1.批量改文件名<br/>
+<p>一、
+先在你的机器上输入
+wget -m -r -k -np -b &ndash;user-agent=&lsquo;Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)&rsquo; <a href="http://www.mysite.com/solution/">http://www.mysite.com/solution/</a>
+      ^  ^  ^  ^   ^       ^                                                                    <sup>__欲mirror的网站的url</sup>
+      |  |  |  |   |       |__访问网站使用的程序的标识（我不想让那个网站知道我用的是wget,要mirror他的站，所以就假冒ie4)
+      |  |  |  |   |_____放到后台运行 (我可不想傻等)
+      |  |  |  |___ 限制在当前目录下的文件（如果不设，你就死定了)
+      |  |  |__转换连接(但是我没有感觉有多大的用)
+      |  |__递归抓取<br/>
+      |__这个要用呀，是作mirror呀
+然后你先出去转转，等时间差不多了，再回来吧
+二、wget结束后，你会发现，那些list.jsp?id=什么什么的，都wget了下来，文件名就是list.jsp?id=xxx存放着。
+    类似这种:
+    -rw-r&ndash;r&ndash;    1 root     root        30588 Jul 31 18:49 showfom.jsp?i=1525
+    wget到没有错，可是在我们的机器上是不能直接访问的，这种文件名在win下也不能使用。unix对它支持，可是在apache或别的web server上不能正常访问。
+    如访问 <a href="http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525,%E6%88%91%E4%BB%AC%E7%9A%84web">http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525,我们的web</a> server会认为请求showfom.jsp文件，?后面是参数，所以造成我们不能直接访问。
+    说了这么半天，这才说到我要说的，就是我们如何处理这种情况。(唉，悲哀)
+三、转换
+    经过对测试，发现可以通过把?转换成@后，webserver可以正常访问。
+    即<a href="http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525%E6%94%B9%E6%88%90http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp@i=1525">http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp?i=1525改成http://192.168.0.1/mirror/www.mysite.com/solution/showfom.jsp@i=1525</a>
+    明白了这个，我们就可以编写两个脚本来实现。
+1.批量改文件名
 $cat &gt;/var/tmp/s.sh</p>
 
 <h1 id="toc_2">!/bin/sh</h1>
 
-<p>FILES=<code>ls</code><br/><br/>
-for i in \(FILES ; do  <br/>
-  j=`echo \)i | sed &ldquo;s/?/@/&rdquo;`<br/><br/>
-  mv \(i \)j<br/><br/>
+<p>FILES=<code>ls</code><br/>
+for i in $FILES ; do<br/>
+  j=<code>echo $i | sed &quot;s/?/@/&quot;</code><br/>
+  mv $i $j<br/>
 done  </p>
 
-<p>2.替换掉文件内容中的提示<br/>
+<p>2.替换掉文件内容中的提示
 $cat &gt;/var/tmp/s1.sh</p>
 
 <h1 id="toc_3">!/bin/sh</h1>
 
-<p>cat \(1 |sed s/.jsp?/.jsp@/ &gt;1.bak<br/>
-mv 1.bak \)1</p>
+<p>cat $1 |sed s/.jsp?/.jsp@/ &gt;1.bak
+mv 1.bak $1</p>
 
-<p>这两个脚本主要是利用sed的替换功能<br/>
-sed s/.jsp?/.jsp@/<br/>
-    |   |     |__欲改成的信息<br/>
-    |   |__须换掉的信息<br/>
+<p>这两个脚本主要是利用sed的替换功能
+sed s/.jsp?/.jsp@/
+    |   |     |__欲改成的信息
+    |   |__须换掉的信息
     |__发现并替换</p>
 
 <p>如果是cgi?换成cgi@,asp?换成asp@,php?换成php@,具体看情况而变。</p>
@@ -270,7 +270,7 @@ sed s/.jsp?/.jsp@/<br/>
 
 <h1 id="toc_5">/var/tmp/s.sh</h1>
 
-<p>mv: <code>historylist.jsp&#39; and</code>historylist.jsp&#39; are the same file<br/>
+<p>mv: <code>historylist.jsp&#39; and</code>historylist.jsp&#39; are the same file
 mv: <code>index.html&#39; and</code>index.html&#39; are the same file</p>
 
 <p>hehe,这就是不用改名的文件，我们通过分析文件，了解通过这两个文件调用才能显示文章</p>
@@ -281,9 +281,9 @@ mv: <code>index.html&#39; and</code>index.html&#39; are the same file</p>
 
 <h1 id="toc_7">/var/tmp/s1.sh historylist.jsp</h1>
 
-<p>过滤完后，我们现在输入<a href="http://192.168.0.1/mirror/www.mysite.com/solution/,%E7%84%B6%E5%90%8E%E7%9C%8B%E7%9C%8B%EF%BC%8C%E6%98%AF%E4%B8%8D%E6%98%AF%E5%87%BA%E6%9D%A5%E4%BA%86,%E5%86%8D%E7%82%B9links%EF%BC%8C%E9%83%BD%E6%AD%A3%E5%B8%B8%E8%AE%BF%E9%97%AE%E4%BA%86,Ok">http://192.168.0.1/mirror/www.mysite.com/solution/,然后看看，是不是出来了,再点links，都正常访问了,Ok</a>.<br/>
-在此先谢谢eist,e4gle的帮助。<br/>
-注：此文很乱，可取的就只一点：就是把?替换成@,让web server能正常识别。hehe,大家不要笑我哟。<br/>
+<p>过滤完后，我们现在输入<a href="http://192.168.0.1/mirror/www.mysite.com/solution/,%E7%84%B6%E5%90%8E%E7%9C%8B%E7%9C%8B%EF%BC%8C%E6%98%AF%E4%B8%8D%E6%98%AF%E5%87%BA%E6%9D%A5%E4%BA%86,%E5%86%8D%E7%82%B9links%EF%BC%8C%E9%83%BD%E6%AD%A3%E5%B8%B8%E8%AE%BF%E9%97%AE%E4%BA%86,Ok">http://192.168.0.1/mirror/www.mysite.com/solution/,然后看看，是不是出来了,再点links，都正常访问了,Ok</a>.
+在此先谢谢eist,e4gle的帮助。
+注：此文很乱，可取的就只一点：就是把?替换成@,让web server能正常识别。hehe,大家不要笑我哟。
 如有不足，请指教；如有兴趣，快来交流。</p>
 
 
@@ -330,7 +330,7 @@ mv: <code>index.html&#39; and</code>index.html&#39; are the same file</p>
           <div id="site-info" class="site-info">
             
                 <h1>黑洞</h1>
-                <div class="site-des"><a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ehgbFVdJOgsLVBkVFw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a></div>
+                <div class="site-des"></div>
                 <div class="social">
 
 
@@ -373,6 +373,12 @@ mv: <code>index.html&#39; and</code>index.html&#39; are the same file</p>
 	      
 		      
 			      <li class="post">
+			        <a href="15201542683812.html">没用</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="14910699523430.html">打造多用户 ShadowsocksR VPS 过程</a>
 			      </li>
 		     
@@ -391,15 +397,11 @@ mv: <code>index.html&#39; and</code>index.html&#39; are the same file</p>
 		  
 		      
 			      <li class="post">
-			        <a href="14701463847475.html">优雅女性一生一定要看的50篇黄文</a>
+			        <a href="14701463847475.html"></a>
 			      </li>
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="14701463847714.html">Mac 上使用自动发布到 github pages</a>
-			      </li>
-		     
 		  
 		      
 		  
@@ -456,7 +458,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
     
 
-<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ehgbFVdJOgsLVBkVFw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a>
+
 
   </body>
 </html>

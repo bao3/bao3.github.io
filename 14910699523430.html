@@ -115,7 +115,7 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>这是我自己的安装过程，非常方便，核心功能 lnmp 和 resilio sync 使用 docker 实现，省太多事了。<br/>
+      <p>这是我自己的安装过程，非常方便，核心功能 lnmp 和 resilio sync 使用 docker 实现，省太多事了。
 主要功能是：建立一个网页客户界面，方便管理 SSR 参数；shadowsocksR 读取每一个用户独立的 SSR 参数并启动；数据库默认只能被本机使用；</p>
 
 <h1 id="toc_0">安装 Docker</h1>
@@ -151,8 +151,8 @@ sudo docker run -d --name Sync  \
      --restart=on-failure resilio/sync
 </code></pre>
 
-<p>然后在你自己的电脑上使用 :<br/>
-<code>ssh -N -L 9888:127.0.0.1:8888 username@your.vps.ip.or.domain</code><br/>
+<p>然后在你自己的电脑上使用 :
+<code>ssh -N -L 9888:127.0.0.1:8888 username@your.vps.ip.or.domain</code>
 打开你的浏览器，网址输入 <strong>127.0.0.1:9888</strong> 就可以配置 Btsync 同步，从些之后你要跟你的 VPS 之间传输什么文件或者要做备份，就方便多了。</p>
 
 <h1 id="toc_2">安装 lnmp</h1>
@@ -187,7 +187,7 @@ cd $DOCKER_FOLDER\
     &amp;&amp; sed -i &#39;s/&quot;db&quot;:.*/&quot;db&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json
 </code></pre>
 
-<p>然后修改 <code>userapiconfig.py</code> <code>usermysql.json</code> <code>user-config.json</code>等等，这个就属于 SSR 的配置问题咯。<br/>
+<p>然后修改 <code>userapiconfig.py</code> <code>usermysql.json</code> <code>user-config.json</code>等等，这个就属于 SSR 的配置问题咯。
 <strong>但是</strong> 请确保你的系统安装了 <code>python</code>,<code>pip</code>,<code>setuptools</code>,然后还要安装 <code>pip install cymysql</code> 用以让 shadowsocksR 使用数据库方式来连接</p>
 
 <pre><code>sudo apt install python-pip -y
@@ -222,6 +222,9 @@ sudo vim /etc/supervisord.conf
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
+          <a href="15201542683812.html" 
+          title="Previous Post: 没用">&laquo; 没用</a>
+      
         </p>
         </div>
         <div class="large-6 columns">
@@ -254,7 +257,7 @@ sudo vim /etc/supervisord.conf
           <div id="site-info" class="site-info">
             
                 <h1>黑洞</h1>
-                <div class="site-des"><a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ehgbFVdJOgsLVBkVFw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a></div>
+                <div class="site-des"></div>
                 <div class="social">
 
 
@@ -297,6 +300,12 @@ sudo vim /etc/supervisord.conf
 	      
 		      
 			      <li class="post">
+			        <a href="15201542683812.html">没用</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="14910699523430.html">打造多用户 ShadowsocksR VPS 过程</a>
 			      </li>
 		     
@@ -315,15 +324,11 @@ sudo vim /etc/supervisord.conf
 		  
 		      
 			      <li class="post">
-			        <a href="14701463847475.html">优雅女性一生一定要看的50篇黄文</a>
+			        <a href="14701463847475.html"></a>
 			      </li>
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="14701463847714.html">Mac 上使用自动发布到 github pages</a>
-			      </li>
-		     
 		  
 		      
 		  
@@ -380,7 +385,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
     
 
-<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ehgbFVdJOgsLVBkVFw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a>
+
 
   </body>
 </html>

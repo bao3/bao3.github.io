@@ -116,7 +116,7 @@
 
       <div class="article-content">
       <blockquote>
-<p>理论上你有什么需要实时提交的 git repo 都可以使用这个方法，但为了节约，你需要设置 fswatch 的间隔时间<br/>
+<p>理论上你有什么需要实时提交的 git repo 都可以使用这个方法，但为了节约，你需要设置 fswatch 的间隔时间
 虽然我下面使用进行的时候使用的是 MyWeb ，其实你也可以换成其他的 Markdown 工具，效果应该差不多，只是 MyWeb 实在是方便。</p>
 </blockquote>
 
@@ -124,13 +124,13 @@
 
 <h2 id="toc_0">首先， 确认你要发布的目录</h2>
 
-<p>　　我的 mweb 发布到 Github 的文件夹是 blog，如下图所示：<br/>
+<p>　　我的 mweb 发布到 Github 的文件夹是 blog，如下图所示：
 <img src="media/14550024568971/14550028748116.jpg" alt="" style="width:314px;"/></p>
 
-<p>　　先在 blog 这个目录上右击生成网站，然后再点如下图所示，找到生成网站的位置：<br/>
+<p>　　先在 blog 这个目录上右击生成网站，然后再点如下图所示，找到生成网站的位置：
 　　<img src="media/14550024568971/14613161793220.jpg" alt="w:100" style="width:297px;"/></p>
 
-<p>　<br/>
+<p>　
 　　然后生成的网站目录在 <code>/Users/bao3/Library/Containers/com.coderforart.MWeb/Data/Documents/MWeb/LocalData/Site/blog/</code>，所以我的目标就是每次文件有变化时，就自动将文章发布到 github ，记住，重点是 “有变化时” 实时更新。</p>
 
 <h2 id="toc_1">其次,安装自动发布工具</h2>
@@ -141,7 +141,7 @@
 
 <h2 id="toc_2">脚本主体</h2>
 
-<p>　　我不是个程序员，所以写出来的脚本有点“脏”，好在还能用，自己动手丰衣足食嘛；然后开始写我们的脚本吧：<br/>
+<p>　　我不是个程序员，所以写出来的脚本有点“脏”，好在还能用，自己动手丰衣足食嘛；然后开始写我们的脚本吧：
 找一个目录存放这个脚本，比如自己的 &ldquo;/Users/`whoami`/ &quot;下面，文件名字叫 gitblog.command ，重点是一定要是 *.command 这种结尾，后面有重要用途。</p>
 
 <pre><code>
@@ -188,10 +188,10 @@ exit
 
 <h2 id="toc_4">开机启动</h2>
 
-<p>在做这一步前，请先双击刚刚生成的 gitblog.command ，应该可以启动一个黑窗口然后又消失了。<br/>
+<p>在做这一步前，请先双击刚刚生成的 gitblog.command ，应该可以启动一个黑窗口然后又消失了。
 接着，你打开 Terminal 输入下面的命令</p>
 
-<p>$ ps waux | grep git | grep -v grep<br/>
+<p>$ ps waux | grep git | grep -v grep
 bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
 
 <p>这表示成功启动了。但如果没有，则表示你没有配置成功，多半是里面有什么特殊符号少了半边或者路径错了什么的，需要你自己调试了。</p>
@@ -214,7 +214,7 @@ bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
         <p class="text-left" style="padding:15px 0px;">
       
           <a href="14701463847475.html" 
-          title="Previous Post: 优雅女性一生一定要看的50篇黄文">&laquo; 优雅女性一生一定要看的50篇黄文</a>
+          title="Previous Post: ">&laquo; </a>
       
         </p>
         </div>
@@ -248,7 +248,7 @@ bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
           <div id="site-info" class="site-info">
             
                 <h1>黑洞</h1>
-                <div class="site-des"><a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ehgbFVdJOgsLVBkVFw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a></div>
+                <div class="site-des"></div>
                 <div class="social">
 
 
@@ -291,6 +291,12 @@ bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
 	      
 		      
 			      <li class="post">
+			        <a href="15201542683812.html">没用</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="14910699523430.html">打造多用户 ShadowsocksR VPS 过程</a>
 			      </li>
 		     
@@ -309,15 +315,11 @@ bao3            20410      4:43下午   0:00.01 xargs -0 -n1 bash -c gitpush</p>
 		  
 		      
 			      <li class="post">
-			        <a href="14701463847475.html">优雅女性一生一定要看的50篇黄文</a>
+			        <a href="14701463847475.html"></a>
 			      </li>
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="14701463847714.html">Mac 上使用自动发布到 github pages</a>
-			      </li>
-		     
 		  
 		      
 		  
@@ -374,7 +376,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
     
 
-<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ehgbFVdJOgsLVBkVFw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a>
+
 
   </body>
 </html>

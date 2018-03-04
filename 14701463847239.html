@@ -132,13 +132,13 @@
 
 <h1 id="toc_2">下载 iso安装盘</h1>
 
-<p>登录你的 Vultr ，请不要关键是去点下图中的 “Deploy New Instance”，我们要先准备光盘，所以请你点击 <code>💿ISOs</code> 输入 iso的地址，让 Vultr给你下载好。<br/>
-<img src="media/14518870323173/downloadISO.png" alt="downloadISO"/><br/>
-　　ArchLinux 的光盘下载网址 <a href="https://www.archlinux.org/download/">https://www.archlinux.org/download/</a> ，找到你想要的节点，点进去，复制 ISO的 URL<br/>
-　　<br/>
+<p>登录你的 Vultr ，请不要关键是去点下图中的 “Deploy New Instance”，我们要先准备光盘，所以请你点击 <code>💿ISOs</code> 输入 iso的地址，让 Vultr给你下载好。
+<img src="media/14518870323173/downloadISO.png" alt="downloadISO"/>
+　　ArchLinux 的光盘下载网址 <a href="https://www.archlinux.org/download/">https://www.archlinux.org/download/</a> ，找到你想要的节点，点进去，复制 ISO的 URL
+　　
 　　<img src="media/14518870323173/14518892017207.jpg" alt=""/></p>
 
-<p>比如我使用的地址：<br/>
+<p>比如我使用的地址：
 <code>http://mirror.rackspace.com/archlinux/iso/2016.01.01/archlinux-2016.01.01-dual.iso</code>  </p>
 
 <p>然后粘贴到上面 💿ISOs 这个里面，这样 Vultr 就开始帮你下载了。</p>
@@ -154,8 +154,8 @@
 <li>并且 SATA套餐不能使用 Snapshot 免费备份功能而 SSD可以，基于此，相当于多了一个免费的备份镜像，数据是数据是无价的。 </li>
 </ol>
 
-<p>　<br/>
-　　选择系统时，使用你刚才下载的 iso ( <code>Custom</code> &gt; <code>My ISOs</code> &gt; <code>archlinux-XXXX.iso</code> )，在创建好之后系统根本不会自动安装好 Arch Linux，只不过是用光盘启动了而已。<br/><br/>
+<p>　
+　　选择系统时，使用你刚才下载的 iso ( <code>Custom</code> &gt; <code>My ISOs</code> &gt; <code>archlinux-XXXX.iso</code> )，在创建好之后系统根本不会自动安装好 Arch Linux，只不过是用光盘启动了而已。<br/>
 <img src="media/14518870323173/vultrdeply.png" alt="vultrdeply"/></p>
 </blockquote>
 
@@ -165,10 +165,10 @@
 
 <h2 id="toc_5">硬盘分区</h2>
 
-<p>　　整个安装过程中最核心的地方就是硬盘分区。原因在于 Vultr是基于 KVM的虚拟机，而我们又是用的 SSD ，所以是基于 BIOS + GPT的系统。而在默认情况下咱们的引动器 Grub只能支持 BIOS+ MBR 或者 EFI + GPT 的方式。Vultr 恰是个混合模式，会导致 Grub不引导的。<br/><br/>
- 1.     首先我们必须分出一个 bios安装分区，用于存放存放标准的 Grub 的引导文件。<br/><br/>
- 2.  如果你要承载 Web类服务，例如<strong>网站</strong>或者<strong>私有云</strong> ( <strong><em>owncloud</em></strong>)，那么我们最好单独分一个 Swap 。<br/><br/>
- 3. 默认情况下我们直接使用剩余的 <strong>SSD</strong> 作为整个系统磁盘，不单独分区了。<br/><br/>
+<p>　　整个安装过程中最核心的地方就是硬盘分区。原因在于 Vultr是基于 KVM的虚拟机，而我们又是用的 SSD ，所以是基于 BIOS + GPT的系统。而在默认情况下咱们的引动器 Grub只能支持 BIOS+ MBR 或者 EFI + GPT 的方式。Vultr 恰是个混合模式，会导致 Grub不引导的。<br/>
+ 1.     首先我们必须分出一个 bios安装分区，用于存放存放标准的 Grub 的引导文件。<br/>
+ 2.  如果你要承载 Web类服务，例如<strong>网站</strong>或者<strong>私有云</strong> ( <strong><em>owncloud</em></strong>)，那么我们最好单独分一个 Swap 。<br/>
+ 3. 默认情况下我们直接使用剩余的 <strong>SSD</strong> 作为整个系统磁盘，不单独分区了。<br/>
 正面就开始咯：</p>
 
 <pre><code class="language-shell"> gdisk /dev/vda
@@ -199,19 +199,19 @@
  mount /dev/vda3 /mnt
 </code></pre>
 
-<p>　　好了，至此所有准备工作都已经完成了，我们开始安装系统核心了。<br/><br/>
- <code><br/>
- pacstrap /mnt base base-devel net-tools<br/>
-</code><br/>
+<p>　　好了，至此所有准备工作都已经完成了，我们开始安装系统核心了。<br/>
+ <code>
+ pacstrap /mnt base base-devel net-tools
+</code>
 　　这是要安装基本系统以及一些必要的套件，其中 <code>net-tools</code>是我额外加上的，因为这样可以在安装完使用诸如 <code>ifconfig</code> <code>nslookup</code>等等的小工具。经过等待（*通常为 2分钟 *左右），系统就已经完全OK了。</p>
 
-<p>　　不过此时的系统还没有引导器 <em>bootloader</em> ,因此我们需要为系统安装一下：<br/><br/>
- <code><br/>
- arch-chroot /mnt<br/>
- pacman -Sy grub<br/>
- mkinitcpio -p linux<br/>
- grub-install /dev/vda<br/>
- grub-mkconfig -o /boot/grub/grub.cfg<br/>
+<p>　　不过此时的系统还没有引导器 <em>bootloader</em> ,因此我们需要为系统安装一下：<br/>
+ <code>
+ arch-chroot /mnt
+ pacman -Sy grub
+ mkinitcpio -p linux
+ grub-install /dev/vda
+ grub-mkconfig -o /boot/grub/grub.cfg
 </code></p>
 
 <h2 id="toc_7">配置网络连接</h2>
@@ -220,7 +220,7 @@
 <li>其实操作上来说，以上安装就已经可以重启你的 VPS 享受乐趣，不过在此之前，先要做一些小的配置。</li>
 </ol>
 
-<p><code>配置DHCP</code>，这一步比较简单，在你的命令行下接着输入：<br/>
+<p><code>配置DHCP</code>，这一步比较简单，在你的命令行下接着输入：
 <code>systemctl enable dhcpcd</code></p>
 
 <p>或者是</p>
@@ -238,10 +238,10 @@
 <p>输入你的密码，在你输入的时候是不显示密码的，但是不用担心，这是 Linux / Unix 机制造成。</p></li>
 </ol>
 
-<p>　　此时你修改的是 Root 用户的密码，但我们平时不应该使用此用户来登录，所以你需要创建一个普通用户以及设置用户密码，这个用户名及密码将会是你远程连接 VPS所使用的。使用用户 <code>mylove</code> 登录后，需要使用 sudo 来执行系统管理命令<br/>
-　　<br/>
-　　<code>useradd -m -G wheel -s /bin/bash  mylove</code><br/>
-　　<code>passwd mylove</code><br/>
+<p>　　此时你修改的是 Root 用户的密码，但我们平时不应该使用此用户来登录，所以你需要创建一个普通用户以及设置用户密码，这个用户名及密码将会是你远程连接 VPS所使用的。使用用户 <code>mylove</code> 登录后，需要使用 sudo 来执行系统管理命令
+　　
+　　<code>useradd -m -G wheel -s /bin/bash  mylove</code>
+　　<code>passwd mylove</code>
 　　</p>
 
 <hr/>
@@ -258,10 +258,10 @@
 <p>提醒，SSH 连接涉及你的服务器安全，请一定要去官方网站下载工具，不要去网上找什么汉化版、修改版，以免这些工具利用你的 ssh 连接获取你的服务器密码、植入木马、作为攻击跳板等</p>
 </blockquote>
 
-<p>针对 Mac ，打开 <strong>终端</strong>，输入<br/>
-<code><br/>
-ssh mylove@your.vps.ip.address<br/>
-</code><br/>
+<p>针对 Mac ，打开 <strong>终端</strong>，输入
+<code>
+ssh mylove@your.vps.ip.address
+</code>
 　　使用你的 IP 地址替换后半部分，连接时会询问你是不是要添加 （ yes/no )，你就选 yes 。然后会让你登入普通用户 mylove 的密码，登入成功后，可能 再接着输入 <code>su -</code> 从成变身成管理员（ 需要你输入管理员密码 ）。</p>
 
 <ul>
@@ -296,15 +296,15 @@ Server = http://repo.archlinux.fr/$arch
 
 <h2 id="toc_11">shandowsocks Strongswan Ocserv</h2>
 
-<p>　　安装过程非常简单，切换到普通用户 <code>mylove</code> 下，输入 <code>yaourt -S shadowsocks-libev strongswan ocserv</code> 然后就开始问你一些问题，然后就开始编译了，你根本不必担心什么，因为这是绝大多数用户都验证过的配置。只是你要看清楚问你的问题是“编辑 PKGUID”（ 选 n）还是问你“是否继续构建” （选 yes），然后就会问你是否要安装。<br/>
+<p>　　安装过程非常简单，切换到普通用户 <code>mylove</code> 下，输入 <code>yaourt -S shadowsocks-libev strongswan ocserv</code> 然后就开始问你一些问题，然后就开始编译了，你根本不必担心什么，因为这是绝大多数用户都验证过的配置。只是你要看清楚问你的问题是“编辑 PKGUID”（ 选 n）还是问你“是否继续构建” （选 yes），然后就会问你是否要安装。
 　　</p>
 
 <h2 id="toc_12">备份你的 VPS</h2>
 
-<p>　　尽管你已经安装好了这些必备软件，但是请不要急着从网上找资料来配置它们，你首先要做的就是备份。记住，数据是无价的，而如果因为配置错了浪费太多重建时间更是无价的。<br/>
-　　Vultr 默认开放一个非常好用的主机克隆服务，叫“快照” Snapshot ，目前是免费向 SSD硬盘用户开放，所以你打开网页，先备份一下吧<br/>
-　　登录你的 VPS，点击 <code>Snapshots</code><br/>
-　　<img src="media/14518870323173/14518954709903.jpg" alt=""/><br/>
+<p>　　尽管你已经安装好了这些必备软件，但是请不要急着从网上找资料来配置它们，你首先要做的就是备份。记住，数据是无价的，而如果因为配置错了浪费太多重建时间更是无价的。
+　　Vultr 默认开放一个非常好用的主机克隆服务，叫“快照” Snapshot ，目前是免费向 SSD硬盘用户开放，所以你打开网页，先备份一下吧
+　　登录你的 VPS，点击 <code>Snapshots</code>
+　　<img src="media/14518870323173/14518954709903.jpg" alt=""/>
 <br></p>
 
 <p><img src="media/14518870323173/14518956019134.jpg" alt=""/></p>
@@ -370,13 +370,13 @@ COMMIT
 # Completed on Mon Jan  4 16:27:39 2016
 </code></pre>
 
-<p>　　将这段代码在你的 VPS 里新建一个文件 <code>nano ~/firwall.txt</code> ，然后粘贴进去。然后使用 <code>iptables-restore &lt; ~/firwall.txt</code><br/>
-　　以上的这个规则默认拒绝所有连接到你的  VPS的请求，只保留常用的端口，由于我的 shadowsocks使用 4689端口，因此我开放了这个特别端口，你可以改成自己的；同时，系统自动建立 nat，你可以自由地在你的 strongswan （前面刚安装的）里配置任意的 IP地址段，也可以在 ocserv里配置了。<br/>
+<p>　　将这段代码在你的 VPS 里新建一个文件 <code>nano ~/firwall.txt</code> ，然后粘贴进去。然后使用 <code>iptables-restore &lt; ~/firwall.txt</code>
+　　以上的这个规则默认拒绝所有连接到你的  VPS的请求，只保留常用的端口，由于我的 shadowsocks使用 4689端口，因此我开放了这个特别端口，你可以改成自己的；同时，系统自动建立 nat，你可以自由地在你的 strongswan （前面刚安装的）里配置任意的 IP地址段，也可以在 ocserv里配置了。
 　　</p>
 
 <h2 id="toc_14">配置Shadowsocks-libev</h2>
 
-<p>　　我特意安装了这个版本，你不必担心，这货只是 Shadowsocks众多分支里我觉得非常不错的一个，而配置文件则是完全相同的。<br/>
+<p>　　我特意安装了这个版本，你不必担心，这货只是 Shadowsocks众多分支里我觉得非常不错的一个，而配置文件则是完全相同的。
 　　<code>nano /etc/shadowsocks/config.json</code> ，然后粘贴上代码:</p>
 
 <pre><code>{
@@ -389,7 +389,7 @@ COMMIT
     }
 </code></pre>
 
-<p>　　注意， 4698 要改成你自己的，并且要与防火墙里的配置相对应，至于 local port：1080 这个不起任何作用，仅当你用作客户端时才有用，但是保留它的好处是，你可以直接把这个配置文件复制到你电脑的客户端使用。<br/>
+<p>　　注意， 4698 要改成你自己的，并且要与防火墙里的配置相对应，至于 local port：1080 这个不起任何作用，仅当你用作客户端时才有用，但是保留它的好处是，你可以直接把这个配置文件复制到你电脑的客户端使用。
 　　接下来就是设置 Shadosocks的开机自动启动。ArchLinux的牛逼之处就是全程使用 systemd管理，非常省心。代码就是：</p>
 
 <pre><code>systemctl enable shadowsocks-libev@config #开机启动
@@ -400,19 +400,19 @@ netstat -npl | grep 4698   #查看配置有没有成功
 ss | grep 4698    #查看有没有客户端成功连接
 </code></pre>
 
-<p>　　<br/>
-　　以上代码直接复制执行就可以了，截图如下：<br/>
-　　<br/>
+<p>　　
+　　以上代码直接复制执行就可以了，截图如下：
+　　
 <img src="media/14518870323173/14518973569665.jpg" alt=""/></p>
 
 <p>剩下的工作就是你自己配置你的客户端，当客户端连接时，就在上面的图里就能看到了（图片的最后三行）</p>
 
 <h2 id="toc_15">Strongswan 配置</h2>
 
-<p>　　接下来的这部分我就不多说了，非常麻烦，所以我只贴我的配置咯，入门级的教程你可能需要问别人啦~<br/>
-　　<br/>
-　　这是一个麻烦，因为涉及太多了，而且每个人配置还不一样，比如我始终只使用证书认证，最后被迫开放了密码认证。所以这里可能不见得每个人都一样，你一定不要惊讶。主要涉及到了的配置文件就是 strongswan.conf, ipsec.conf,ipsec.secrets 。<br/>
-　　首先编辑 strongswan.conf 加入 <code>i_dont_care_about_security_and_use_aggressive_mode_psk = yes</code>和 <br/>
+<p>　　接下来的这部分我就不多说了，非常麻烦，所以我只贴我的配置咯，入门级的教程你可能需要问别人啦~
+　　
+　　这是一个麻烦，因为涉及太多了，而且每个人配置还不一样，比如我始终只使用证书认证，最后被迫开放了密码认证。所以这里可能不见得每个人都一样，你一定不要惊讶。主要涉及到了的配置文件就是 strongswan.conf, ipsec.conf,ipsec.secrets 。
+　　首先编辑 strongswan.conf 加入 <code>i_dont_care_about_security_and_use_aggressive_mode_psk = yes</code>和 
     <code>duplicheck.enable = no</code> 这两项一个是让你可以使用 ipsec + 密码来上网，一个是为了允许同一个用户名（或者证书）在多个终端登录。</p>
 
 <p>算了，想了想，还是不写配置了，好累。   </p>
@@ -463,7 +463,7 @@ ss | grep 4698    #查看有没有客户端成功连接
           <div id="site-info" class="site-info">
             
                 <h1>黑洞</h1>
-                <div class="site-des"><a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ehgbFVdJOgsLVBkVFw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a></div>
+                <div class="site-des"></div>
                 <div class="social">
 
 
@@ -506,6 +506,12 @@ ss | grep 4698    #查看有没有客户端成功连接
 	      
 		      
 			      <li class="post">
+			        <a href="15201542683812.html">没用</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="14910699523430.html">打造多用户 ShadowsocksR VPS 过程</a>
 			      </li>
 		     
@@ -524,15 +530,11 @@ ss | grep 4698    #查看有没有客户端成功连接
 		  
 		      
 			      <li class="post">
-			        <a href="14701463847475.html">优雅女性一生一定要看的50篇黄文</a>
+			        <a href="14701463847475.html"></a>
 			      </li>
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="14701463847714.html">Mac 上使用自动发布到 github pages</a>
-			      </li>
-		     
 		  
 		      
 		  
@@ -589,7 +591,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
     
 
-<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ehgbFVdJOgsLVBkVFw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a>
+
 
   </body>
 </html>

@@ -97,6 +97,75 @@
 		<div class="markdown-body home-categories">
 		
 			<div class="article">
+                <a class="clearlink" href="14701463848256.html">
+                
+                  <h1>自己折腾 FreeNAS@ThinkPad x201i 的记录</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>这些记录没有任何意义，请忽略</p>
+
+<pre><code class="language-Bash">cp -Rp acpi_ibm* /boot/kernel/
+cp -RP acpi_video.ko* /boot/kernel/
+cp -Rp iwn1000fw.ko* /boot/kernel/
+cp -Rp if_iwn.ko* /boot/kernel/
+cp -Rp wlan* /boot/kernel/
+cp -Rp fuse.ko* /boot/kernel/
+sed -i &quot;.bak&quot; &#39;s/yes/no/g&#39; /usr/local/etc/pkg/repos/local.conf
+sed -i &quot;.bak&quot; &#39;s/no/yes/g&#39; /usr/local/etc/pkg/repos/FreeBSD.conf
+
+pkg update
+pkg install vim-lite proxychains-ng shadowsocks-libev aria2
+
+vi /boot/loader.conf
+
+#######
+acpi_ibm_load=&quot;YES&quot;
+acpi_video_load=&quot;YES&quot;
+if_iwn_load=&quot;YES&quot;
+iwn1000fw_load=&quot;YES&quot;
+snd_ich_load=&quot;YES&quot;
+###########
+
+
+saver=&quot;green&quot; blanktime=&quot;300&quot; scrnmap=&quot;NO&quot;
+powerd_enable=&quot;YES&quot;
+powerd_flags=&quot;-i 80 -p 200 -b adaptive -a adaptive -n adaptive&quot;
+
+performance_cx_lowest=&quot;C3&quot;
+economy_cx_lowest=&quot;C3&quot;
+performance_cpu_freq=&quot;HIGH&quot;
+
+
+sysctl -a | grep cx_
+/etc/sysctl.conf
+hw.acpi.cpu.cx_lowest=C3
+
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/8/2</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
                 <a class="clearlink" href="14701463848381.html">
                 
                   <h1>Mac 上使用 Syncthing 同步文档</h1>
@@ -120,14 +189,14 @@ brew cask install syncthing
 
 </code></pre>
 
-<p>会看到下图<br/>
+<p>会看到下图
 <img src="media/14623502546429/14623510408640.jpg" alt="syncthing安装"/></p>
 
 <p>然后进入上图中的 <code>open /opt/homebrew-cask/Caskroom/syncthing/0.12.22</code> 然后进入安装文件夹（如果你有多个版本，则进入最高的那个就可以了），找到 <code>syncthing.plist</code> ，通常位置安装目录的 <code>etc/macosx-launchd</code> 。</p>
 
 <h2 id="toc_1">修改配置文件</h2>
 
-<p>在 Finder 里，不要选中任何文件的情况下，点击如下图标，拷贝为路径，如果你的系统没有这个选项，请试着按下 Option 键。<br/>
+<p>在 Finder 里，不要选中任何文件的情况下，点击如下图标，拷贝为路径，如果你的系统没有这个选项，请试着按下 Option 键。
 <img src="media/14623502546429/14623515346988.jpg" alt=""/></p>
 
 <p>接着在 iTerm 或者 Terminal 里输入</p>
@@ -202,7 +271,7 @@ sed -n &#39;/local/p&#39; ./syncthing.plist
           <div id="site-info" class="site-info">
             
                 <h1>黑洞</h1>
-                <div class="site-des"><a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ehgbFVdJOgsLVBkVFw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a></div>
+                <div class="site-des"></div>
                 <div class="social">
 
 
@@ -245,6 +314,12 @@ sed -n &#39;/local/p&#39; ./syncthing.plist
 	      
 		      
 			      <li class="post">
+			        <a href="15201542683812.html">没用</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
 			        <a href="14910699523430.html">打造多用户 ShadowsocksR VPS 过程</a>
 			      </li>
 		     
@@ -263,15 +338,11 @@ sed -n &#39;/local/p&#39; ./syncthing.plist
 		  
 		      
 			      <li class="post">
-			        <a href="14701463847475.html">优雅女性一生一定要看的50篇黄文</a>
+			        <a href="14701463847475.html"></a>
 			      </li>
 		     
 		  
 		      
-			      <li class="post">
-			        <a href="14701463847714.html">Mac 上使用自动发布到 github pages</a>
-			      </li>
-		     
 		  
 		      
 		  
@@ -328,7 +399,7 @@ Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
 
     
 
-<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=ehgbFVdJOgsLVBkVFw" style="text-decoration:none;"><img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a>
+
 
   </body>
 </html>
