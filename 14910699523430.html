@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  icloud 邮件设置 - 黑洞
+  打造多用户 ShadowsocksR VPS 过程 - 黑洞
   
   </title>
   
@@ -97,10 +97,10 @@
       <div class="markdown-body article-wrap">
        <div class="article">
           
-          <h1>icloud 邮件设置</h1>
+          <h1>打造多用户 ShadowsocksR VPS 过程</h1>
      
         <div class="read-more clearfix">
-          <span class="date">2016/8/2</span>
+          <span class="date">2017/4/2</span>
 
           
            
@@ -115,21 +115,103 @@
       </div><!-- article -->
 
       <div class="article-content">
-      <p>适用于收件服务器的 IMAP 信息<br/>
-服务器名称：imap.mail.me.com<br/>
-是否需要 SSL：是<br/>
-如果您在使用 SSL 时看到错误信息，请尝试使用 TLS。<br/>
-端口：993<br/>
-用户名：通常是您的 iCloud 电子邮件地址的名称部分（例如 emilyparker，而不是 <a href="mailto:emilyparker@icloud.com">emilyparker@icloud.com</a>）。如果仅使用 iCloud 电子邮件地址时您的电子邮件客户端无法连接 iCloud，请尝试使用完整地址。<br/>
-密码：您的 iCloud 密码<br/>
-适用于发件服务器的 SMTP 信息<br/>
-服务器名称：smtp.mail.me.com<br/>
-是否需要 SSL：是<br/>
-如果您在使用 SSL 时看到错误信息，请尝试使用 TLS 或 STARTTLS。<br/>
-端口：587<br/>
-是否需要 SMTP 鉴定：是<br/>
-用户名：您的完整 iCloud 电子邮件地址（例如，<a href="mailto:emilyparker@icloud.com">emilyparker@icloud.com</a>，而不是 emilyparker）<br/>
-密码：您的 iCloud 密码</p>
+      <p>这是我自己的安装过程，非常方便，核心功能 lnmp 和 resilio sync 使用 docker 实现，省太多事了。<br/>
+主要功能是：建立一个网页客户界面，方便管理 SSR 参数；shadowsocksR 读取每一个用户独立的 SSR 参数并启动；数据库默认只能被本机使用；</p>
+
+<h1 id="toc_0">安装 Docker</h1>
+
+<p>参考<a href="https://docs.docker.com/engine/installation/#docker-variants">这里的文章</a>  进行 Docker 安装，我使用的是 <strong>Ubuntu</strong> 所以要看这里<a href="https://docs.docker.com/engine/installation/linux/ubuntu/"> Docker for Ubuntu</a>，请务必注意自己的系统版本:</p>
+
+<pre><code>sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
+   &quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable&quot;
+sudo apt-get update -y &amp;&amp; sudo apt-get install docker-ce -y 
+
+   
+</code></pre>
+
+<h1 id="toc_1">安装 Resilio Sync</h1>
+
+<p>这是因为我偶尔有时候需要 VPS 跟我的笔记本同步一些数据，你不使用 Btsync 的话，就可以不安装，请跳过。  </p>
+
+<pre><code>DATA_FOLDER=~/sync
+WEBUI_PORT=8888
+mkdir -p  $DATA_FOLDER/folders  
+sudo docker run -d --name Sync  \
+     -p 127.0.0.1:$WEBUI_PORT:8888 -p 55555 \
+     -v $DATA_FOLDER:/mnt/sync \
+     --restart=on-failure resilio/sync
+</code></pre>
+
+<p>然后在你自己的电脑上使用 :<br/>
+<code>ssh -N -L 9888:127.0.0.1:8888 username@your.vps.ip.or.domain</code><br/>
+打开你的浏览器，网址输入 <strong>127.0.0.1:9888</strong> 就可以配置 Btsync 同步，从些之后你要跟你的 VPS 之间传输什么文件或者要做备份，就方便多了。</p>
+
+<h1 id="toc_2">安装 lnmp</h1>
+
+<p>如果你要制作基于数据库的 shadowsocks 多用户使用，这一步建议你还是要进行的，这一步将会为你直接配置好数据库、web、php ，简单省事。</p>
+
+<pre><code>DOCKER_FOLDER=~/docker
+cd $DOCKER_FOLDER\
+    &amp;&amp; git clone https://github.com/bao3/mini_lnmp.git \
+    &amp;&amp; cd mini_lnmp
+</code></pre>
+
+<p>接下来就是模仿 <strong>~/mini_lnmp/nginx_conf/default.conf</strong> 写自己的网站配置，然后把自己的网站数据库放在 <strong>~/mini_lnmp/sql</strong> ，把自己的网站证书放在 <strong>ssl</strong> 下面，将网站目录放在 <strong>webroot</strong> 。启动我们的网页服务器，记住 <code>sql</code> 里的数据库文件在第一次启动时，是自动导入，省心太多了，是不是？</p>
+
+<pre><code>docker run -d --restart=always -v ~/mini_lnmp:/mnt  \
+        -p 127.0.0.1:1222:22 -p 80:80 -p 443:443   \
+        -p 127.0.0.1:3306:3306 --name lnmp bao3/mini_lnmp
+</code></pre>
+
+<h1 id="toc_3">安装多用户版 shadowsocksr</h1>
+
+<p>十分建议你将 ss 服务端换成 shadowsocksR，也就是 SSR，主要是这个客户端既可以兼容旧的 SS 又支持新的混淆，非常的方便和安全，而且围绕它的周边软件非常多。</p>
+
+<pre><code>cd ~ \
+    &amp;&amp; git clone -b manyuser https://github.com/shadowsocksr-backup/shadowsocksr.git \
+    &amp;&amp; cd shadowsocksr \
+    &amp;&amp; bash initcfg.sh \
+    &amp;&amp; sed -i &quot;s/API_INTERFACE =.*$/API_INTERFACE = &#39;sspanelv3ssr&#39; /&quot; userapiconfig.py \
+    &amp;&amp; sed -i &#39;s/&quot;host&quot;:.*/&quot;host&quot;: &quot;127.0.0.1&quot; ,/&#39; usermysql.json \
+    &amp;&amp; sed -i &#39;s/&quot;user&quot;:.*/&quot;user&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json \
+    &amp;&amp; sed -i &#39;s/&quot;password&quot;:.*/&quot;password&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json \
+    &amp;&amp; sed -i &#39;s/&quot;db&quot;:.*/&quot;db&quot;: &quot;sspanel&quot; ,/&#39; usermysql.json
+</code></pre>
+
+<p>然后修改 <code>userapiconfig.py</code> <code>usermysql.json</code> <code>user-config.json</code>等等，这个就属于 SSR 的配置问题咯。<br/>
+<strong>但是</strong> 请确保你的系统安装了 <code>python</code>,<code>pip</code>,<code>setuptools</code>,然后还要安装 <code>pip install cymysql</code> 用以让 shadowsocksR 使用数据库方式来连接</p>
+
+<pre><code>sudo apt install python-pip -y
+export LC_ALL=C
+pip install cymysql
+</code></pre>
+
+<p><code>python server.py</code> 看看能不能运行，OK 的话，就可以使用 supervisord 来保持后台了。</p>
+
+<h1 id="toc_4">安装 Supervisor 保持后台运行</h1>
+
+<pre><code>sudo apt install supervisor -y \
+sudo  echo_supervisord_conf &gt; /etc/supervisord.conf
+sudo vim /etc/supervisord.conf   
+</code></pre>
+
+<p>在最后一行，加入：</p>
+
+<pre><code>  [program:ssr]
+  command=/usr/bin/python /home/bao3/shadowsocksr/server.py
+  user=bao3
+</code></pre>
+
+<h1 id="toc_5">完工</h1>
 
 
     
@@ -140,16 +222,13 @@
         <div class="large-6 columns">
         <p class="text-left" style="padding:15px 0px;">
       
-          <a href="14701463847961.html" 
-          title="Previous Post: 主题：如何处理wget mirror网站后应用程序文件名问题">&laquo; 主题：如何处理wget mirror网站后应用程序文件名问题</a>
-      
         </p>
         </div>
         <div class="large-6 columns">
       <p class="text-right" style="padding:15px 0px;">
       
-          <a  href="14701463848186.html" 
-          title="Next Post: Brew Cask 安装软件">Brew Cask 安装软件 &raquo;</a>
+          <a  href="14701463847239.html" 
+          title="Next Post: 在 Vultr上安装 Arch linux">在 Vultr上安装 Arch linux &raquo;</a>
       
       </p>
         </div>

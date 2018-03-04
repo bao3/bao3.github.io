@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     
-  icloud 邮件设置 - 黑洞
+  黑洞
   
   </title>
   
@@ -88,86 +88,113 @@
        
 
  <script type="text/javascript">
-  $(function(){
-    $('#menu_item_index').addClass('is_active');
-  });
+	$(function(){
+		$('#menu_item_index').addClass('is_active');
+	});
 </script>
 <div class="row">
-  <div class="large-8 medium-8 columns">
-      <div class="markdown-body article-wrap">
-       <div class="article">
-          
-          <h1>icloud 邮件设置</h1>
-     
-        <div class="read-more clearfix">
-          <span class="date">2016/8/2</span>
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="14701463848381.html">
+                
+                  <h1>Mac 上使用 Syncthing 同步文档</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>最早的时候个人同步我使用的是 BTsync ，但这家伙后来改版后有诸多不便，于是转投了我一直看好的另一个同步工具 &mdash;- Syncthing 。开源且多平台 （ iOS 上不行，不过 iOS 除了照片也没什么可以同步的了 ），我最喜欢的就是可以自建一个 relay 。详细使用上比较简单，我今天只记录一下我在 Mac 上的操作。</p>
 
-          
-           
-         
-          <span class="comments">
-            
+<p>操作需要使用 iTerm 或者 Terminal 请自备。</p>
 
-            
-          </span>
+<h2 id="toc_0">使用 Brew Cask 安装</h2>
 
-        </div>
-      </div><!-- article -->
+<p>其实你也可以自己下载安装包 (<a href="https://github.com/syncthing/syncthing/releases)%EF%BC%8C%E8%A7%A3%E5%8E%8B%E5%90%8E%E6%8A%8A">https://github.com/syncthing/syncthing/releases)，解压后把</a>&ldquo; syncthing &rdquo; 这个可执行文件放到 <code>/usr/local/bin</code> 。（ 我建议你养成好习惯，所有自己下载安装的终端都丢这里 ）</p>
 
-      <div class="article-content">
-      <p>适用于收件服务器的 IMAP 信息<br/>
-服务器名称：imap.mail.me.com<br/>
-是否需要 SSL：是<br/>
-如果您在使用 SSL 时看到错误信息，请尝试使用 TLS。<br/>
-端口：993<br/>
-用户名：通常是您的 iCloud 电子邮件地址的名称部分（例如 emilyparker，而不是 <a href="mailto:emilyparker@icloud.com">emilyparker@icloud.com</a>）。如果仅使用 iCloud 电子邮件地址时您的电子邮件客户端无法连接 iCloud，请尝试使用完整地址。<br/>
-密码：您的 iCloud 密码<br/>
-适用于发件服务器的 SMTP 信息<br/>
-服务器名称：smtp.mail.me.com<br/>
-是否需要 SSL：是<br/>
-如果您在使用 SSL 时看到错误信息，请尝试使用 TLS 或 STARTTLS。<br/>
-端口：587<br/>
-是否需要 SMTP 鉴定：是<br/>
-用户名：您的完整 iCloud 电子邮件地址（例如，<a href="mailto:emilyparker@icloud.com">emilyparker@icloud.com</a>，而不是 emilyparker）<br/>
-密码：您的 iCloud 密码</p>
+<p>如果你有了 brew 则可以</p>
+
+<pre><code>brew tap caskroom/cask
+brew tap caskroom/versions
+brew cask install syncthing 
+
+</code></pre>
+
+<p>会看到下图<br/>
+<img src="media/14623502546429/14623510408640.jpg" alt="syncthing安装"/></p>
+
+<p>然后进入上图中的 <code>open /opt/homebrew-cask/Caskroom/syncthing/0.12.22</code> 然后进入安装文件夹（如果你有多个版本，则进入最高的那个就可以了），找到 <code>syncthing.plist</code> ，通常位置安装目录的 <code>etc/macosx-launchd</code> 。</p>
+
+<h2 id="toc_1">修改配置文件</h2>
+
+<p>在 Finder 里，不要选中任何文件的情况下，点击如下图标，拷贝为路径，如果你的系统没有这个选项，请试着按下 Option 键。<br/>
+<img src="media/14623502546429/14623515346988.jpg" alt=""/></p>
+
+<p>接着在 iTerm 或者 Terminal 里输入</p>
+
+<pre><code>cd $(pbpaste)
+sed -i .bak &quot;s/USERNAME/$(whoami)/g&quot; ./syncthing.plist
+sed -i .bak &quot;s/\Users\/$(whoami)\/bin/usr\/local\/bin/g&quot; ./syncthing.plist
+sed -n &#39;/Users/p&#39; ./syncthing.plist
+sed -n &#39;/local/p&#39; ./syncthing.plist
+</code></pre>
+
+<p>你应该会看到输出了带你的用户名的几行以及带有 syncthing的一行：</p>
+
+<pre><code>        &lt;string&gt;/Users/bao3&lt;/string&gt;
+    &lt;string&gt;/Users/bao3/Library/Logs/Syncthing.log&lt;/string&gt;
+    &lt;string&gt;/Users/bao3/Library/Logs/Syncthing-Errors.log&lt;/string&gt;
+        &lt;string&gt;/usr/local/bin/syncthing&lt;/string&gt;
+</code></pre>
+
+<h2 id="toc_2">加载启动文件</h2>
+
+<p>比较简单，我是直接 copy 过去:</p>
+
+<pre><code> cp syncthing.plist  ~/Library/LaunchAgents/syncthing.plist
+  launchctl load ~/Library/LaunchAgents/syncthing.plist 
+</code></pre>
+
+<p>随后会打开网页，让你登录 <a href="http://127.0.0.1:8384">http://127.0.0.1:8384</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/8/2</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
 
 
-    
-
-      </div>
-
-      <div class="row">
-        <div class="large-6 columns">
-        <p class="text-left" style="padding:15px 0px;">
-      
-          <a href="14701463847961.html" 
-          title="Previous Post: 主题：如何处理wget mirror网站后应用程序文件名问题">&laquo; 主题：如何处理wget mirror网站后应用程序文件名问题</a>
-      
-        </p>
-        </div>
-        <div class="large-6 columns">
-      <p class="text-right" style="padding:15px 0px;">
-      
-          <a  href="14701463848186.html" 
-          title="Next Post: Brew Cask 安装软件">Brew Cask 安装软件 &raquo;</a>
-      
-      </p>
-        </div>
-      </div>
-      <div class="comments-wrap">
-        <div class="share-comments">
-          
-
-          
-
-          
-        </div>
-      </div>
-    </div><!-- article-wrap -->
-  </div><!-- large 8 -->
-
-
-
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   <a href="all_1.html">&laquo; Prev Page</a>  
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			
+			</p>
+			  </div>
+			</div>
+		</div>
+	</div><!-- large 8 -->
 
  <div class="large-4 medium-4 columns">
   <div class="hide-for-small">
