@@ -2,7 +2,7 @@ Package: org.bao3.heibang.atv.sftpserver
 Version: 0.0.2
 Architecture: darwin-arm64
 Maintainer: Tyrael
-Filename: ./debs/sftp-server.darwin-arm64.deb
+Filename: ./atv/debs/sftp-server.darwin-arm64.deb
 Size: 90222
 MD5sum: da4e8ef178e0620f2ba231b203b0fd11
 SHA1: 53229af03a9871fd368931ad054bf2552ccdee58
