@@ -1,0 +1,405 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+    
+  黑洞
+  
+  </title>
+  
+  
+  <link href="atom.xml" rel="alternate" title="黑洞" type="application/atom+xml">
+    <link rel="stylesheet" href="asset/css/foundation.min.css" />
+    <link rel="stylesheet" href="asset/css/docs.css" />
+    <script src="asset/js/vendor/modernizr.js"></script>
+    <script src="asset/js/vendor/jquery.js"></script>
+  <script src="asset/highlightjs/highlight.pack.js"></script>
+  <link href="asset/highlightjs/styles/github.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script>hljs.initHighlightingOnLoad();</script>
+<script type="text/javascript">
+  function before_search(){
+    var searchVal = 'site:bao3.org ' + document.getElementById('search_input').value;
+    document.getElementById('search_q').value = searchVal;
+    return true;
+  }
+</script>
+  </head>
+  <body class="antialiased hide-extras">
+    
+    <div class="marketing off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar>
+
+
+  <section class="top-bar-section">
+  <div class="row">
+      <div style="position: relative;width:100%;"><div style="position: absolute; width:100%;">
+        <ul id="main-menu" class="left">
+        
+        <li id=""><a target="self" href="index.html">Home</a></li>
+        
+        <li id=""><a target="_self" href="archives.html">Archives</a></li>
+        
+        </ul>
+
+        <ul class="right" id="search-wrap">
+          <li>
+<form target="_blank" onsubmit="return before_search();" action="http://google.com/search" method="get">
+    <input type="hidden" id="search_q" name="q" value="" />
+    <input tabindex="1" type="search" id="search_input"  placeholder="Search"/>
+</form>
+</li>
+          </ul>
+      </div></div>
+  </div>
+  </section>
+
+</nav>
+
+        <nav class="tab-bar show-for-small">
+  <a href="javascript:void(0)" class="left-off-canvas-toggle menu-icon">
+    <span> &nbsp; 黑洞</span>
+  </a>
+</nav>
+
+<aside class="left-off-canvas-menu">
+      <ul class="off-canvas-list">
+       
+       <li><a href="index.html">HOME</a></li>
+    <li><a href="archives.html">Archives</a></li>
+    <li><a href="about.html">ABOUT</a></li>
+
+    <li><label>Categories</label></li>
+
+         
+
+      </ul>
+    </aside>
+
+<a class="exit-off-canvas" href="#"></a>
+
+
+        <section id="main-content" role="main" class="scroll-container">
+        
+       
+
+ <script type="text/javascript">
+	$(function(){
+		$('#menu_item_index').addClass('is_active');
+	});
+</script>
+<div class="row">
+	<div class="large-8 medium-8 columns">
+		<div class="markdown-body home-categories">
+		
+			<div class="article">
+                <a class="clearlink" href="14701463848256.html">
+                
+                  <h1>自己折腾 FreeNAS@ThinkPad x201i 的记录</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>这些记录没有任何意义，请忽略</p>
+
+<pre><code class="language-Bash">cp -Rp acpi_ibm* /boot/kernel/
+cp -RP acpi_video.ko* /boot/kernel/
+cp -Rp iwn1000fw.ko* /boot/kernel/
+cp -Rp if_iwn.ko* /boot/kernel/
+cp -Rp wlan* /boot/kernel/
+cp -Rp fuse.ko* /boot/kernel/
+sed -i &quot;.bak&quot; &#39;s/yes/no/g&#39; /usr/local/etc/pkg/repos/local.conf
+sed -i &quot;.bak&quot; &#39;s/no/yes/g&#39; /usr/local/etc/pkg/repos/FreeBSD.conf
+
+pkg update
+pkg install vim-lite proxychains-ng shadowsocks-libev aria2
+
+vi /boot/loader.conf
+
+#######
+acpi_ibm_load=&quot;YES&quot;
+acpi_video_load=&quot;YES&quot;
+if_iwn_load=&quot;YES&quot;
+iwn1000fw_load=&quot;YES&quot;
+snd_ich_load=&quot;YES&quot;
+###########
+
+
+saver=&quot;green&quot; blanktime=&quot;300&quot; scrnmap=&quot;NO&quot;
+powerd_enable=&quot;YES&quot;
+powerd_flags=&quot;-i 80 -p 200 -b adaptive -a adaptive -n adaptive&quot;
+
+performance_cx_lowest=&quot;C3&quot;
+economy_cx_lowest=&quot;C3&quot;
+performance_cpu_freq=&quot;HIGH&quot;
+
+
+sysctl -a | grep cx_
+/etc/sysctl.conf
+hw.acpi.cpu.cx_lowest=C3
+
+</code></pre>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/8/2</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+			<div class="article">
+                <a class="clearlink" href="14701463848381.html">
+                
+                  <h1>Mac 上使用 Syncthing 同步文档</h1>
+                  <div class="a-content">
+                      
+                      <div class="a-content-text">
+                        
+                        	<p>最早的时候个人同步我使用的是 BTsync ，但这家伙后来改版后有诸多不便，于是转投了我一直看好的另一个同步工具 &mdash;- Syncthing 。开源且多平台 （ iOS 上不行，不过 iOS 除了照片也没什么可以同步的了 ），我最喜欢的就是可以自建一个 relay 。详细使用上比较简单，我今天只记录一下我在 Mac 上的操作。</p>
+
+<p>操作需要使用 iTerm 或者 Terminal 请自备。</p>
+
+<h2 id="toc_0">使用 Brew Cask 安装</h2>
+
+<p>其实你也可以自己下载安装包 (<a href="https://github.com/syncthing/syncthing/releases)%EF%BC%8C%E8%A7%A3%E5%8E%8B%E5%90%8E%E6%8A%8A">https://github.com/syncthing/syncthing/releases)，解压后把</a>&ldquo; syncthing &rdquo; 这个可执行文件放到 <code>/usr/local/bin</code> 。（ 我建议你养成好习惯，所有自己下载安装的终端都丢这里 ）</p>
+
+<p>如果你有了 brew 则可以</p>
+
+<pre><code>brew tap caskroom/cask
+brew tap caskroom/versions
+brew cask install syncthing 
+
+</code></pre>
+
+<p>会看到下图
+<img src="media/14623502546429/14623510408640.jpg" alt="syncthing安装"/></p>
+
+<p>然后进入上图中的 <code>open /opt/homebrew-cask/Caskroom/syncthing/0.12.22</code> 然后进入安装文件夹（如果你有多个版本，则进入最高的那个就可以了），找到 <code>syncthing.plist</code> ，通常位置安装目录的 <code>etc/macosx-launchd</code> 。</p>
+
+<h2 id="toc_1">修改配置文件</h2>
+
+<p>在 Finder 里，不要选中任何文件的情况下，点击如下图标，拷贝为路径，如果你的系统没有这个选项，请试着按下 Option 键。
+<img src="media/14623502546429/14623515346988.jpg" alt=""/></p>
+
+<p>接着在 iTerm 或者 Terminal 里输入</p>
+
+<pre><code>cd $(pbpaste)
+sed -i .bak &quot;s/USERNAME/$(whoami)/g&quot; ./syncthing.plist
+sed -i .bak &quot;s/\Users\/$(whoami)\/bin/usr\/local\/bin/g&quot; ./syncthing.plist
+sed -n &#39;/Users/p&#39; ./syncthing.plist
+sed -n &#39;/local/p&#39; ./syncthing.plist
+</code></pre>
+
+<p>你应该会看到输出了带你的用户名的几行以及带有 syncthing的一行：</p>
+
+<pre><code>        &lt;string&gt;/Users/bao3&lt;/string&gt;
+    &lt;string&gt;/Users/bao3/Library/Logs/Syncthing.log&lt;/string&gt;
+    &lt;string&gt;/Users/bao3/Library/Logs/Syncthing-Errors.log&lt;/string&gt;
+        &lt;string&gt;/usr/local/bin/syncthing&lt;/string&gt;
+</code></pre>
+
+<h2 id="toc_2">加载启动文件</h2>
+
+<p>比较简单，我是直接 copy 过去:</p>
+
+<pre><code> cp syncthing.plist  ~/Library/LaunchAgents/syncthing.plist
+  launchctl load ~/Library/LaunchAgents/syncthing.plist 
+</code></pre>
+
+<p>随后会打开网页，让你登录 <a href="http://127.0.0.1:8384">http://127.0.0.1:8384</a></p>
+
+                        
+                      </div>
+                  </div>
+                </a>
+                <div class="read-more clearfix">
+                  <div class="more-left left">
+                  
+                    <span class="date">2016/8/2</span>
+                    
+          				   
+                  </div>
+                  <div class="more-right right">
+                  <span class="comments">
+                      
+
+                       
+                  </span>
+                  </div>
+                </div>
+              </div><!-- article -->
+        
+              
+
+
+			<div class="row">
+			  <div class="large-6 columns">
+			  <p class="text-left" style="padding-top:25px;">
+			   <a href="all_1.html">&laquo; Prev Page</a>  
+			  </p>
+			  </div>
+			  <div class="large-6 columns">
+			<p class="text-right" style="padding-top:25px;">
+			
+			</p>
+			  </div>
+			</div>
+		</div>
+	</div><!-- large 8 -->
+
+ <div class="large-4 medium-4 columns">
+  <div class="hide-for-small">
+    <div id="sidebar" class="sidebar">
+          <div id="site-info" class="site-info">
+            
+                <h1>黑洞</h1>
+                <div class="site-des"></div>
+                <div class="social">
+
+
+
+<a target="_blank" class="linkedin" href="https://www.linkedin.com/in/tyraelwang/" title="LinkedIn">LinkedIn</a>
+
+
+
+
+<a target="_blank" class="twitter" target="_blank" href="https://twitter.com/bao3" title="Twitter">Twitter</a>
+
+<a target="_blank" class="email" href="mailto:web@bao3.org" title="Email">Email</a>
+  <a target="_blank" class="rss" href="atom.xml" title="RSS">RSS</a>
+                
+              	 </div>
+          	</div>
+
+             
+
+              <div id="site-categories" class="side-item ">
+                <div class="side-header">
+                  <h2>Categories</h2>
+                </div>
+                <div class="side-content">
+
+      	<p class="cat-list">
+         
+        </p>
+
+
+                </div>
+              </div>
+
+              <div id="site-categories" class="side-item">
+                <div class="side-header">
+                  <h2>Recent Posts</h2>
+                </div>
+                <div class="side-content">
+                <ul class="posts-list">
+	      
+		      
+			      <li class="post">
+			        <a href="15201542683812.html">没用</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14910699523430.html">打造多用户 ShadowsocksR VPS 过程</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14701463847239.html">在 Vultr上安装 Arch linux</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14701463847399.html">使用 My Chrome 订制自己的浏览器</a>
+			      </li>
+		     
+		  
+		      
+			      <li class="post">
+			        <a href="14701463847475.html"></a>
+			      </li>
+		     
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		  
+		      
+		   
+		  		</ul>
+                </div>
+              </div>
+        </div><!-- sidebar -->
+      </div><!-- hide for small -->
+</div><!-- large 4 -->
+
+</div><!-- row -->
+
+ <div class="page-bottom clearfix">
+  <div class="row">
+   <p class="copyright">Copyright &copy; 2015
+Powered by <a target="_blank" href="http://www.mweb.im">MWeb</a>,&nbsp; 
+Theme used <a target="_blank" href="http://github.com">GitHub CSS</a>.</p>
+  </div>
+</div>
+
+        </section>
+      </div>
+    </div>
+
+  
+    
+
+    <script src="asset/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      function fixSidebarHeight(){
+        var w1 = $('.markdown-body').height();
+          var w2 = $('#sidebar').height();
+          if (w1 > w2) { $('#sidebar').height(w1); };
+      }
+      $(function(){
+        fixSidebarHeight();
+      })
+      $(window).load(function(){
+          fixSidebarHeight();
+      });
+     
+    </script>
+
+    
+
+
+
+  </body>
+</html>
