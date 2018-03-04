@@ -1,0 +1,8 @@
+Origin: bao3's AppleTV Repo
+Label:BAT Repo
+Suite: stable
+Version: 1.0
+Codename: Tyrael
+Architectures:darwin-arm64 
+Components: main
+Description: This repo just for NitoTV tvOS
